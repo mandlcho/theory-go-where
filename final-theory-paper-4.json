@@ -1,0 +1,1276 @@
+[
+  {
+    "correctAnswer": "Stay behind",
+    "media": [],
+    "number": 1,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Pass on the left"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Pass on the right"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Stay behind"
+      }
+    ],
+    "question": "There is a slow moving motorcyclist ahead of you. You are not sure what the rider is going to do, you should",
+    "result": "correct",
+    "selected": "Stay behind"
+  },
+  {
+    "correctAnswer": "any place",
+    "media": [],
+    "number": 2,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "any place"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "straight road only"
+      },
+      {
+        "correct": false,
+        "selectedWrong": true,
+        "text": "junctions and on bends only"
+      }
+    ],
+    "question": "Head-on collisions can actually happen at",
+    "result": "wrong",
+    "selected": "junctions and on bends only"
+  },
+  {
+    "correctAnswer": "The brakes overheating",
+    "media": [],
+    "number": 3,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "The brakes overheating"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Air in the brake fluid"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The brakes out of adjustment"
+      }
+    ],
+    "question": "The main cause of brake fade is",
+    "result": "correct",
+    "selected": "The brakes overheating"
+  },
+  {
+    "correctAnswer": "A reduction in the engine revolutions",
+    "media": [],
+    "number": 4,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "A reduction in the engine revolutions"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "An increase in the engine revolutions"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "No change in the engine revolutions"
+      }
+    ],
+    "question": "When the accelerator pedal is released, there will be",
+    "result": "correct",
+    "selected": "A reduction in the engine revolutions"
+  },
+  {
+    "correctAnswer": "third party risk",
+    "media": [],
+    "number": 5,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "third party risk"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "thrid party risk, fire and theft"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "fully comprehensive"
+      }
+    ],
+    "question": "The minimum legal insurance coverage required to drive on the road is",
+    "result": "correct",
+    "selected": "third party risk"
+  },
+  {
+    "correctAnswer": "at least 20 metres behind your vehicle",
+    "media": [],
+    "number": 6,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "just behind the vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "at least 10 metres behind your vehicle"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "at least 20 metres behind your vehicle"
+      }
+    ],
+    "question": "If you need to display the 'vehicle breakdown sign', it should be placed;",
+    "result": "correct",
+    "selected": "at least 20 metres behind your vehicle"
+  },
+  {
+    "correctAnswer": "The cyclist crossing the road (C).",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/bicyclemainhazard_84bgmya.png",
+        "tag": "div"
+      }
+    ],
+    "number": 7,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Cars turning right ( A )."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Parked vehicle at the junction ( B )."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "The cyclist crossing the road (C)."
+      }
+    ],
+    "question": "What is the main hazard shown in this scenario?",
+    "result": "correct",
+    "selected": "The cyclist crossing the road (C)."
+  },
+  {
+    "correctAnswer": "wait until Car B has turned left.",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/CarACarBturnLeft_8a9yu3Z.png",
+        "tag": "div"
+      }
+    ],
+    "number": 8,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "move out slowly and turn."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "turn immediately."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "wait until Car B has turned left."
+      }
+    ],
+    "question": "When Car A is making a left turn, car B's left turn signal is on. What should car A do",
+    "result": "correct",
+    "selected": "wait until Car B has turned left."
+  },
+  {
+    "correctAnswer": "Slow down and allow the car to proceed",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/carfromsideroad_IusphkC.png",
+        "tag": "div"
+      }
+    ],
+    "number": 9,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound the horn to stop the car from coming out"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Quickly switch to the right lane to pass the junction"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down and allow the car to proceed"
+      }
+    ],
+    "question": "When the car from the side road does not give way to you, you should",
+    "result": "correct",
+    "selected": "Slow down and allow the car to proceed"
+  },
+  {
+    "correctAnswer": "Be charged in court",
+    "media": [],
+    "number": 10,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Have to pay a fine"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Be charged in court"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Be given a warning"
+      }
+    ],
+    "question": "Any person caught driving with blood alcohol content which exceeds the prescribed limit will",
+    "result": "correct",
+    "selected": "Be charged in court"
+  },
+  {
+    "correctAnswer": "Reduce the co-ordination of the control of vehicle",
+    "media": [],
+    "number": 11,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Reduce the co-ordination of the control of vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Faster reaction"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Increase alertness"
+      }
+    ],
+    "question": "Drink driving may cause",
+    "result": "correct",
+    "selected": "Reduce the co-ordination of the control of vehicle"
+  },
+  {
+    "correctAnswer": "Loss of proper control of the vehicle",
+    "media": [],
+    "number": 12,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Increase confidence"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Loss of proper control of the vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Greater awareness of danger"
+      }
+    ],
+    "question": "Drinking and driving may cause",
+    "result": "correct",
+    "selected": "Loss of proper control of the vehicle"
+  },
+  {
+    "correctAnswer": "they need to check for traffic in their blind area",
+    "media": [],
+    "number": 13,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "they need to listen for following traffic"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "they need to check for traffic in their blind area"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "looking around helps them balance as they turn"
+      }
+    ],
+    "question": "Motorcyclists will often look over their right shoulder just before turning right. This is because",
+    "result": "correct",
+    "selected": "they need to check for traffic in their blind area"
+  },
+  {
+    "correctAnswer": "24 demerit points.",
+    "media": [],
+    "number": 14,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": true,
+        "text": "12 demerit points."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "16 demerit points."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "24 demerit points."
+      }
+    ],
+    "question": "A driver with more than a year experience will be suspended from driving if within a period of 24 months, he has accumulated",
+    "result": "wrong",
+    "selected": "12 demerit points."
+  },
+  {
+    "correctAnswer": "24 demerit points within 24 months.",
+    "media": [],
+    "number": 15,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": true,
+        "text": "12 demerit points within 12 months."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "24 demerit points within 24 months."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "36 demerits points within 36 months."
+      }
+    ],
+    "question": "A qualified driver with more than 1 year driving experience will be suspended from driving if the has accumulated",
+    "result": "wrong",
+    "selected": "12 demerit points within 12 months."
+  },
+  {
+    "correctAnswer": "pull to the side and stop if necessary.",
+    "media": [],
+    "number": 16,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "slow down quickly."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "pull to the side and stop if necessary."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "increase your speed."
+      }
+    ],
+    "question": "When an emergency vehicle behind you sounds its siren, you should",
+    "result": "correct",
+    "selected": "pull to the side and stop if necessary."
+  },
+  {
+    "correctAnswer": "the dangerous practice of following another vehicle too closely",
+    "media": [],
+    "number": 17,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "reversing into a vertical parking lot"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "the dangerous practice of following another vehicle too closely"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "parking at the tail end of the gate or entrance"
+      }
+    ],
+    "question": "The term 'Tailgating' means",
+    "result": "correct",
+    "selected": "the dangerous practice of following another vehicle too closely"
+  },
+  {
+    "correctAnswer": "Drive through slowly in 1st gear.",
+    "media": [],
+    "number": 18,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive through as fast as possible to avoid stopping."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Drive through slowly in 1st gear."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive through in the highest gear."
+      }
+    ],
+    "question": "How should you deal with floods?",
+    "result": "correct",
+    "selected": "Drive through slowly in 1st gear."
+  },
+  {
+    "correctAnswer": "keep to the left lane",
+    "media": [],
+    "number": 19,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "keep to the left lane"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "keep to the extreme right lane"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive in the centre lane"
+      }
+    ],
+    "question": "On the expressway if the road is clear, you should",
+    "result": "correct",
+    "selected": "keep to the left lane"
+  },
+  {
+    "correctAnswer": "keep to the left lane if the road ahead is clear.",
+    "media": [],
+    "number": 20,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "overtake by the extreme left lane."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "keep to the extreme right lane if you are on maximum speed."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "keep to the left lane if the road ahead is clear."
+      }
+    ],
+    "question": "On the expressway, you should",
+    "result": "correct",
+    "selected": "keep to the left lane if the road ahead is clear."
+  },
+  {
+    "correctAnswer": "cause inconvenience and danger to other motorists.",
+    "media": [],
+    "number": 21,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "improve the flow of traffic on the road."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "cause inconvenience and danger to other motorists."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "cause wear and tear to the vehicle."
+      }
+    ],
+    "question": "Switching lanes suddenly or abruptly will",
+    "result": "correct",
+    "selected": "cause inconvenience and danger to other motorists."
+  },
+  {
+    "correctAnswer": "More power but lesser speed",
+    "media": [],
+    "number": 22,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "More power but lesser speed"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "More power and higher speed"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Less power and lesser speed"
+      }
+    ],
+    "question": "Compared to a higher gear, a lower gear has",
+    "result": "correct",
+    "selected": "More power but lesser speed"
+  },
+  {
+    "correctAnswer": "Close to the left of the road.",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/goodviewrightbend_gmZjsCz.png",
+        "tag": "div"
+      }
+    ],
+    "number": 23,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Close to the centre line."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "In the middle of your lane."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Close to the left of the road."
+      }
+    ],
+    "question": "In order to have a better view while entering a sharp right hand bend as shown in the scenario, you should position your car",
+    "result": "correct",
+    "selected": "Close to the left of the road."
+  },
+  {
+    "correctAnswer": "Handbrake",
+    "media": [],
+    "number": 24,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Both handbrake and foot-brake"
+      },
+      {
+        "correct": false,
+        "selectedWrong": true,
+        "text": "Foot brake only"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Handbrake"
+      }
+    ],
+    "question": "Just before you move off on an up-slope which brake should you apply ?",
+    "result": "wrong",
+    "selected": "Foot brake only"
+  },
+  {
+    "correctAnswer": "Select a lower gear and use the foot-brake",
+    "media": [],
+    "number": 25,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Use the foot brake and handbrake"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Select a lower gear and use the foot-brake"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Free the gear and use the foot-brake"
+      }
+    ],
+    "question": "To control the speed of your vehicle when going down a steep hill, you should",
+    "result": "correct",
+    "selected": "Select a lower gear and use the foot-brake"
+  },
+  {
+    "correctAnswer": "Always drive at a speed that match the traffic flow",
+    "media": [],
+    "number": 26,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive on the extreme right lane all the time"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Always drive at a speed that match the traffic flow"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive at the maximun speed limit of the road all the time"
+      }
+    ],
+    "question": "To drive in a way where other drivers will not find it necessary to overtake you, you should",
+    "result": "correct",
+    "selected": "Always drive at a speed that match the traffic flow"
+  },
+  {
+    "correctAnswer": "All round",
+    "media": [],
+    "number": 27,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Behind"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "All round"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Ahead and behind"
+      }
+    ],
+    "question": "Before reversing, you should check",
+    "result": "correct",
+    "selected": "All round"
+  },
+  {
+    "correctAnswer": "Braking.",
+    "media": [],
+    "number": 28,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Engine temperature."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Braking."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Oil pressure."
+      }
+    ],
+    "question": "Driving with under-inflated tyres can affect",
+    "result": "correct",
+    "selected": "Braking."
+  },
+  {
+    "correctAnswer": "Steering and braking",
+    "media": [],
+    "number": 29,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Oil pressure"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Steering and braking"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Changing gear"
+      }
+    ],
+    "question": "Incorrect tyre pressure will affect",
+    "result": "correct",
+    "selected": "Steering and braking"
+  },
+  {
+    "correctAnswer": "be greater.",
+    "media": [],
+    "number": 30,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "be greater."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "be lesser."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "remain unchanged."
+      }
+    ],
+    "question": "When the speed increases while driving round a bend, the push of the centrifugal force will",
+    "result": "correct",
+    "selected": "be greater."
+  },
+  {
+    "correctAnswer": "Longer",
+    "media": [],
+    "number": 31,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The same"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Longer"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Shorter"
+      }
+    ],
+    "question": "If the frictional force is reduced on wet road, the stopping distance will be",
+    "result": "correct",
+    "selected": "Longer"
+  },
+  {
+    "correctAnswer": "It is very difficult to control the vehicle.",
+    "media": [],
+    "number": 32,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The vehicle will negotiate a bend smoothly"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It makes control easier at high speed"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "It is very difficult to control the vehicle."
+      }
+    ],
+    "question": "When neutral gear is engaged while driving",
+    "result": "correct",
+    "selected": "It is very difficult to control the vehicle."
+  },
+  {
+    "correctAnswer": "Dip your headlights",
+    "media": [],
+    "number": 33,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Switch off your lights"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Dip your headlights"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Swith on high beam"
+      }
+    ],
+    "question": "On a sharp bend at night, to avoid dazzling oncoming traffic, you should",
+    "result": "correct",
+    "selected": "Dip your headlights"
+  },
+  {
+    "correctAnswer": "to avoid dazzling drivers of oncoming vehicles",
+    "media": [],
+    "number": 34,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to save the battery's electrical energy"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to light up the road immediately in front of you"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "to avoid dazzling drivers of oncoming vehicles"
+      }
+    ],
+    "question": "The purpose of using dipped headlights whilst driving is to",
+    "result": "correct",
+    "selected": "to avoid dazzling drivers of oncoming vehicles"
+  },
+  {
+    "correctAnswer": "be aware that the driver's reactions may not be as fast as yours",
+    "media": [],
+    "number": 35,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "flash your lights and overtake"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "be aware that the driver's reactions may not be as fast as yours"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "expect the driver to drive badly"
+      }
+    ],
+    "question": "When following a car driven by an elderly driver, you should",
+    "result": "correct",
+    "selected": "be aware that the driver's reactions may not be as fast as yours"
+  },
+  {
+    "correctAnswer": "check traffic from right and left before moving off.",
+    "media": [],
+    "number": 36,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "depress the accelerator hard and move off quickly."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "check traffic from right and left before moving off."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "only move off when other vehicles move."
+      }
+    ],
+    "question": "When the traffic light turns green at a junction, you should",
+    "result": "correct",
+    "selected": "check traffic from right and left before moving off."
+  },
+  {
+    "correctAnswer": "slow down and be ready to stop",
+    "media": [],
+    "number": 37,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "overtake the slow moving vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "maintain your normal speed"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "slow down and be ready to stop"
+      }
+    ],
+    "question": "When you see a vehicle slowing down at a pedestrian crossing, you should",
+    "result": "correct",
+    "selected": "slow down and be ready to stop"
+  },
+  {
+    "correctAnswer": "to get the best view of the road ahead",
+    "media": [],
+    "number": 38,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to offer others a gap if they wanted to overtake you"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "to get the best view of the road ahead"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to leave a gap in case the vehicle stops abruptly and rolls back"
+      }
+    ],
+    "question": "Before overtaking a large vehicle you should keep a longer distance. The reason is :",
+    "result": "correct",
+    "selected": "to get the best view of the road ahead"
+  },
+  {
+    "correctAnswer": "Causes other vehicles to overtake dangerously on the left",
+    "media": [],
+    "number": 39,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Ensures a smoother flow of traffic"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Causes other vehicles to overtake dangerously on the left"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Causes other vehicles to overtake on the right"
+      }
+    ],
+    "question": "Road hogging",
+    "result": "correct",
+    "selected": "Causes other vehicles to overtake dangerously on the left"
+  },
+  {
+    "correctAnswer": "Brake reservoir.",
+    "media": [],
+    "number": 40,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Battery."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Engine."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Brake reservoir."
+      }
+    ],
+    "question": "Which of the following maintenance parts could cause an accident if the fluid level is low?",
+    "result": "correct",
+    "selected": "Brake reservoir."
+  },
+  {
+    "correctAnswer": "Wait for the engine to cool by itself.",
+    "media": [],
+    "number": 41,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Open the radiator tank cap immediately."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Wait for the engine to cool by itself."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Pour water on the engine."
+      }
+    ],
+    "question": "To cool an over-heated engine, you should switch off the engine and",
+    "result": "correct",
+    "selected": "Wait for the engine to cool by itself."
+  },
+  {
+    "correctAnswer": "Slow down",
+    "media": [],
+    "number": 42,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive at normal speed"
+      }
+    ],
+    "question": "How can you prevent 'aquaplaning' occuring?",
+    "result": "correct",
+    "selected": "Slow down"
+  },
+  {
+    "correctAnswer": "Use your brakes gently and early",
+    "media": [],
+    "number": 43,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Use your brakes gently and early"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Brake harder"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Apply both the handbrake and foot brake together"
+      }
+    ],
+    "question": "In order to prevent skidding when stopping your vehicle on a wet road, you should",
+    "result": "correct",
+    "selected": "Use your brakes gently and early"
+  },
+  {
+    "correctAnswer": "try not to react",
+    "media": [],
+    "number": 44,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "try not to react"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "flash your headlights several times"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "sound your horn"
+      }
+    ],
+    "question": "A driver does something that upsets you, you should",
+    "result": "correct",
+    "selected": "try not to react"
+  },
+  {
+    "correctAnswer": "a fine with demerit points.",
+    "media": [],
+    "number": 45,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "a fine."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to be charged in court."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "a fine with demerit points."
+      }
+    ],
+    "question": "The penalty for driving on the road-shoulder of an Expressway is",
+    "result": "correct",
+    "selected": "a fine with demerit points."
+  },
+  {
+    "correctAnswer": "give the cyclist plenty of room",
+    "media": [],
+    "number": 46,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "overtake on the right"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "give the cyclist plenty of room"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "give a horn warning"
+      }
+    ],
+    "question": "At a roundabout you notice a cyclist is signaling to turn right ahead, you should",
+    "result": "correct",
+    "selected": "give the cyclist plenty of room"
+  },
+  {
+    "correctAnswer": "Drive slowly and leave plenty of room",
+    "media": [],
+    "number": 47,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Use your horn just once to warn them"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Drive slowly and leave plenty of room"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Overtake them as quickly as possible"
+      }
+    ],
+    "question": "How should you overtake cyclists?",
+    "result": "correct",
+    "selected": "Drive slowly and leave plenty of room"
+  },
+  {
+    "correctAnswer": "both (A) and (B) above.",
+    "media": [],
+    "number": 48,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "signal your intention."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "lookout for other road users especially those in front and behind."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "both (A) and (B) above."
+      }
+    ],
+    "question": "Before moving off from a stationary position, you should",
+    "result": "correct",
+    "selected": "both (A) and (B) above."
+  },
+  {
+    "correctAnswer": "Swinging wide on left turns",
+    "media": [],
+    "number": 49,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Swinging wide on left turns"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Striking the left kerb when turning left"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Cutting the corner when turning right"
+      }
+    ],
+    "question": "If you turn too late when steering around a corner, you risk",
+    "result": "correct",
+    "selected": "Swinging wide on left turns"
+  },
+  {
+    "correctAnswer": "Six positions",
+    "media": [],
+    "number": 50,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Three positions"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Six positions"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Nine positions"
+      }
+    ],
+    "question": "There are how many different positions that your bike can collide with another vehicle?",
+    "result": "correct",
+    "selected": "Six positions"
+  }
+]
