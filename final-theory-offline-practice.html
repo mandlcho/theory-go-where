@@ -120,7 +120,7 @@
             <button id="prevButton" class="btn" type="button">Previous</button>
             <button id="flagButton" class="btn" type="button">Flag</button>
             <span class="spacer"></span>
-            <button id="nextButton" class="btn primary" type="button">Next</button>
+            <button id="nextButton" class="btn primary" type="button" aria-keyshortcuts="Space" title="Press Space for next question">Next</button>
             <button id="submitButton" class="btn primary" type="button">Submit paper</button>
           </nav>
         </article>
@@ -262,7 +262,7 @@
 
     function renderExam() {
       const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number];
-      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review":"Choose the best answer, or press 1, 2, or 3. Your progress saves automatically.";
+      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review · Press Space for next":"Choose with 1, 2, or 3, then press Space for next. Your progress saves automatically.";
       $("#answeredCount").textContent=answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
       const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'">':"";
       const choices=q.options.map((option,i)=>{
@@ -306,6 +306,7 @@
       if(event.key==="Escape"&&questionSidebar.classList.contains("mobile-open")){setPaletteOpen(false,true);return;}
       if(examView.hidden||questionSidebar.classList.contains("mobile-open")||event.ctrlKey||event.metaKey||event.altKey||event.target.matches("textarea,select,input:not([type=radio])"))return;
       if(!state.submitted&&/^[123]$/.test(event.key)){const input=document.querySelector('input[name="answer"][value="'+(Number(event.key)-1)+'"]');if(input&&!input.disabled){event.preventDefault();input.click();}return;}
+      if(event.code==="Space"||event.key===" "){event.preventDefault();if(!$("#nextButton").hidden)$("#nextButton").click();return;}
       if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();
     });
     renderHome(); show("home");
