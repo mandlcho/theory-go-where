@@ -262,12 +262,12 @@
 
     function renderExam() {
       const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number];
-      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review":"Choose the best answer. Your progress saves automatically.";
+      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review":"Choose the best answer, or press 1, 2, or 3. Your progress saves automatically.";
       $("#answeredCount").textContent=answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
       const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'">':"";
       const choices=q.options.map((option,i)=>{
         let cls="choice", tag=""; if(review&&option.correct){cls+=" correct";tag="Correct";} else if(review&&String(i)===String(selected)&&!option.correct){cls+=" wrong";tag="Your answer";}
-        return '<label class="'+cls+'"><input type="radio" name="answer" value="'+i+'" '+(String(i)===String(selected)?'checked':'')+' '+(review?'disabled':'')+'><span class="choice-letter">'+option.label+'</span><span>'+esc(option.text)+'</span><span class="answer-tag">'+tag+'</span></label>';
+        return '<label class="'+cls+'"><input type="radio" name="answer" value="'+i+'" aria-keyshortcuts="'+(i+1)+'" title="Press '+(i+1)+' to select" '+(String(i)===String(selected)?'checked':'')+' '+(review?'disabled':'')+'><span class="choice-letter">'+option.label+'</span><span>'+esc(option.text)+'</span><span class="answer-tag">'+tag+'</span></label>';
       }).join("");
       const feedback=review?teachingFeedback(q,selected):"";
       $("#questionArea").innerHTML='<p class="q-label">Question '+q.number+' · '+(state.index+1)+' of 50</p><h3>'+esc(q.question)+'</h3>'+image+'<div class="choices">'+choices+'</div>'+feedback;
@@ -302,7 +302,12 @@
     $("#flagButton").addEventListener("click",()=>{const n=currentQuestion().number;state.flags=state.flags.includes(n)?state.flags.filter(x=>x!==n):[...state.flags,n];writeStore();renderExam();});
     paletteToggle.addEventListener("click",()=>setPaletteOpen(!questionSidebar.classList.contains("mobile-open"))); $("#paletteClose").addEventListener("click",()=>setPaletteOpen(false,true)); paletteBackdrop.addEventListener("click",()=>setPaletteOpen(false,true));
     window.addEventListener("resize",()=>{if(!window.matchMedia("(max-width:860px)").matches)setPaletteOpen(false);});
-    document.addEventListener("keydown",(event)=>{if(event.key==="Escape"&&questionSidebar.classList.contains("mobile-open")){setPaletteOpen(false,true);return;}if(examView.hidden||event.target.matches("input"))return;if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();});
+    document.addEventListener("keydown",(event)=>{
+      if(event.key==="Escape"&&questionSidebar.classList.contains("mobile-open")){setPaletteOpen(false,true);return;}
+      if(examView.hidden||questionSidebar.classList.contains("mobile-open")||event.ctrlKey||event.metaKey||event.altKey||event.target.matches("textarea,select,input:not([type=radio])"))return;
+      if(!state.submitted&&/^[123]$/.test(event.key)){const input=document.querySelector('input[name="answer"][value="'+(Number(event.key)-1)+'"]');if(input&&!input.disabled){event.preventDefault();input.click();}return;}
+      if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();
+    });
     renderHome(); show("home");
   </script>
 </body>
