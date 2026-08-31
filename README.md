@@ -11,6 +11,7 @@ An offline-friendly Singapore driving-theory practice app. It currently contains
 - Phone-first practice mode with a sticky question header, thumb-friendly navigation, and a collapsible question palette
 - Shuffled practice attempts, scoring, flags, and answer review
 - Choice-specific teaching feedback for incorrect answers
+- A mobile-friendly tricky-topics cheat sheet with memory hooks and date-sensitive demerit-point guidance
 - Topic-matched links to official Traffic Police and LTA guidance
 - Placeholder cards for Papers 1, 3, 7, 8, and 10
 

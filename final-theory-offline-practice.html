@@ -18,7 +18,7 @@
     button,input{font:inherit} button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     button:focus-visible,input:focus-visible{outline:3px solid rgba(7,89,133,.25);outline-offset:2px}
     .topbar{position:relative;z-index:30;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:18px 20px;box-shadow:0 3px 16px rgba(9,42,68,.18)}
-    .topbar-inner{width:min(1160px,100%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .topbar-inner{width:min(1160px,100%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.top-actions{display:flex;align-items:center;gap:8px}
     .brand{display:flex;align-items:center;gap:12px}.brand-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:12px;background:rgba(255,255,255,.12);font-weight:900}
     .brand h1{margin:0;font-size:1.08rem;letter-spacing:-.015em}.brand p{margin:1px 0 0;color:rgba(255,255,255,.68);font-size:.78rem}
     .ghost-light{border:1px solid rgba(255,255,255,.35);border-radius:9px;background:transparent;color:#fff;padding:9px 13px;font-weight:750}
@@ -61,6 +61,12 @@
     .teaching-label{display:block;margin-bottom:6px;color:var(--blue);font-size:.72rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
     .teaching p{margin:0;line-height:1.62}.teaching strong{color:var(--navy)}
     .source-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 10px;border:1px solid #a8c9da;border-radius:8px;background:#fff;color:var(--blue);font-size:.78rem;font-weight:850;text-decoration:none}.source-link:hover{text-decoration:underline;border-color:var(--blue)}
+    .cheat-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding:20px 0 10px}.cheat-hero h2{max-width:760px;margin:0;font-size:clamp(2.2rem,5vw,4rem);line-height:1;letter-spacing:-.055em}.cheat-intro{max-width:670px;margin:15px 0 0;color:var(--muted);font-size:1.02rem}
+    .shortcut-box{min-width:220px;padding:16px 18px;border:1px solid #b8d4e3;border-radius:14px;background:#eef7fb}.shortcut-box strong{display:block;margin-bottom:8px;color:var(--navy);font-size:.82rem}.shortcut-box span{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:.78rem}.shortcut-box kbd{display:inline-grid;min-width:27px;height:27px;place-items:center;border:1px solid #aac2d0;border-bottom-width:3px;border-radius:6px;background:#fff;color:var(--navy);font:800 .75rem ui-monospace,SFMono-Regular,Menlo,monospace}
+    .cheat-jumps{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.cheat-jumps a{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--blue);font-size:.78rem;font-weight:850;text-decoration:none}.cheat-jumps a:hover{border-color:#8fb3c7;background:#f5fafc}
+    .cheat-alert{margin:0 0 16px;padding:14px 16px;border:1px solid #efd08d;border-radius:13px;background:var(--amber-bg);color:#69470b}.cheat-alert strong{color:#4d3408}.cheat-alert a{color:inherit;font-weight:850}
+    .cheat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.cheat-card{scroll-margin-top:22px;padding:21px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:0 8px 25px rgba(9,42,68,.05)}.cheat-card.featured{grid-column:1/-1}.cheat-topic{color:var(--blue);font-size:.7rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.cheat-card h3{margin:5px 0 7px;font-size:1.35rem;letter-spacing:-.025em}.memory-hook{margin:0 0 15px;color:var(--navy);font-weight:850}.rule-list{display:grid;gap:0;border-top:1px solid var(--line)}.rule{display:grid;grid-template-columns:minmax(110px,155px) 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}.rule strong{color:var(--navy)}.rule span{color:var(--muted)}
+    .future-note{margin-top:15px;padding:12px 14px;border-radius:11px;background:#f1f5f8;color:#445461;font-size:.85rem}.future-note strong{color:var(--ink)}.cheat-sources{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.cheat-sources a{display:inline-flex;align-items:center;min-height:38px;padding:0 10px;border:1px solid #a8c9da;border-radius:8px;color:var(--blue);font-size:.76rem;font-weight:850;text-decoration:none}.cheat-sources a:hover{text-decoration:underline;border-color:var(--blue)}
     [hidden]{display:none!important}.empty{padding:50px 20px;text-align:center;color:var(--muted)}
     footer{text-align:center;color:var(--muted);font-size:.75rem;padding:0 20px 30px}
     @media(max-width:860px){
@@ -72,7 +78,7 @@
       .palette{grid-template-columns:repeat(10,1fr)}
     }
     @media(max-width:600px){
-      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:10px}.brand{gap:9px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.98rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 10px;font-size:.78rem;white-space:nowrap}
+      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:7px}.top-actions{gap:6px}.brand{gap:8px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.94rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 8px;font-size:.72rem;white-space:nowrap}body:not([data-view="home"]) .brand-mark{display:none}
       main{width:min(100% - 18px,1160px);margin-top:18px}.hero{padding:12px 0 10px}.hero h2{font-size:2.15rem}.hero-copy{font-size:.94rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
       .paper-grid{grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.paper-card{min-height:180px;padding:14px;border-radius:15px}.paper-card h3{font-size:1.2rem}.paper-no{font-size:.68rem}.paper-meta{font-size:.8rem}.paper-progress{margin-top:13px}.card-actions{flex-direction:column;gap:7px;padding-top:12px}.card-actions .btn{width:100%}
       body[data-view="exam"] main{width:100%;margin:0;padding-bottom:calc(82px + env(safe-area-inset-bottom))}body[data-view="exam"] footer{display:none}.exam-main{border:0;border-radius:0;box-shadow:none;min-height:calc(100dvh - 60px)}
@@ -82,6 +88,7 @@
       .exam-actions{position:fixed;z-index:40;inset:auto 0 0;display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));border-top:1px solid var(--line);background:rgba(255,255,255,.96);box-shadow:0 -10px 30px rgba(9,42,68,.12);backdrop-filter:blur(14px)}.exam-actions .spacer{display:none}.exam-actions .btn{min-height:50px;padding-inline:14px}.exam-actions #nextButton,.exam-actions #submitButton{width:100%}
       .palette{grid-template-columns:repeat(5,1fr);gap:8px}.q-dot{min-height:48px;aspect-ratio:auto;border-radius:9px;font-size:.82rem}.legend{margin-bottom:2px}
       .teaching{padding:14px}.source-link{display:flex;min-height:48px;width:100%;justify-content:center;text-align:center}.result-panel{padding:28px 18px;border:0;border-radius:0;box-shadow:none}.result-actions{display:grid}.result-actions .btn{width:100%;min-height:50px}
+      .cheat-hero{display:block;padding-top:8px}.cheat-hero h2{font-size:2.35rem}.cheat-intro{font-size:.93rem}.shortcut-box{margin-top:17px}.cheat-jumps{margin:16px 0}.cheat-jumps a{padding:8px 10px;font-size:.73rem}.cheat-grid{grid-template-columns:1fr;gap:11px}.cheat-card,.cheat-card.featured{grid-column:auto;padding:17px;border-radius:15px}.cheat-card h3{font-size:1.22rem}.rule{display:block;padding:10px 0}.rule strong{display:block;margin-bottom:3px}.cheat-sources a{min-height:44px}.cheat-alert{font-size:.86rem}
     }
     @media print{.topbar,.sidebar,.exam-actions{display:none!important}body{background:#fff}.exam-shell{display:block}.exam-main{box-shadow:none}.question{break-inside:avoid}}
   </style>
@@ -90,7 +97,7 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand"><span class="brand-mark">FT</span><div><h1>Final Theory Practice</h1><p>Personal offline study copy</p></div></div>
-      <button id="homeButton" class="ghost-light" type="button" hidden>All papers</button>
+      <div class="top-actions"><button id="cheatButton" class="ghost-light" type="button">Cheat sheet</button><button id="homeButton" class="ghost-light" type="button" hidden>Papers</button></div>
     </div>
   </header>
   <main>
@@ -102,6 +109,105 @@
         <div id="statusStrip" class="status-strip"></div>
       </div>
       <div id="paperGrid" class="paper-grid"></div>
+    </section>
+
+    <section id="cheatView" hidden>
+      <div class="cheat-hero">
+        <div>
+          <p class="kicker">Final Theory cheat sheet</p>
+          <h2>The tricky bits, made memorable.</h2>
+          <p class="cheat-intro">Use these memory hooks when two answers both sound reasonable. They summarise the rules that repeat across your captured papers; open the official links when you want the full rule.</p>
+        </div>
+        <aside class="shortcut-box" aria-label="Practice keyboard shortcuts"><strong>Practice faster</strong><span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> choose an answer</span><span><kbd>Space</kbd> next question</span><span><kbd>←</kbd><kbd>→</kbd> move between questions</span></aside>
+      </div>
+      <nav class="cheat-jumps" aria-label="Cheat sheet topics"><a href="#cheat-points">Demerit points</a><a href="#cheat-observation">Observation</a><a href="#cheat-distance">Distance & grip</a><a href="#cheat-overtaking">Overtaking</a><a href="#cheat-expressway">Expressways</a><a href="#cheat-people">People</a><a href="#cheat-control">Vehicle control</a></nav>
+      <p class="cheat-alert"><strong>Date-sensitive:</strong> The demerit-point answers in these 2026 mock papers use the rules in force on 31 August 2026. New thresholds begin on 1 January 2027.</p>
+
+      <div class="cheat-grid">
+        <article id="cheat-points" class="cheat-card featured">
+          <span class="cheat-topic">Exact numbers</span><h3>Demerit points: identify the driver first</h3><p class="memory-hook">Memory hook: 13–1, 24–24, 12–12.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>13 in 1</strong><span>A new driver who reaches 13 points during the one-year probation period has the licence revoked.</span></div>
+            <div class="rule"><strong>24 in 24</strong><span>A non-probationary driver with no previous suspension becomes liable for the first suspension at 24 points within 24 months.</span></div>
+            <div class="rule"><strong>12 in 12</strong><span>After a previous suspension, 12 points within 12 months triggers a subsequent suspension.</span></div>
+            <div class="rule"><strong>12-month suspension</strong><span>A suspension lasting 12 months or more means the licence is revoked and the theory and practical tests must be retaken.</span></div>
+            <div class="rule"><strong>Clean for 12 months</strong><span>No new point-carrying offence for 12 months removes the previous demerit points. A 24-month clean record removes previous suspension records.</span></div>
+          </div>
+          <p class="future-note"><strong>Mock wording warning:</strong> Papers 2 and 9 expect “13 points”, but the official meaning is probationary-licence revocation—not a general test-booking rule. From <strong>1 January 2027</strong>, 13 becomes 12 for probationary drivers, while the first-suspension threshold changes from 24 to 18.</p>
+          <div class="cheat-sources"><a href="https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Driver-Improvement-Point-Systems" target="_blank" rel="noopener noreferrer">Current Traffic Police rules ↗</a><a href="https://www.police.gov.sg/media-hub/news/2026/07/20260731_tightening_of_the_driver_improvement_points" target="_blank" rel="noopener noreferrer">Changes from 2027 ↗</a></div>
+        </article>
+
+        <article id="cheat-observation" class="cheat-card">
+          <span class="cheat-topic">Hazard routine</span><h3>Observation before movement</h3><p class="memory-hook">Mirrors → signal → blind spot → move only when clear.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>Lane change</strong><span>Mirrors cannot show every motorcycle or cyclist. Make a direct blind-spot check before moving sideways.</span></div>
+            <div class="rule"><strong>Moving off</strong><span>Use mirrors, check the blind spot, signal, then move when the path is clear.</span></div>
+            <div class="rule"><strong>Green light</strong><span>Green gives permission, not a guarantee. Approach under control and check that the junction is clear.</span></div>
+            <div class="rule"><strong>Parked vehicle</strong><span>Slow down: it may pull out, open a door or hide another road user.</span></div>
+          </div>
+          <div class="cheat-sources"><a href="https://www.police.gov.sg/Knowledge-Hub/Traffic/Road-Safety-Tips/Road-Safety-Tips-for-Drivers" target="_blank" rel="noopener noreferrer">Traffic Police driver tips ↗</a></div>
+        </article>
+
+        <article id="cheat-distance" class="cheat-card">
+          <span class="cheat-topic">Time and traction</span><h3>Following distance, braking and bends</h3><p class="memory-hook">Create time first; make every control input smooth.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>Three seconds</strong><span>Use the three-second rule at every normal driving speed, and increase the gap when grip or visibility is poor.</span></div>
+            <div class="rule"><strong>Wet road</strong><span>Less grip means a longer stopping distance. Brake gently and earlier.</span></div>
+            <div class="rule"><strong>Heavy load</strong><span>More mass needs more braking distance.</span></div>
+            <div class="rule"><strong>Bend</strong><span>Reduce speed before entering, while the vehicle is straight—not halfway around the bend.</span></div>
+            <div class="rule"><strong>Downhill</strong><span>Select a lower gear for engine braking; never coast in neutral or with the clutch held down.</span></div>
+          </div>
+          <div class="cheat-sources"><a href="https://www.police.gov.sg/-/media/SPF/Knowledge-Hub/Traffic/FT-ENG-2126-Revised.pdf" target="_blank" rel="noopener noreferrer">Official Final Theory handbook ↗</a></div>
+        </article>
+
+        <article id="cheat-overtaking" class="cheat-card">
+          <span class="cheat-topic">Lane discipline</span><h3>Overtaking and large vehicles</h3><p class="memory-hook">See clearly, leave space, and always keep an escape route.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>Rightmost lane</strong><span>Use it for overtaking, not as the default cruising lane.</span></div>
+            <div class="rule"><strong>Behind a lorry</strong><span>Stay well back for a wider view. A long vehicle may swing opposite its signal before turning.</span></div>
+            <div class="rule"><strong>Do not pass</strong><span>Avoid overtaking at bends, junctions, pedestrian crossings or where the view ahead is restricted.</span></div>
+            <div class="rule"><strong>Pass goes wrong</strong><span>If the other vehicle speeds up, abandon the attempt and return safely—do not race.</span></div>
+            <div class="rule"><strong>Being passed</strong><span>Do not accelerate. Ease off if needed and let the other road user complete the manoeuvre.</span></div>
+          </div>
+          <div class="cheat-sources"><a href="https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/road_safety_and_vehicle_rules/driving-rules.html" target="_blank" rel="noopener noreferrer">LTA driving rules ↗</a></div>
+        </article>
+
+        <article id="cheat-expressway" class="cheat-card">
+          <span class="cheat-topic">Fast roads</span><h3>Expressways and emergency vehicles</h3><p class="memory-hook">Be predictable: keep left, never reverse, stop only where safe.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>Missed exit</strong><span>Continue to the next exit. Never stop or reverse on the expressway.</span></div>
+            <div class="rule"><strong>Breakdown or puncture</strong><span>Move to the road shoulder if possible, use hazard lights and seek assistance.</span></div>
+            <div class="rule"><strong>Road shoulder</strong><span>It is for emergencies, not overtaking or bypassing a queue.</span></div>
+            <div class="rule"><strong>Siren behind</strong><span>Keep left, slow down and stop if necessary, while avoiding a sudden dangerous move.</span></div>
+            <div class="rule"><strong>Direction unclear</strong><span>Slow down and move left so the emergency vehicle has a predictable path.</span></div>
+          </div>
+          <div class="cheat-sources"><a href="https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/road_safety_and_vehicle_rules/driving-in-expressway-and-tunnel.html" target="_blank" rel="noopener noreferrer">LTA expressway and tunnel guide ↗</a></div>
+        </article>
+
+        <article id="cheat-people" class="cheat-card">
+          <span class="cheat-topic">Vulnerable road users</span><h3>Pedestrians, children and two-wheelers</h3><p class="memory-hook">If they have less protection, give them more time and space.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>Turning</strong><span>Give way to pedestrians who have started crossing the side road you are entering.</span></div>
+            <div class="rule"><strong>Reversing</strong><span>Move slowly, check all around and give way to anyone crossing behind.</span></div>
+            <div class="rule"><strong>Children</strong><span>A ball, distraction or sudden movement can turn a potential hazard into an immediate one.</span></div>
+            <div class="rule"><strong>Elderly people</strong><span>Expect slower movement or misjudgement of your speed; reduce speed and be ready to stop.</span></div>
+            <div class="rule"><strong>Motorcycles</strong><span>Expect filtering beside queues and check the blind spot before changing lane or opening a door.</span></div>
+          </div>
+          <div class="cheat-sources"><a href="https://www.police.gov.sg/Knowledge-Hub/Traffic/Road-Safety-Tips/Road-Safety-Tips-for-Pedestrians" target="_blank" rel="noopener noreferrer">Traffic Police pedestrian tips ↗</a><a href="https://www.police.gov.sg/Knowledge-Hub/Traffic/Road-Safety-Tips/Road-Safety-Tips-for-Drivers" target="_blank" rel="noopener noreferrer">Driver tips ↗</a></div>
+        </article>
+
+        <article id="cheat-control" class="cheat-card">
+          <span class="cheat-topic">Loss of control</span><h3>Lights, tyres and mechanical trouble</h3><p class="memory-hook">Slow, smooth and stable beats a sudden reaction.</p>
+          <div class="rule-list">
+            <div class="rule"><strong>Headlight glare</strong><span>Slow down, look toward the left edge of the road and never retaliate with high beam.</span></div>
+            <div class="rule"><strong>High beam</strong><span>Dip it when facing oncoming traffic so the other driver is not dazzled.</span></div>
+            <div class="rule"><strong>Tyre puncture</strong><span>Grip the wheel, keep the vehicle stable, brake progressively and stop safely at the side.</span></div>
+            <div class="rule"><strong>Overheating</strong><span>Stop safely and let the engine cool. Never remove a hot radiator cap immediately.</span></div>
+            <div class="rule"><strong>Pulls while braking</strong><span>Treat it as a defect and have it checked; do not continue normal driving.</span></div>
+          </div>
+          <div class="cheat-sources"><a href="https://www.police.gov.sg/-/media/SPF/Knowledge-Hub/Traffic/FT-ENG-2126-Revised.pdf" target="_blank" rel="noopener noreferrer">Official Final Theory handbook ↗</a></div>
+        </article>
+      </div>
     </section>
 
     <section id="examView" hidden>
@@ -145,9 +251,10 @@
     const STORAGE_KEY = "ft-offline-practice-v1";
     const PASS_MARK = 45;
     const $ = (selector) => document.querySelector(selector);
-    const homeView = $("#homeView"), examView = $("#examView"), resultView = $("#resultView");
+    const homeView = $("#homeView"), cheatView = $("#cheatView"), examView = $("#examView"), resultView = $("#resultView");
     const questionSidebar = $("#questionSidebar"), paletteBackdrop = $("#paletteBackdrop"), paletteToggle = $("#paletteToggle");
     const state = { paper:null, index:0, order:[], answers:{}, flags:[], submitted:false, startedAt:null };
+    let viewBeforeCheat="home";
 
     function esc(value) { return String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
     function readStore() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; } }
@@ -163,8 +270,9 @@
       questionSidebar.classList.toggle("mobile-open",shouldOpen); paletteBackdrop.hidden=!shouldOpen; document.body.classList.toggle("palette-open",shouldOpen); paletteToggle.setAttribute("aria-expanded",String(shouldOpen));
       if(shouldOpen) $("#paletteClose").focus(); else if(restoreFocus) paletteToggle.focus();
     }
-    function show(view) { homeView.hidden=view!=="home"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
+    function show(view) { homeView.hidden=view!=="home"; cheatView.hidden=view!=="cheat"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; $("#homeButton").textContent=view==="cheat"?"Back":"Papers"; $("#cheatButton").hidden=view==="cheat"; setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
     function goHome() { if(state.paper && !state.submitted) writeStore(); renderHome(); show("home"); }
+    function openCheat() { viewBeforeCheat=document.body.dataset.view||"home"; show("cheat"); }
 
     function renderHome() {
       const store=readStore(); const readyIds=Object.keys(PAPERS).sort((a,b)=>Number(a)-Number(b)); const ids=Array.from({length:10},(_,i)=>String(i+1));
@@ -297,7 +405,7 @@
       $("#retryButton").addEventListener("click",()=>startPaper(String(state.paper),false)); $("#resultHome").addEventListener("click",goHome);
     }
 
-    $("#homeButton").addEventListener("click",goHome); $("#prevButton").addEventListener("click",()=>{if(state.index>0){state.index--;writeStore();renderExam();}});
+    $("#homeButton").addEventListener("click",()=>{if(document.body.dataset.view==="cheat")show(viewBeforeCheat);else goHome();}); $("#cheatButton").addEventListener("click",openCheat); $("#prevButton").addEventListener("click",()=>{if(state.index>0){state.index--;writeStore();renderExam();}});
     $("#nextButton").addEventListener("click",()=>{if(state.index<49){state.index++;writeStore();renderExam();}}); $("#submitButton").addEventListener("click",submitPaper);
     $("#flagButton").addEventListener("click",()=>{const n=currentQuestion().number;state.flags=state.flags.includes(n)?state.flags.filter(x=>x!==n):[...state.flags,n];writeStore();renderExam();});
     paletteToggle.addEventListener("click",()=>setPaletteOpen(!questionSidebar.classList.contains("mobile-open"))); $("#paletteClose").addEventListener("click",()=>setPaletteOpen(false,true)); paletteBackdrop.addEventListener("click",()=>setPaletteOpen(false,true));
