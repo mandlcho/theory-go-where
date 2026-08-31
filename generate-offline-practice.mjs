@@ -142,6 +142,10 @@ const html = `<!doctype html>
     .cheat-alert{margin:0 0 16px;padding:14px 16px;border:1px solid #efd08d;border-radius:13px;background:var(--amber-bg);color:#69470b}.cheat-alert strong{color:#4d3408}.cheat-alert a{color:inherit;font-weight:850}
     .cheat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.cheat-card{scroll-margin-top:22px;padding:21px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:0 8px 25px rgba(9,42,68,.05)}.cheat-card.featured{grid-column:1/-1}.cheat-topic{color:var(--blue);font-size:.7rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.cheat-card h3{margin:5px 0 7px;font-size:1.35rem;letter-spacing:-.025em}.memory-hook{margin:0 0 15px;color:var(--navy);font-weight:850}.rule-list{display:grid;gap:0;border-top:1px solid var(--line)}.rule{display:grid;grid-template-columns:minmax(110px,155px) 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}.rule strong{color:var(--navy)}.rule span{color:var(--muted)}
     .future-note{margin-top:15px;padding:12px 14px;border-radius:11px;background:#f1f5f8;color:#445461;font-size:.85rem}.future-note strong{color:var(--ink)}.cheat-sources{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.cheat-sources a{display:inline-flex;align-items:center;min-height:38px;padding:0 10px;border:1px solid #a8c9da;border-radius:8px;color:var(--blue);font-size:.76rem;font-weight:850;text-decoration:none}.cheat-sources a:hover{text-decoration:underline;border-color:var(--blue)}
+    .scores-hero{padding:20px 0 12px}.scores-hero h2{margin:0;font-size:clamp(2.2rem,5vw,4rem);line-height:1;letter-spacing:-.055em}.scores-hero p:last-child{max-width:650px;margin:14px 0 0;color:var(--muted)}
+    .score-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:20px 0}.score-stat{padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:#fff}.score-stat strong{display:block;color:var(--navy);font-size:1.55rem;line-height:1}.score-stat span{color:var(--muted);font-size:.77rem;font-weight:750}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}.score-card{display:flex;min-height:205px;flex-direction:column;padding:19px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:0 8px 25px rgba(9,42,68,.05)}.score-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.score-card h3{margin:4px 0 1px;font-size:1.35rem}.score-status{padding:5px 8px;border-radius:999px;background:#edf1f4;color:var(--muted);font-size:.68rem;font-weight:900}.score-status.pass{background:var(--green-bg);color:var(--green)}.score-status.retry{background:var(--red-bg);color:var(--red)}.score-big{margin:19px 0 2px;color:var(--navy);font-size:2rem;font-weight:950;letter-spacing:-.04em}.score-detail{margin:0;color:var(--muted);font-size:.82rem}.score-card .paper-progress{margin:13px 0 7px}.score-card .card-actions{padding-top:14px}.score-empty{grid-column:1/-1;padding:38px 20px;border:1px dashed var(--line);border-radius:16px;background:#f8fafb;text-align:center;color:var(--muted)}
+    .mobile-tabs{display:none}
     [hidden]{display:none!important}.empty{padding:50px 20px;text-align:center;color:var(--muted)}
     footer{text-align:center;color:var(--muted);font-size:.75rem;padding:0 20px 30px}
     @media(max-width:860px){
@@ -153,19 +157,21 @@ const html = `<!doctype html>
       .palette{grid-template-columns:repeat(10,1fr)}
     }
     @media(max-width:600px){
-      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:7px}.top-actions{gap:6px}.brand{gap:8px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.94rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 8px;font-size:.72rem;white-space:nowrap}body:not([data-view="home"]) .brand-mark{display:none}
-      main{width:min(100% - 18px,1160px);margin-top:18px}.hero{padding:12px 0 10px}.hero h2{font-size:2.15rem}.hero-copy{font-size:.94rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
+      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:7px}.top-actions{gap:6px}.brand{gap:8px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.94rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 8px;font-size:.72rem;white-space:nowrap}body:not([data-view="home"]) .brand-mark{display:none}#cheatButton{display:none!important}body:not([data-view="cheat"]) #homeButton{display:none!important}
+      main{width:min(100% - 18px,1160px);margin-top:18px;padding-bottom:calc(74px + env(safe-area-inset-bottom))}.hero{padding:12px 0 10px}.hero h2{font-size:2.15rem}.hero-copy{font-size:.94rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
       .paper-grid{grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.paper-card{min-height:180px;padding:14px;border-radius:15px}.paper-card h3{font-size:1.2rem}.paper-no{font-size:.68rem}.paper-meta{font-size:.8rem}.paper-progress{margin-top:13px}.card-actions{flex-direction:column;gap:7px;padding-top:12px}.card-actions .btn{width:100%}
-      body[data-view="exam"] main{width:100%;margin:0;padding-bottom:calc(82px + env(safe-area-inset-bottom))}body[data-view="exam"] footer{display:none}.exam-main{border:0;border-radius:0;box-shadow:none;min-height:calc(100dvh - 60px)}
+      body[data-view="exam"] main{width:100%;margin:0;padding-bottom:calc(144px + env(safe-area-inset-bottom))}body[data-view="exam"] footer{display:none}.exam-main{border:0;border-radius:0;box-shadow:none;min-height:calc(100dvh - 60px)}
       .exam-head{position:sticky;z-index:20;top:calc(60px + env(safe-area-inset-top));padding:11px 14px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px)}.exam-head h2{font-size:.98rem}.exam-sub{display:none}.exam-status{gap:8px}.answered-count{font-size:.72rem;white-space:nowrap}.palette-toggle{min-height:36px;padding-inline:9px;font-size:.72rem}
       .question{padding:20px 15px 26px}.q-label{margin-bottom:8px;font-size:.7rem}.question h3{font-size:1.23rem;line-height:1.38}.diagram{width:100%;max-height:290px;margin-top:17px;border-radius:11px}
       .choices{gap:10px;margin-top:18px}.choice{min-height:64px;grid-template-columns:auto 36px minmax(0,1fr);gap:10px;padding:12px;border-radius:12px}.choice input{width:20px;height:20px}.choice-letter{width:36px;height:36px}.choice .answer-tag{grid-column:3;font-size:.72rem}
-      .exam-actions{position:fixed;z-index:40;inset:auto 0 0;display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));border-top:1px solid var(--line);background:rgba(255,255,255,.96);box-shadow:0 -10px 30px rgba(9,42,68,.12);backdrop-filter:blur(14px)}.exam-actions .spacer{display:none}.exam-actions .btn{min-height:50px;padding-inline:14px}.exam-actions #nextButton,.exam-actions #submitButton{width:100%}
+      .exam-actions{position:fixed;z-index:40;inset:auto 0 calc(60px + env(safe-area-inset-bottom));display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-right));border-top:1px solid var(--line);background:rgba(255,255,255,.96);box-shadow:0 -10px 30px rgba(9,42,68,.12);backdrop-filter:blur(14px)}.exam-actions .spacer{display:none}.exam-actions .btn{min-height:50px;padding-inline:14px}.exam-actions #nextButton,.exam-actions #submitButton{width:100%}
       .palette{grid-template-columns:repeat(5,1fr);gap:8px}.q-dot{min-height:48px;aspect-ratio:auto;border-radius:9px;font-size:.82rem}.legend{margin-bottom:2px}
       .teaching{padding:14px}.source-link{display:flex;min-height:48px;width:100%;justify-content:center;text-align:center}.result-panel{padding:28px 18px;border:0;border-radius:0;box-shadow:none}.result-actions{display:grid}.result-actions .btn{width:100%;min-height:50px}
       .cheat-hero{display:block;padding-top:8px}.cheat-hero h2{font-size:2.35rem}.cheat-intro{font-size:.93rem}.shortcut-box{margin-top:17px}.cheat-jumps{margin:16px 0}.cheat-jumps a{padding:8px 10px;font-size:.73rem}.cheat-grid{grid-template-columns:1fr;gap:11px}.cheat-card,.cheat-card.featured{grid-column:auto;padding:17px;border-radius:15px}.cheat-card h3{font-size:1.22rem}.rule{display:block;padding:10px 0}.rule strong{display:block;margin-bottom:3px}.cheat-sources a{min-height:44px}.cheat-alert{font-size:.86rem}
+      .scores-hero{padding-top:8px}.scores-hero h2{font-size:2.35rem}.score-summary{gap:7px;margin:16px 0}.score-stat{padding:12px 9px}.score-stat strong{font-size:1.3rem}.score-stat span{font-size:.68rem}.score-grid{grid-template-columns:1fr;gap:10px}.score-card{min-height:190px;padding:16px}.score-card .card-actions .btn{width:100%}
+      .mobile-tabs{position:fixed;z-index:45;inset:auto 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px max(8px,env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));border-top:1px solid var(--line);background:rgba(255,255,255,.97);box-shadow:0 -8px 24px rgba(9,42,68,.1);backdrop-filter:blur(15px)}.mobile-tab{display:grid;min-height:50px;place-items:center;border:0;border-radius:10px;background:transparent;color:#6a7883;font-size:.72rem;font-weight:850}.mobile-tab.active{background:#eaf4f9;color:var(--blue)}.mobile-tab:active{background:#dcecf4}footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     }
-    @media print{.topbar,.sidebar,.exam-actions{display:none!important}body{background:#fff}.exam-shell{display:block}.exam-main{box-shadow:none}.question{break-inside:avoid}}
+    @media print{.topbar,.sidebar,.exam-actions,.mobile-tabs{display:none!important}body{background:#fff}.exam-shell{display:block}.exam-main{box-shadow:none}.question{break-inside:avoid}}
   </style>
 </head>
 <body data-view="home">
@@ -285,6 +291,12 @@ const html = `<!doctype html>
       </div>
     </section>
 
+    <section id="scoresView" hidden>
+      <div class="scores-hero"><p class="kicker">Saved on this device</p><h2>Your scores.</h2><p>See the latest saved attempt for every available paper. Resume an unfinished paper or review the answers from a completed one.</p></div>
+      <div id="scoreSummary" class="score-summary"></div>
+      <div id="scoreGrid" class="score-grid"></div>
+    </section>
+
     <section id="examView" hidden>
       <div class="exam-shell">
         <article class="exam-main">
@@ -320,13 +332,18 @@ const html = `<!doctype html>
     <section id="resultView" hidden></section>
   </main>
   <footer>Questions captured from completed CDC e-Trial review pages on 31 August 2026. Teaching notes link to official Singapore Traffic Police and LTA guidance; source links require internet access. For personal study use.</footer>
+  <nav class="mobile-tabs" aria-label="Primary navigation">
+    <button id="tabPapers" class="mobile-tab active" type="button">Papers</button>
+    <button id="tabCheats" class="mobile-tab" type="button">Cheatsheets</button>
+    <button id="tabScores" class="mobile-tab" type="button">Scores</button>
+  </nav>
 
   <script>
     const PAPERS = ${appData};
     const STORAGE_KEY = "ft-offline-practice-v1";
     const PASS_MARK = 45;
     const $ = (selector) => document.querySelector(selector);
-    const homeView = $("#homeView"), cheatView = $("#cheatView"), examView = $("#examView"), resultView = $("#resultView");
+    const homeView = $("#homeView"), cheatView = $("#cheatView"), scoresView = $("#scoresView"), examView = $("#examView"), resultView = $("#resultView");
     const questionSidebar = $("#questionSidebar"), paletteBackdrop = $("#paletteBackdrop"), paletteToggle = $("#paletteToggle");
     const state = { paper:null, index:0, order:[], answers:{}, flags:[], submitted:false, startedAt:null };
     let viewBeforeCheat="home";
@@ -345,9 +362,11 @@ const html = `<!doctype html>
       questionSidebar.classList.toggle("mobile-open",shouldOpen); paletteBackdrop.hidden=!shouldOpen; document.body.classList.toggle("palette-open",shouldOpen); paletteToggle.setAttribute("aria-expanded",String(shouldOpen));
       if(shouldOpen) $("#paletteClose").focus(); else if(restoreFocus) paletteToggle.focus();
     }
-    function show(view) { homeView.hidden=view!=="home"; cheatView.hidden=view!=="cheat"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; $("#homeButton").textContent=view==="cheat"?"Back":"Papers"; $("#cheatButton").hidden=view==="cheat"; setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
+    function updateTabs(view) { const active=view==="cheat"?"cheats":view==="scores"||view==="result"?"scores":"papers"; [["#tabPapers","papers"],["#tabCheats","cheats"],["#tabScores","scores"]].forEach(([selector,name])=>{const button=$(selector),selected=name===active;button.classList.toggle("active",selected);if(selected)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");}); }
+    function show(view) { if(view==="scores")renderScores(); homeView.hidden=view!=="home"; cheatView.hidden=view!=="cheat"; scoresView.hidden=view!=="scores"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; $("#homeButton").textContent=view==="cheat"?"Back":"Papers"; $("#cheatButton").hidden=view==="cheat"; updateTabs(view); setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
     function goHome() { if(state.paper && !state.submitted) writeStore(); renderHome(); show("home"); }
     function openCheat() { viewBeforeCheat=document.body.dataset.view||"home"; show("cheat"); }
+    function openScores() { if(state.paper&&!state.submitted)writeStore(); show("scores"); }
 
     function renderHome() {
       const store=readStore(); const readyIds=Object.keys(PAPERS).sort((a,b)=>Number(a)-Number(b)); const ids=Array.from({length:10},(_,i)=>String(i+1));
@@ -363,6 +382,23 @@ const html = `<!doctype html>
       document.querySelectorAll("[data-shuffle]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.shuffle,true)));
       document.querySelectorAll("[data-reset]").forEach(b=>b.addEventListener("click",()=>resetPaper(b.dataset.reset)));
     }
+
+    function renderScores() {
+      const store=readStore(), ids=Object.keys(PAPERS).sort((a,b)=>Number(a)-Number(b));
+      const completed=ids.filter(id=>store[id]?.submitted);
+      const best=completed.length?Math.max(...completed.map(id=>scoreFor(id,store[id].answers||{}))):null;
+      const totalAnswered=ids.reduce((sum,id)=>sum+Object.keys(store[id]?.answers||{}).length,0);
+      $("#scoreSummary").innerHTML='<div class="score-stat"><strong>'+completed.length+'/'+ids.length+'</strong><span>Papers completed</span></div><div class="score-stat"><strong>'+(best===null?'—':best+'/50')+'</strong><span>Best latest score</span></div><div class="score-stat"><strong>'+totalAnswered+'</strong><span>Answers saved</span></div>';
+      $("#scoreGrid").innerHTML=ids.map(id=>{
+        const saved=store[id], answered=Object.keys(saved?.answers||{}).length;
+        if(!saved||!answered) return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status">Not started</span></div><p class="score-big">—</p><p class="score-detail">No saved attempt yet</p><div class="paper-progress"><i style="width:0%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Start paper</button></div></article>';
+        if(saved.submitted){const score=scoreFor(id,saved.answers||{}),passed=score>=PASS_MARK;return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status '+(passed?'pass':'retry')+'">'+(passed?'Passed':'Keep practising')+'</span></div><p class="score-big">'+score+'/50</p><p class="score-detail">Latest saved attempt · '+(score*2)+'%</p><div class="paper-progress"><i style="width:'+(score*2)+'%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Review answers</button></div></article>';}
+        const pct=Math.round(answered/50*100);return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status">In progress</span></div><p class="score-big">'+answered+'/50</p><p class="score-detail">Questions answered</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Resume paper</button></div></article>';
+      }).join("");
+      document.querySelectorAll("[data-score-paper]").forEach(button=>button.addEventListener("click",()=>openStoredPaper(button.dataset.scorePaper)));
+    }
+
+    function openStoredPaper(id) { const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,{...saved,paper:Number(id)}); writeStore(); renderExam(); show("exam"); }
 
     function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; const all=readStore(); delete all[id]; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); renderHome(); }
     function startPaper(id,randomize) {
@@ -480,7 +516,7 @@ const html = `<!doctype html>
       $("#retryButton").addEventListener("click",()=>startPaper(String(state.paper),false)); $("#resultHome").addEventListener("click",goHome);
     }
 
-    $("#homeButton").addEventListener("click",()=>{if(document.body.dataset.view==="cheat")show(viewBeforeCheat);else goHome();}); $("#cheatButton").addEventListener("click",openCheat); $("#prevButton").addEventListener("click",()=>{if(state.index>0){state.index--;writeStore();renderExam();}});
+    $("#homeButton").addEventListener("click",()=>{if(document.body.dataset.view==="cheat")show(viewBeforeCheat);else goHome();}); $("#cheatButton").addEventListener("click",openCheat); $("#tabPapers").addEventListener("click",goHome); $("#tabCheats").addEventListener("click",()=>{if(document.body.dataset.view!=="cheat")openCheat();}); $("#tabScores").addEventListener("click",openScores); $("#prevButton").addEventListener("click",()=>{if(state.index>0){state.index--;writeStore();renderExam();}});
     $("#nextButton").addEventListener("click",()=>{if(state.index<49){state.index++;writeStore();renderExam();}}); $("#submitButton").addEventListener("click",submitPaper);
     $("#flagButton").addEventListener("click",()=>{const n=currentQuestion().number;state.flags=state.flags.includes(n)?state.flags.filter(x=>x!==n):[...state.flags,n];writeStore();renderExam();});
     paletteToggle.addEventListener("click",()=>setPaletteOpen(!questionSidebar.classList.contains("mobile-open"))); $("#paletteClose").addEventListener("click",()=>setPaletteOpen(false,true)); paletteBackdrop.addEventListener("click",()=>setPaletteOpen(false,true));
