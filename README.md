@@ -10,6 +10,7 @@ An offline-friendly Singapore driving-theory practice app. It currently contains
 - Progress saved locally in the browser
 - Phone-first practice mode with a persistent Papers/Cheatsheets/Scores tab bar, thumb-friendly exam controls, and a collapsible question palette
 - Shuffled practice attempts, scoring, flags, and answer review
+- Missed-answer review that opens on the first wrong response and jumps directly between wrong questions
 - Choice-specific teaching feedback for incorrect answers
 - A mobile-friendly tricky-topics cheat sheet with memory hooks and date-sensitive demerit-point guidance
 - Topic-matched links to official Traffic Police and LTA guidance

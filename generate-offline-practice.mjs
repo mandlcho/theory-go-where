@@ -317,6 +317,7 @@ const html = `<!doctype html>
           <nav class="exam-actions" aria-label="Question navigation">
             <button id="prevButton" class="btn" type="button">Previous</button>
             <button id="flagButton" class="btn" type="button">Flag</button>
+            <button id="nextWrongButton" class="btn danger" type="button" hidden>Next wrong</button>
             <span class="spacer"></span>
             <button id="nextButton" class="btn primary" type="button" aria-keyshortcuts="Space" title="Press Space for next question">Next</button>
             <button id="submitButton" class="btn primary" type="button">Submit paper</button>
@@ -403,7 +404,7 @@ const html = `<!doctype html>
       document.querySelectorAll("[data-score-paper]").forEach(button=>button.addEventListener("click",()=>openStoredPaper(button.dataset.scorePaper)));
     }
 
-    function openStoredPaper(id) { const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,{...saved,paper:Number(id)}); writeStore(); renderExam(); show("exam"); }
+    function openStoredPaper(id) { const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,{...saved,paper:Number(id)}); if(state.submitted)state.index=wrongIndexes()[0]??0; writeStore(); renderExam(); show("exam"); }
 
     function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; const all=readStore(); delete all[id]; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); renderHome(); }
     function startPaper(id,randomize) {
@@ -414,6 +415,8 @@ const html = `<!doctype html>
     }
 
     function scoreFor(id,answers) { return PAPERS[String(id)].reduce((sum,q)=>sum+(q.options[Number(answers[q.number])]?.correct?1:0),0); }
+    function wrongIndexes() { return state.order.reduce((indexes,number,index)=>{const q=paperQuestions().find(item=>item.number===number);if(!q.options[Number(state.answers[number])]?.correct)indexes.push(index);return indexes;},[]); }
+    function goToNextWrong() { const wrong=wrongIndexes(); if(!wrong.length)return; const next=wrong.find(index=>index>state.index)??wrong[0]; state.index=next; writeStore(); renderExam(); window.scrollTo({top:0,behavior:"smooth"}); }
 
     function teachingPrinciple(q) {
       const s=(q.question+" "+q.options.map(o=>o.text).join(" ")).toLowerCase();
@@ -485,9 +488,9 @@ const html = `<!doctype html>
     }
 
     function renderExam() {
-      const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number];
+      const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number]; const wrong=review?wrongIndexes():[];
       $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review · Press Space for next":"Choose with 1, 2, or 3, then press Space for next. Your progress saves automatically.";
-      $("#answeredCount").textContent=answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
+      $("#answeredCount").textContent=review?wrong.length+" wrong":answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
       const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'">':"";
       const choices=q.options.map((option,i)=>{
         let cls="choice", tag=""; if(review&&option.correct){cls+=" correct";tag="Correct";} else if(review&&String(i)===String(selected)&&!option.correct){cls+=" wrong";tag="Your answer";}
@@ -497,6 +500,7 @@ const html = `<!doctype html>
       $("#questionArea").innerHTML='<p class="q-label">Question '+q.number+' · '+(state.index+1)+' of 50</p><h3>'+esc(q.question)+'</h3>'+image+'<div class="choices">'+choices+'</div>'+feedback;
       if(!review) document.querySelectorAll('input[name="answer"]').forEach(input=>input.addEventListener("change",()=>{state.answers[q.number]=Number(input.value);writeStore();renderExam();}));
       $("#prevButton").disabled=state.index===0; $("#nextButton").hidden=state.index===49; $("#submitButton").hidden=state.index!==49||review; $("#flagButton").hidden=review;
+      $("#nextWrongButton").hidden=!review||!wrong.length; $("#nextWrongButton").disabled=wrong.length===1&&wrong[0]===state.index; $("#nextWrongButton").textContent=$("#nextWrongButton").disabled?"Only wrong":"Next wrong";
       $("#flagButton").textContent=state.flags.includes(q.number)?"Unflag":"Flag"; renderPalette();
     }
 
@@ -516,14 +520,16 @@ const html = `<!doctype html>
     }
     function renderResult() {
       const score=scoreFor(state.paper,state.answers), pct=score*2, passed=score>=PASS_MARK, missed=50-score;
-      resultView.innerHTML='<div class="result-panel"><div class="score-ring" style="--score:'+pct+'%"><div class="score-value"><strong>'+score+'/50</strong><span>'+pct+'%</span></div></div><p class="kicker">Paper '+state.paper+' complete</p><h2>'+(passed?'Pass — well done':'Keep practising')+'</h2><p>You answered '+score+' correctly and have '+missed+' question'+(missed===1?'':'s')+' to review. The pass mark is '+PASS_MARK+'/50.</p><div class="result-actions"><button id="reviewButton" class="btn primary">Review answers</button><button id="retryButton" class="btn">Retry paper</button><button id="resultHome" class="btn">All papers</button></div></div>';
-      $("#reviewButton").addEventListener("click",()=>{state.index=0;renderExam();show("exam");});
+      const reviewLabel=missed?'Review '+missed+' missed':'Review answers';
+      resultView.innerHTML='<div class="result-panel"><div class="score-ring" style="--score:'+pct+'%"><div class="score-value"><strong>'+score+'/50</strong><span>'+pct+'%</span></div></div><p class="kicker">Paper '+state.paper+' complete</p><h2>'+(passed?'Pass — well done':'Keep practising')+'</h2><p>You answered '+score+' correctly and have '+missed+' question'+(missed===1?'':'s')+' to review. The pass mark is '+PASS_MARK+'/50.</p><div class="result-actions"><button id="reviewButton" class="btn primary">'+reviewLabel+'</button><button id="retryButton" class="btn">Retry paper</button><button id="resultHome" class="btn">All papers</button></div></div>';
+      $("#reviewButton").addEventListener("click",()=>{state.index=wrongIndexes()[0]??0;writeStore();renderExam();show("exam");});
       $("#retryButton").addEventListener("click",()=>startPaper(String(state.paper),false)); $("#resultHome").addEventListener("click",goHome);
     }
 
     $("#homeButton").addEventListener("click",()=>{if(document.body.dataset.view==="cheat")show(viewBeforeCheat);else goHome();}); $("#cheatButton").addEventListener("click",openCheat); $("#tabPapers").addEventListener("click",goHome); $("#tabCheats").addEventListener("click",()=>{if(document.body.dataset.view!=="cheat")openCheat();}); $("#tabScores").addEventListener("click",openScores); $("#prevButton").addEventListener("click",()=>{if(state.index>0){state.index--;writeStore();renderExam();}});
     $("#nextButton").addEventListener("click",()=>{if(state.index<49){state.index++;writeStore();renderExam();}}); $("#submitButton").addEventListener("click",submitPaper);
     $("#flagButton").addEventListener("click",()=>{const n=currentQuestion().number;state.flags=state.flags.includes(n)?state.flags.filter(x=>x!==n):[...state.flags,n];writeStore();renderExam();});
+    $("#nextWrongButton").addEventListener("click",goToNextWrong);
     paletteToggle.addEventListener("click",()=>setPaletteOpen(!questionSidebar.classList.contains("mobile-open"))); $("#paletteClose").addEventListener("click",()=>setPaletteOpen(false,true)); paletteBackdrop.addEventListener("click",()=>setPaletteOpen(false,true));
     window.addEventListener("resize",()=>{if(!window.matchMedia("(max-width:860px)").matches)setPaletteOpen(false);});
     document.addEventListener("keydown",(event)=>{
