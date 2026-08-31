@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Offline Final Theory practice papers">
   <title>Final Theory · Offline Practice</title>
   <style>
@@ -15,9 +15,9 @@
     }
     *{box-sizing:border-box} html{scroll-behavior:smooth}
     body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
-    button,input{font:inherit} button{cursor:pointer}
+    button,input{font:inherit} button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     button:focus-visible,input:focus-visible{outline:3px solid rgba(7,89,133,.25);outline-offset:2px}
-    .topbar{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:18px 20px;box-shadow:0 3px 16px rgba(9,42,68,.18)}
+    .topbar{position:relative;z-index:30;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:18px 20px;box-shadow:0 3px 16px rgba(9,42,68,.18)}
     .topbar-inner{width:min(1160px,100%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
     .brand{display:flex;align-items:center;gap:12px}.brand-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:12px;background:rgba(255,255,255,.12);font-weight:900}
     .brand h1{margin:0;font-size:1.08rem;letter-spacing:-.015em}.brand p{margin:1px 0 0;color:rgba(255,255,255,.68);font-size:.78rem}
@@ -39,6 +39,7 @@
     .exam-main,.sidebar{border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
     .exam-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line)}
     .exam-head h2{margin:0;font-size:1.15rem}.exam-sub{margin:2px 0 0;color:var(--muted);font-size:.82rem}.answered-count{font-size:.82rem;font-weight:800;color:var(--blue)}
+    .exam-status{display:flex;align-items:center;gap:10px}.palette-toggle,.sidebar-close{display:none}
     .bar{height:5px;background:#e6edf1}.bar i{display:block;height:100%;background:var(--blue);transition:width .25s}
     .question{padding:26px 28px 30px}.q-label{margin:0 0 9px;color:var(--blue);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
     .question h3{margin:0;font-size:clamp(1.16rem,2.4vw,1.52rem);line-height:1.4;letter-spacing:-.02em}
@@ -47,7 +48,8 @@
     .choice:hover{border-color:#9bb9cb;background:#fafcfd}.choice input{width:18px;height:18px;margin:0;accent-color:var(--blue)}.choice-letter{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#edf3f7;color:var(--blue);font-weight:900}
     .choice.correct{border-color:#89caa6;background:var(--green-bg)}.choice.wrong{border-color:#e8a39d;background:var(--red-bg)}.choice .answer-tag{font-size:.76rem;font-weight:900}.correct .answer-tag{color:var(--green)}.wrong .answer-tag{color:var(--red)}
     .exam-actions{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:17px 22px;border-top:1px solid var(--line)}.exam-actions .spacer{flex:1}
-    .sidebar{position:sticky;top:18px;padding:18px}.sidebar h3{margin:0 0 4px;font-size:.95rem}.sidebar-note{margin:0 0 13px;color:var(--muted);font-size:.78rem}
+    .sidebar{position:sticky;top:18px;padding:18px}.sidebar-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.sidebar h3{margin:0 0 4px;font-size:.95rem}.sidebar-note{margin:0 0 13px;color:var(--muted);font-size:.78rem}
+    .palette-backdrop{display:none}
     .palette{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.q-dot{display:grid;place-items:center;aspect-ratio:1;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted);font-size:.76rem;font-weight:850}
     .q-dot:hover{border-color:#8caabd}.q-dot.active{border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue);color:var(--blue)}.q-dot.answered{background:var(--sky);color:var(--blue)}.q-dot.flagged{background:var(--amber-bg);color:var(--amber)}
     .q-dot.review-correct{background:var(--green-bg);border-color:#8bc9a6;color:var(--green)}.q-dot.review-wrong{background:var(--red-bg);border-color:#e5a39d;color:var(--red)}
@@ -61,12 +63,30 @@
     .source-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 10px;border:1px solid #a8c9da;border-radius:8px;background:#fff;color:var(--blue);font-size:.78rem;font-weight:850;text-decoration:none}.source-link:hover{text-decoration:underline;border-color:var(--blue)}
     [hidden]{display:none!important}.empty{padding:50px 20px;text-align:center;color:var(--muted)}
     footer{text-align:center;color:var(--muted);font-size:.75rem;padding:0 20px 30px}
-    @media(max-width:860px){.exam-shell{grid-template-columns:1fr}.sidebar{position:static;order:-1}.palette{grid-template-columns:repeat(10,1fr)}}
-    @media(max-width:600px){main{width:min(100% - 18px,1160px);margin-top:18px}.topbar{padding:13px 12px}.brand p{display:none}.hero{padding-top:16px}.paper-grid{grid-template-columns:1fr 1fr}.paper-card{min-height:190px;padding:15px}.paper-card h3{font-size:1.25rem}.card-actions{flex-direction:column}.question{padding:20px 16px}.choice{grid-template-columns:auto 30px 1fr;padding:12px 10px}.choice .answer-tag{grid-column:3}.exam-actions{padding:14px}.palette{grid-template-columns:repeat(10,1fr);gap:4px}.sidebar{padding:13px}.q-dot{border-radius:5px}.topbar .ghost-light{display:none}}
+    @media(max-width:860px){
+      body.palette-open{overflow:hidden}.exam-shell{display:block}.palette-toggle,.sidebar-close{display:inline-flex;align-items:center;justify-content:center}
+      .palette-toggle{min-height:40px;border:1px solid #b7d0de;border-radius:9px;background:#edf6fa;color:var(--blue);padding:0 11px;font-size:.78rem;font-weight:900}
+      .sidebar{position:fixed;z-index:60;inset:auto 0 0;top:auto;max-height:min(78dvh,650px);overflow:auto;padding:20px max(18px,env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));border:0;border-radius:24px 24px 0 0;box-shadow:0 -22px 70px rgba(9,42,68,.26);transform:translateY(105%);visibility:hidden;transition:transform .22s ease,visibility .22s}
+      .sidebar.mobile-open{transform:translateY(0);visibility:visible}.sidebar-close{min-width:72px;min-height:40px;border:1px solid var(--line);border-radius:9px;background:#f3f6f8;color:var(--ink);font-size:.8rem;font-weight:850}
+      .palette-backdrop{position:fixed;z-index:50;inset:0;display:block;border:0;background:rgba(7,25,39,.48);backdrop-filter:blur(2px)}
+      .palette{grid-template-columns:repeat(10,1fr)}
+    }
+    @media(max-width:600px){
+      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:10px}.brand{gap:9px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.98rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 10px;font-size:.78rem;white-space:nowrap}
+      main{width:min(100% - 18px,1160px);margin-top:18px}.hero{padding:12px 0 10px}.hero h2{font-size:2.15rem}.hero-copy{font-size:.94rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
+      .paper-grid{grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.paper-card{min-height:180px;padding:14px;border-radius:15px}.paper-card h3{font-size:1.2rem}.paper-no{font-size:.68rem}.paper-meta{font-size:.8rem}.paper-progress{margin-top:13px}.card-actions{flex-direction:column;gap:7px;padding-top:12px}.card-actions .btn{width:100%}
+      body[data-view="exam"] main{width:100%;margin:0;padding-bottom:calc(82px + env(safe-area-inset-bottom))}body[data-view="exam"] footer{display:none}.exam-main{border:0;border-radius:0;box-shadow:none;min-height:calc(100dvh - 60px)}
+      .exam-head{position:sticky;z-index:20;top:calc(60px + env(safe-area-inset-top));padding:11px 14px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px)}.exam-head h2{font-size:.98rem}.exam-sub{display:none}.exam-status{gap:8px}.answered-count{font-size:.72rem;white-space:nowrap}.palette-toggle{min-height:36px;padding-inline:9px;font-size:.72rem}
+      .question{padding:20px 15px 26px}.q-label{margin-bottom:8px;font-size:.7rem}.question h3{font-size:1.23rem;line-height:1.38}.diagram{width:100%;max-height:290px;margin-top:17px;border-radius:11px}
+      .choices{gap:10px;margin-top:18px}.choice{min-height:64px;grid-template-columns:auto 36px minmax(0,1fr);gap:10px;padding:12px;border-radius:12px}.choice input{width:20px;height:20px}.choice-letter{width:36px;height:36px}.choice .answer-tag{grid-column:3;font-size:.72rem}
+      .exam-actions{position:fixed;z-index:40;inset:auto 0 0;display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));border-top:1px solid var(--line);background:rgba(255,255,255,.96);box-shadow:0 -10px 30px rgba(9,42,68,.12);backdrop-filter:blur(14px)}.exam-actions .spacer{display:none}.exam-actions .btn{min-height:50px;padding-inline:14px}.exam-actions #nextButton,.exam-actions #submitButton{width:100%}
+      .palette{grid-template-columns:repeat(5,1fr);gap:8px}.q-dot{min-height:48px;aspect-ratio:auto;border-radius:9px;font-size:.82rem}.legend{margin-bottom:2px}
+      .teaching{padding:14px}.source-link{display:flex;min-height:48px;width:100%;justify-content:center;text-align:center}.result-panel{padding:28px 18px;border:0;border-radius:0;box-shadow:none}.result-actions{display:grid}.result-actions .btn{width:100%;min-height:50px}
+    }
     @media print{.topbar,.sidebar,.exam-actions{display:none!important}body{background:#fff}.exam-shell{display:block}.exam-main{box-shadow:none}.question{break-inside:avoid}}
   </style>
 </head>
-<body>
+<body data-view="home">
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand"><span class="brand-mark">FT</span><div><h1>Final Theory Practice</h1><p>Personal offline study copy</p></div></div>
@@ -87,7 +107,13 @@
     <section id="examView" hidden>
       <div class="exam-shell">
         <article class="exam-main">
-          <header class="exam-head"><div><h2 id="examTitle"></h2><p id="examSub" class="exam-sub"></p></div><span id="answeredCount" class="answered-count"></span></header>
+          <header class="exam-head">
+            <div><h2 id="examTitle"></h2><p id="examSub" class="exam-sub"></p></div>
+            <div class="exam-status">
+              <span id="answeredCount" class="answered-count"></span>
+              <button id="paletteToggle" class="palette-toggle" type="button" aria-expanded="false" aria-controls="questionSidebar">Questions</button>
+            </div>
+          </header>
           <div class="bar"><i id="progressBar"></i></div>
           <div id="questionArea" class="question"></div>
           <nav class="exam-actions" aria-label="Question navigation">
@@ -98,11 +124,15 @@
             <button id="submitButton" class="btn primary" type="button">Submit paper</button>
           </nav>
         </article>
-        <aside class="sidebar">
-          <h3>Question palette</h3><p class="sidebar-note">Jump to any question.</p>
+        <aside id="questionSidebar" class="sidebar" aria-label="Question palette">
+          <div class="sidebar-head">
+            <div><h3>Question palette</h3><p class="sidebar-note">Jump to any question.</p></div>
+            <button id="paletteClose" class="sidebar-close" type="button">Close</button>
+          </div>
           <div id="palette" class="palette"></div>
           <div class="legend"><span><i class="swatch done"></i>Answered</span><span><i class="swatch flag"></i>Flagged</span><span><i class="swatch"></i>Unanswered</span></div>
         </aside>
+        <button id="paletteBackdrop" class="palette-backdrop" type="button" hidden aria-label="Close question palette"></button>
       </div>
     </section>
 
@@ -116,6 +146,7 @@
     const PASS_MARK = 45;
     const $ = (selector) => document.querySelector(selector);
     const homeView = $("#homeView"), examView = $("#examView"), resultView = $("#resultView");
+    const questionSidebar = $("#questionSidebar"), paletteBackdrop = $("#paletteBackdrop"), paletteToggle = $("#paletteToggle");
     const state = { paper:null, index:0, order:[], answers:{}, flags:[], submitted:false, startedAt:null };
 
     function esc(value) { return String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
@@ -127,7 +158,12 @@
     function currentQuestion() { return paperQuestions().find((q)=>q.number===state.order[state.index]); }
     function answerCount() { return Object.keys(state.answers).length; }
 
-    function show(view) { homeView.hidden=view!=="home"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; $("#homeButton").hidden=view==="home"; window.scrollTo({top:0,behavior:"smooth"}); }
+    function setPaletteOpen(open,restoreFocus=false) {
+      const shouldOpen=Boolean(open)&&window.matchMedia("(max-width:860px)").matches;
+      questionSidebar.classList.toggle("mobile-open",shouldOpen); paletteBackdrop.hidden=!shouldOpen; document.body.classList.toggle("palette-open",shouldOpen); paletteToggle.setAttribute("aria-expanded",String(shouldOpen));
+      if(shouldOpen) $("#paletteClose").focus(); else if(restoreFocus) paletteToggle.focus();
+    }
+    function show(view) { homeView.hidden=view!=="home"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
     function goHome() { if(state.paper && !state.submitted) writeStore(); renderHome(); show("home"); }
 
     function renderHome() {
@@ -227,7 +263,7 @@
     function renderExam() {
       const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number];
       $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review":"Choose the best answer. Your progress saves automatically.";
-      $("#answeredCount").textContent=answerCount()+" / 50 answered"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
+      $("#answeredCount").textContent=answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
       const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'">':"";
       const choices=q.options.map((option,i)=>{
         let cls="choice", tag=""; if(review&&option.correct){cls+=" correct";tag="Correct";} else if(review&&String(i)===String(selected)&&!option.correct){cls+=" wrong";tag="Your answer";}
@@ -247,7 +283,7 @@
         else if(state.flags.includes(number)) cls+=" flagged"; else if(state.answers[number]!==undefined) cls+=" answered";
         return '<button class="'+cls+'" data-index="'+index+'" type="button" aria-label="Question '+number+'">'+number+'</button>';
       }).join("");
-      document.querySelectorAll("[data-index]").forEach(b=>b.addEventListener("click",()=>{state.index=Number(b.dataset.index);writeStore();renderExam();window.scrollTo({top:0,behavior:"smooth"});}));
+      document.querySelectorAll("[data-index]").forEach(b=>b.addEventListener("click",()=>{state.index=Number(b.dataset.index);writeStore();renderExam();setPaletteOpen(false);window.scrollTo({top:0,behavior:"smooth"});}));
     }
 
     function submitPaper() {
@@ -264,8 +300,10 @@
     $("#homeButton").addEventListener("click",goHome); $("#prevButton").addEventListener("click",()=>{if(state.index>0){state.index--;writeStore();renderExam();}});
     $("#nextButton").addEventListener("click",()=>{if(state.index<49){state.index++;writeStore();renderExam();}}); $("#submitButton").addEventListener("click",submitPaper);
     $("#flagButton").addEventListener("click",()=>{const n=currentQuestion().number;state.flags=state.flags.includes(n)?state.flags.filter(x=>x!==n):[...state.flags,n];writeStore();renderExam();});
-    document.addEventListener("keydown",(event)=>{if(examView.hidden||event.target.matches("input"))return;if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();});
-    renderHome();
+    paletteToggle.addEventListener("click",()=>setPaletteOpen(!questionSidebar.classList.contains("mobile-open"))); $("#paletteClose").addEventListener("click",()=>setPaletteOpen(false,true)); paletteBackdrop.addEventListener("click",()=>setPaletteOpen(false,true));
+    window.addEventListener("resize",()=>{if(!window.matchMedia("(max-width:860px)").matches)setPaletteOpen(false);});
+    document.addEventListener("keydown",(event)=>{if(event.key==="Escape"&&questionSidebar.classList.contains("mobile-open")){setPaletteOpen(false,true);return;}if(examView.hidden||event.target.matches("input"))return;if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();});
+    renderHome(); show("home");
   </script>
 </body>
 </html>
