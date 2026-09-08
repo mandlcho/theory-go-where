@@ -58,7 +58,9 @@ const rawPapers = {
   5: normalizeRaw(5, JSON.parse(await readText("final-theory-paper-5.json"))),
   6: parsePaper6(await readText("final-theory-paper-6.md")),
   7: normalizeRaw(7, JSON.parse(await readText("final-theory-paper-7.json"))),
+  8: normalizeRaw(8, JSON.parse(await readText("final-theory-paper-8.json"))),
   9: normalizeRaw(9, JSON.parse(await readText("final-theory-paper-9.json"))),
+  10: normalizeRaw(10, JSON.parse(await readText("final-theory-paper-10.json"))),
 };
 
 for (const questions of Object.values(rawPapers)) {

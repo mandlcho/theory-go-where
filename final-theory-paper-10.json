@@ -1,0 +1,1309 @@
+[
+  {
+    "correctAnswer": "slow down and keep left and stop if necessary",
+    "id": "89537",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/motorcyclistcrossespath_qBAB0Sk.png",
+        "tag": "div"
+      }
+    ],
+    "number": 1,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "slow down and keep left and stop if necessary"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "swerve to the left and speed up"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "stop immediately"
+      }
+    ],
+    "question": "When the motorcyclist crosses into the car's path, the car driver should",
+    "result": "correct",
+    "selected": "slow down and keep left and stop if necessary"
+  },
+  {
+    "correctAnswer": "give him plenty of room when passing him.",
+    "id": "89537",
+    "media": [],
+    "number": 2,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "drive closer to him."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "not overtake."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "give him plenty of room when passing him."
+      }
+    ],
+    "question": "When you see a cyclist carrying a heavy load, you should",
+    "result": "correct",
+    "selected": "give him plenty of room when passing him."
+  },
+  {
+    "correctAnswer": "Move off to the left of the road and have a rest.",
+    "id": "89537",
+    "media": [],
+    "number": 3,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Keep on driving but use a lower gear."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up so that you can get home quickly."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Move off to the left of the road and have a rest."
+      }
+    ],
+    "question": "What should you do if you are driving and become sleepy?",
+    "result": "correct",
+    "selected": "Move off to the left of the road and have a rest."
+  },
+  {
+    "correctAnswer": "both answers above",
+    "id": "89537",
+    "media": [],
+    "number": 4,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "give signal"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "check the rear view mirrors and blind spot"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "both answers above"
+      }
+    ],
+    "question": "When changing lane, you may be hit from the back if you do not",
+    "result": "correct",
+    "selected": "both answers above"
+  },
+  {
+    "correctAnswer": "fail to recognize and adjust to it",
+    "id": "89537",
+    "media": [],
+    "number": 5,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "can adjust to it"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "fail to recognize and adjust to it"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "can recognize it"
+      }
+    ],
+    "question": "Road conditions may become actual hazard if you",
+    "result": "correct",
+    "selected": "fail to recognize and adjust to it"
+  },
+  {
+    "correctAnswer": "Drivers often do not see them",
+    "id": "89537",
+    "media": [],
+    "number": 6,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "They must do so by law"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It helps keep them cool"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Drivers often do not see them"
+      }
+    ],
+    "question": "Motorcyclists should wear bright clothing mainly because",
+    "result": "correct",
+    "selected": "Drivers often do not see them"
+  },
+  {
+    "correctAnswer": "slow down before the bend",
+    "id": "89537",
+    "media": [],
+    "number": 7,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "continue at the same speed"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "slow down as you go around the bend"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "slow down before the bend"
+      }
+    ],
+    "question": "When approaching a sharp bend ahead, you should",
+    "result": "correct",
+    "selected": "slow down before the bend"
+  },
+  {
+    "correctAnswer": "Slow down and look to the left edge of the road to a avoid the glare",
+    "id": "89537",
+    "media": [],
+    "number": 8,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Retailate by switching on your high beam"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Carry on driving as usual"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down and look to the left edge of the road to a avoid the glare"
+      }
+    ],
+    "question": "When dazzled by the headlights of an oncoming vehicle, you should",
+    "result": "correct",
+    "selected": "Slow down and look to the left edge of the road to a avoid the glare"
+  },
+  {
+    "correctAnswer": "When approaching junctions",
+    "id": "89537",
+    "media": [],
+    "number": 9,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When moving off"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "When approaching junctions"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "On dual carriageways"
+      }
+    ],
+    "question": "Cyclists are particularly vulnerable",
+    "result": "correct",
+    "selected": "When approaching junctions"
+  },
+  {
+    "correctAnswer": "Wait until the pedestrian have crossed the road",
+    "id": "89537",
+    "media": [],
+    "number": 10,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Horn at the pedestrians as you have the right of way"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Wait until the pedestrian have crossed the road"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Turn as quickly as possible in front of the pedestrians"
+      }
+    ],
+    "question": "If pedestrians are still crossing at the signalised crossing, you should",
+    "result": "correct",
+    "selected": "Wait until the pedestrian have crossed the road"
+  },
+  {
+    "correctAnswer": "Drowsiness.",
+    "id": "89537",
+    "media": [],
+    "number": 11,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Drowsiness."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Improved co-ordination."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Colour blindness."
+      }
+    ],
+    "question": "Certain medications given by doctors may cause",
+    "result": "correct",
+    "selected": "Drowsiness."
+  },
+  {
+    "correctAnswer": "Be patient and prepare for them to react more slowly.",
+    "id": "89537",
+    "media": [],
+    "number": 12,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound your horn to warn them of your presence."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Be patient and prepare for them to react more slowly."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Overtake them as soon as possible."
+      }
+    ],
+    "question": "How would you react to probationary riders who appear to be inexperienced?",
+    "result": "correct",
+    "selected": "Be patient and prepare for them to react more slowly."
+  },
+  {
+    "correctAnswer": "They need to check for traffic in their blind area.",
+    "id": "89537",
+    "media": [],
+    "number": 13,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "They need to listen for following traffic."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "They need to check for traffic in their blind area."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Looking around helps them balance as they turn."
+      }
+    ],
+    "question": "Motorcyclists will often look over their right shoulder just before turning right. This is because",
+    "result": "correct",
+    "selected": "They need to check for traffic in their blind area."
+  },
+  {
+    "correctAnswer": "Aquaplaning.",
+    "id": "89537",
+    "media": [],
+    "number": 14,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Free-wheeling."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Coasting."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Aquaplaning."
+      }
+    ],
+    "question": "In very wet road conditions, the builds-up of water between your tyres and the road is called",
+    "result": "correct",
+    "selected": "Aquaplaning."
+  },
+  {
+    "correctAnswer": "As soon as the other vehicle passes you.",
+    "id": "89537",
+    "media": [],
+    "number": 15,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "As soon as the other vehicle passes you."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When the other vehicle signals to overtake."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When the other vehicle moves out to overtake."
+      }
+    ],
+    "question": "When another vehicle is overtaking you at night, you should dip your headlight",
+    "result": "correct",
+    "selected": "As soon as the other vehicle passes you."
+  },
+  {
+    "correctAnswer": "Keep more to the left and proceed carefully.",
+    "id": "89537",
+    "media": [],
+    "number": 16,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up to cross the hill quickly."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Keep close to the centre line and the car in front."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Keep more to the left and proceed carefully."
+      }
+    ],
+    "question": "When approaching the top of a hill, you should",
+    "result": "correct",
+    "selected": "Keep more to the left and proceed carefully."
+  },
+  {
+    "correctAnswer": "When they suddenly decided to cross the road in front of you.",
+    "id": "89537",
+    "media": [],
+    "number": 17,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When they are standing by the side of the road."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "When they suddenly decided to cross the road in front of you."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When they are walking by the side of the road."
+      }
+    ],
+    "question": "When will pedestrians become actual hazards?",
+    "result": "correct",
+    "selected": "When they suddenly decided to cross the road in front of you."
+  },
+  {
+    "correctAnswer": "Lack of experience and judgement.",
+    "id": "89537",
+    "media": [],
+    "number": 18,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Lack of experience and judgement."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Riding on an expressway."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Riding in the rain."
+      }
+    ],
+    "question": "What is the main cause of accidents amongst young and new motorcyclists?",
+    "result": "correct",
+    "selected": "Lack of experience and judgement."
+  },
+  {
+    "correctAnswer": "stay behind",
+    "id": "89537",
+    "media": [],
+    "number": 19,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "overtake him on the left"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "stay behind"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "overtake him on the right"
+      }
+    ],
+    "question": "When you are not sure what the slow moving rider ahead is going to do, you should",
+    "result": "correct",
+    "selected": "stay behind"
+  },
+  {
+    "correctAnswer": "Harsh braking and acceleration.",
+    "id": "89537",
+    "media": [],
+    "number": 20,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Poor steering control"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Harsh braking and acceleration."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Staying in high gears."
+      }
+    ],
+    "question": "What is most likely to cause high fuel consumption?",
+    "result": "correct",
+    "selected": "Harsh braking and acceleration."
+  },
+  {
+    "correctAnswer": "to warn others of danger.",
+    "id": "89537",
+    "media": [],
+    "number": 21,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to signal your annoyance."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to greet other road users."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "to warn others of danger."
+      }
+    ],
+    "question": "What should you use the horn for?",
+    "result": "correct",
+    "selected": "to warn others of danger."
+  },
+  {
+    "correctAnswer": "be patient as you expect them to make mistakes",
+    "id": "89537",
+    "media": [],
+    "number": 22,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "be patient as you expect them to make mistakes"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "sound your horn to warn him of your presence"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "overtake him as soon as possible"
+      }
+    ],
+    "question": "When following a learner driver who stalls at a junction, you should",
+    "result": "correct",
+    "selected": "be patient as you expect them to make mistakes"
+  },
+  {
+    "correctAnswer": "Your ability to drive is impaired",
+    "id": "89537",
+    "media": [],
+    "number": 23,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Your ability to drive is impaired"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Your reactions are better"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Your vision is improved"
+      }
+    ],
+    "question": "If you had too much alcohol",
+    "result": "correct",
+    "selected": "Your ability to drive is impaired"
+  },
+  {
+    "correctAnswer": "Avoid drinking alcohol",
+    "id": "89537",
+    "media": [],
+    "number": 24,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Avoid mixing your alcoholic drinks"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Avoid drinking alcohol"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drink coffee before drinking alcohol"
+      }
+    ],
+    "question": "If you intend to drive after attending a function, you should",
+    "result": "correct",
+    "selected": "Avoid drinking alcohol"
+  },
+  {
+    "correctAnswer": "fine, disqualification and a mandatory jail sentence",
+    "id": "89537",
+    "media": [],
+    "number": 25,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "fine, disqualification and a mandatory jail sentence"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "disqualification only"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "fine and disqualification only"
+      }
+    ],
+    "question": "The penalty for a repeat drink driving offender is",
+    "result": "correct",
+    "selected": "fine, disqualification and a mandatory jail sentence"
+  },
+  {
+    "correctAnswer": "they need to check for traffic in their blind area",
+    "id": "89537",
+    "media": [],
+    "number": 26,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "they need to listen for following traffic"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "they need to check for traffic in their blind area"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "looking around helps them balance as they turn"
+      }
+    ],
+    "question": "Motorcyclists will often look over their right shoulder just before turning right. This is because",
+    "result": "correct",
+    "selected": "they need to check for traffic in their blind area"
+  },
+  {
+    "correctAnswer": "Slow down and assist it to pass you",
+    "id": "89537",
+    "media": [],
+    "number": 27,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Jam your brakes as a warning"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive faster to increase the gap"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down and assist it to pass you"
+      }
+    ],
+    "question": "When being tailgated by a motorcyclist, you should",
+    "result": "correct",
+    "selected": "Slow down and assist it to pass you"
+  },
+  {
+    "correctAnswer": "sways from side to side",
+    "id": "89537",
+    "media": [],
+    "number": 28,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "sways from side to side"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stall"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stopped suddenly"
+      }
+    ],
+    "question": "When a tyre punctures, the motorcycle will",
+    "result": "correct",
+    "selected": "sways from side to side"
+  },
+  {
+    "correctAnswer": "both answers above",
+    "id": "89537",
+    "media": [],
+    "number": 29,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "sudden braking or cornering too fast"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "bald tyres"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "both answers above"
+      }
+    ],
+    "question": "Skidding is due to",
+    "result": "correct",
+    "selected": "both answers above"
+  },
+  {
+    "correctAnswer": "driver ahead signal the intention to turn right",
+    "id": "89537",
+    "media": [],
+    "number": 30,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "vehicle in front is a heavy vehicle"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "driver ahead signal the intention to turn right"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "driver in front signals you to do so"
+      }
+    ],
+    "question": "You may overtake on the left only when the",
+    "result": "correct",
+    "selected": "driver ahead signal the intention to turn right"
+  },
+  {
+    "correctAnswer": "The cyclist might swerve",
+    "id": "89537",
+    "media": [],
+    "number": 31,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The cyclist might get off the bike"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The cyclist might stop suddenly"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "The cyclist might swerve"
+      }
+    ],
+    "question": "When you are overtaking a cyclist , you should leave as much space as you would give a car. What is the main reason for this?",
+    "result": "correct",
+    "selected": "The cyclist might swerve"
+  },
+  {
+    "correctAnswer": "Because it is more difficult to see events ahead",
+    "id": "89537",
+    "media": [],
+    "number": 32,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Because the engine is cooler"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Because it is more difficult to see events ahead"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Because the brakes are more effective"
+      }
+    ],
+    "question": "Why should you always reduce your speed when travelling in heavy rain?",
+    "result": "correct",
+    "selected": "Because it is more difficult to see events ahead"
+  },
+  {
+    "correctAnswer": "Good brakes and good tyres will not shorten the stopping distance",
+    "id": "89537",
+    "media": [],
+    "number": 33,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Good tyres and brakes will shorten the stopping distance"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Good brakes and good tyres will not shorten the stopping distance"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stopping distance will be reduced by hard braking"
+      }
+    ],
+    "question": "Which of these statements about your vehicle stopping distance is correct?",
+    "result": "correct",
+    "selected": "Good brakes and good tyres will not shorten the stopping distance"
+  },
+  {
+    "correctAnswer": "Drivers' judgement is impaired",
+    "id": "89537",
+    "media": [],
+    "number": 34,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Drivers' judgement is impaired"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drivers take shorter time to react"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drivers' vision is improved"
+      }
+    ],
+    "question": "Drink driving can contribute to accidents because",
+    "result": "correct",
+    "selected": "Drivers' judgement is impaired"
+  },
+  {
+    "correctAnswer": "By consuming alcohol and driving",
+    "id": "89537",
+    "media": [],
+    "number": 35,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "By carrying a heavy load"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "By driving at a slow pace"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "By consuming alcohol and driving"
+      }
+    ],
+    "question": "How could you as a driver become a hazard to yourself and all the others around you? You could",
+    "result": "correct",
+    "selected": "By consuming alcohol and driving"
+  },
+  {
+    "correctAnswer": "Go home by public transport",
+    "id": "89537",
+    "media": [],
+    "number": 36,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive home carefully and slowly"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Go home by public transport"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Wait a short while and then drive home"
+      }
+    ],
+    "question": "What advice should you give to a driver who has a few alcoholic drinks at a party?",
+    "result": "correct",
+    "selected": "Go home by public transport"
+  },
+  {
+    "correctAnswer": "Oil",
+    "id": "89537",
+    "media": [],
+    "number": 37,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Water"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Oil"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Petrol"
+      }
+    ],
+    "question": "What do you put into the engine to lubricate the moving parts?",
+    "result": "correct",
+    "selected": "Oil"
+  },
+  {
+    "correctAnswer": "be patient as you expect him to cross the road",
+    "id": "89537",
+    "media": [],
+    "number": 38,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "immediately overtake him and drive on"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "be patient as you expect him to cross the road"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "proceed as normal"
+      }
+    ],
+    "question": "You are following a cyclist who stops at a junction. You should",
+    "result": "correct",
+    "selected": "be patient as you expect him to cross the road"
+  },
+  {
+    "correctAnswer": "give way to them",
+    "id": "89537",
+    "media": [],
+    "number": 39,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "sound your horn and proceed"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "give way to them"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "continue, as it is your right of way"
+      }
+    ],
+    "question": "You are turning left at a junction. Pedestrians start to cross the road. You should",
+    "result": "correct",
+    "selected": "give way to them"
+  },
+  {
+    "correctAnswer": "When overtaking another vehicle",
+    "id": "89537",
+    "media": [],
+    "number": 40,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When traffic jam occurs"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "When overtaking another vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When driving fast"
+      }
+    ],
+    "question": "You may use the right outer most lane of an expressway only",
+    "result": "correct",
+    "selected": "When overtaking another vehicle"
+  },
+  {
+    "correctAnswer": "Hold back until the cyclist has passed the junction",
+    "id": "89537",
+    "media": [],
+    "number": 41,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Overtake the cyclist before the junction"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Hold back until the cyclist has passed the junction"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Go around the cyclist at the junction"
+      }
+    ],
+    "question": "You are following a cyclist. You wish to turn left just ahead, you should",
+    "result": "correct",
+    "selected": "Hold back until the cyclist has passed the junction"
+  },
+  {
+    "correctAnswer": "Slow down before the hazard",
+    "id": "89537",
+    "media": [],
+    "number": 42,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up before the hazard"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down before the hazard"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive at normal speed"
+      }
+    ],
+    "question": "The defence against any adverse road condition is to",
+    "result": "correct",
+    "selected": "Slow down before the hazard"
+  },
+  {
+    "correctAnswer": "Greater",
+    "id": "89537",
+    "media": [],
+    "number": 43,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Greater"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Weaker"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Same"
+      }
+    ],
+    "question": "The lower the gear, the the braking effect of your engine",
+    "result": "correct",
+    "selected": "Greater"
+  },
+  {
+    "correctAnswer": "sways from side to side",
+    "id": "89537",
+    "media": [],
+    "number": 44,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "sways from side to side"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stall"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stopped suddenly"
+      }
+    ],
+    "question": "When a tyre punctures, the motorcycle will",
+    "result": "correct",
+    "selected": "sways from side to side"
+  },
+  {
+    "correctAnswer": "release the brakes and apply intermittent braking.",
+    "id": "89537",
+    "media": [],
+    "number": 45,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "step harder on the brake pedal."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "release the brakes and apply intermittent braking."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "neutralise the gear and apply the front brakes."
+      }
+    ],
+    "question": "When your vehicle starts to skid while braking, you should",
+    "result": "correct",
+    "selected": "release the brakes and apply intermittent braking."
+  },
+  {
+    "correctAnswer": "Before going round a bend.",
+    "id": "89537",
+    "media": [],
+    "number": 46,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Before going round a bend."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Whilst going round a bend."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "After going round a bend."
+      }
+    ],
+    "question": "When should you reduce speed?",
+    "result": "correct",
+    "selected": "Before going round a bend."
+  },
+  {
+    "correctAnswer": "The on-coming vehicle",
+    "id": "89537",
+    "media": [],
+    "number": 47,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The vehicle behind"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "The on-coming vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The vehicle in-front"
+      }
+    ],
+    "question": "The most serious (possible fatal) accident is, when a vehicle collide with",
+    "result": "correct",
+    "selected": "The on-coming vehicle"
+  },
+  {
+    "correctAnswer": "Approaching/passing intersection or junction",
+    "id": "89537",
+    "media": [],
+    "number": 48,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Overtaking"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Approaching/passing intersection or junction"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Following distance"
+      }
+    ],
+    "question": "Know, slow, show and go are defensive systematic driving plan suitable for",
+    "result": "correct",
+    "selected": "Approaching/passing intersection or junction"
+  },
+  {
+    "correctAnswer": "Six positions",
+    "id": "89537",
+    "media": [],
+    "number": 49,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Three positions"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Six positions"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Nine positions"
+      }
+    ],
+    "question": "There are how many different positions that your bike can collide with another vehicle?",
+    "result": "correct",
+    "selected": "Six positions"
+  },
+  {
+    "correctAnswer": "Ride off the road and give plenty of room",
+    "id": "89537",
+    "media": [],
+    "number": 50,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Step hard on the rear brake"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Ride off the road and give plenty of room"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound the horn"
+      }
+    ],
+    "question": "To avoid head-on collision with an on-coming vehicle on a two-way traffic, you should read the road ahead, react by moving left, reduce speed and",
+    "result": "correct",
+    "selected": "Ride off the road and give plenty of room"
+  }
+]
+
