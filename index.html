@@ -58,6 +58,7 @@
     .result-panel h2{margin:0;font-size:2rem;letter-spacing:-.04em}.result-panel p{color:var(--muted)}.result-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:20px}
     .notice{margin:18px 0 0;padding:12px 14px;border-radius:10px;background:var(--amber-bg);color:#6c4705;font-size:.87rem}
     .teaching{margin-top:18px;padding:16px 17px;border:1px solid #b8d4e3;border-radius:13px;background:#eef7fb;color:#18384b;text-align:left}
+    .teaching.is-correct{border-color:#89caa6;background:var(--green-bg);color:#174f31}.teaching.is-correct .teaching-label{color:var(--green)}
     .teaching-label{display:block;margin-bottom:6px;color:var(--blue);font-size:.72rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
     .teaching p{margin:0;line-height:1.62}.teaching strong{color:var(--navy)}
     .source-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 10px;border:1px solid #a8c9da;border-radius:8px;background:#fff;color:var(--blue);font-size:.78rem;font-weight:850;text-decoration:none}.source-link:hover{text-decoration:underline;border-color:var(--blue)}
@@ -118,7 +119,7 @@
       <div class="hero">
         <p class="kicker">Offline practice library</p>
         <h2>Build confidence, one paper at a time.</h2>
-        <p class="hero-copy">Choose a completed CDC e-Trial paper. Answers stay hidden until you submit, progress is saved on this device, and every diagram works without internet.</p>
+        <p class="hero-copy">Choose a completed CDC e-Trial paper. Get instant feedback after every answer, keep the final score and review, and practise with every diagram even without internet.</p>
         <div id="statusStrip" class="status-strip"></div>
       </div>
       <div id="paperGrid" class="paper-grid"></div>
@@ -456,25 +457,25 @@
 
     function teachingFeedback(q,selected) {
       const correct=q.options.find(o=>o.correct); const chosen=selected===undefined?null:q.options[Number(selected)];
-      if(chosen?.correct) return "";
+      if(chosen?.correct) return '<aside class="teaching is-correct" role="status"><span class="teaching-label">Correct</span><p><strong>“'+esc(chosen.text)+'”</strong> is the right answer.</p></aside>';
       const opening=chosen?'<strong>Your choice: “'+esc(chosen.text)+'”</strong><br>':'<strong>You left this question unanswered.</strong> ';
       const contrast=chosen?" "+distractorContrast(chosen.text,q):"";
       const source=officialSource(q);
-      return '<aside class="teaching"><span class="teaching-label">Learn from this one</span><p>'+opening+'The correct answer is <strong>“'+esc(correct.text)+'”</strong> because '+teachingPrinciple(q)+'.'+contrast+'</p><a class="source-link" href="'+source.url+'" target="_blank" rel="noopener noreferrer">Official source: '+esc(source.title)+' ↗</a></aside>';
+      return '<aside class="teaching" role="status"><span class="teaching-label">Not quite — learn from this one</span><p>'+opening+'The correct answer is <strong>“'+esc(correct.text)+'”</strong> because '+teachingPrinciple(q)+'.'+contrast+'</p><a class="source-link" href="'+source.url+'" target="_blank" rel="noopener noreferrer">Official source: '+esc(source.title)+' ↗</a></aside>';
     }
 
     function renderExam() {
-      const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number]; const wrong=review?wrongIndexes():[];
-      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review · Press Space for next":"Choose with 1, 2, or 3, then press Space for next. Your progress saves automatically.";
+      const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number]; const answered=selected!==undefined; const reveal=review||answered; const wrong=review?wrongIndexes():[];
+      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review · Press Space for next":"Choose with 1, 2, or 3. Feedback appears immediately; press Space for next.";
       $("#answeredCount").textContent=review?wrong.length+" wrong":answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
       const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'">':"";
       const choices=q.options.map((option,i)=>{
-        let cls="choice", tag=""; if(review&&option.correct){cls+=" correct";tag="Correct";} else if(review&&String(i)===String(selected)&&!option.correct){cls+=" wrong";tag="Your answer";}
-        return '<label class="'+cls+'"><input type="radio" name="answer" value="'+i+'" aria-keyshortcuts="'+(i+1)+'" title="Press '+(i+1)+' to select" '+(String(i)===String(selected)?'checked':'')+' '+(review?'disabled':'')+'><span class="choice-letter">'+option.label+'</span><span>'+esc(option.text)+'</span><span class="answer-tag">'+tag+'</span></label>';
+        let cls="choice", tag=""; if(reveal&&option.correct){cls+=" correct";tag="Correct";} else if(reveal&&String(i)===String(selected)&&!option.correct){cls+=" wrong";tag="Your answer";}
+        return '<label class="'+cls+'"><input type="radio" name="answer" value="'+i+'" aria-keyshortcuts="'+(i+1)+'" title="Press '+(i+1)+' to select" '+(String(i)===String(selected)?'checked':'')+' '+(reveal?'disabled':'')+'><span class="choice-letter">'+option.label+'</span><span>'+esc(option.text)+'</span><span class="answer-tag">'+tag+'</span></label>';
       }).join("");
-      const feedback=review?teachingFeedback(q,selected):"";
+      const feedback=reveal?teachingFeedback(q,selected):"";
       $("#questionArea").innerHTML='<p class="q-label">Question '+q.number+' · '+(state.index+1)+' of 50</p><h3>'+esc(q.question)+'</h3>'+image+'<div class="choices">'+choices+'</div>'+feedback;
-      if(!review) document.querySelectorAll('input[name="answer"]').forEach(input=>input.addEventListener("change",()=>{state.answers[q.number]=Number(input.value);writeStore();renderExam();}));
+      if(!reveal) document.querySelectorAll('input[name="answer"]').forEach(input=>input.addEventListener("change",()=>{state.answers[q.number]=Number(input.value);writeStore();renderExam();}));
       $("#prevButton").disabled=state.index===0; $("#nextButton").hidden=state.index===49; $("#submitButton").hidden=state.index!==49||review; $("#flagButton").hidden=review;
       $("#nextWrongButton").hidden=!review||!wrong.length; $("#nextWrongButton").disabled=wrong.length===1&&wrong[0]===state.index; $("#nextWrongButton").textContent=$("#nextWrongButton").disabled?"Only wrong":"Next wrong";
       $("#flagButton").textContent=state.flags.includes(q.number)?"Unflag":"Flag"; renderPalette();
