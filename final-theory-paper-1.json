@@ -1,0 +1,1333 @@
+[
+  {
+    "correctAnswer": "Keep a longer following distance.",
+    "id": "89137",
+    "media": [],
+    "number": 1,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Keep a longer following distance."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Keep the normal following distance."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Keep more to the right to have a better view."
+      }
+    ],
+    "question": "When driving behind a bus, you should",
+    "result": "correct",
+    "selected": "Keep a longer following distance."
+  },
+  {
+    "correctAnswer": "Check every side road before you drive past them.",
+    "id": "89137",
+    "media": [],
+    "number": 2,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stop at every road junction before proceeding."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Accelerate through each junction."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Check every side road before you drive past them."
+      }
+    ],
+    "question": "When you are driving along a main road, you should",
+    "result": "correct",
+    "selected": "Check every side road before you drive past them."
+  },
+  {
+    "correctAnswer": "slow down and be prepared to stop.",
+    "id": "89137",
+    "media": [],
+    "number": 3,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "drive on regardless of danger ahead."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "sound the horn and maintain your speed."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "slow down and be prepared to stop."
+      }
+    ],
+    "question": "You notice a vehicle trying to pull out between a row of stationary vehicles. You should",
+    "result": "correct",
+    "selected": "slow down and be prepared to stop."
+  },
+  {
+    "correctAnswer": "reduced.",
+    "id": "89137",
+    "media": [],
+    "number": 4,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "reduced."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "remained the same"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "increased."
+      }
+    ],
+    "question": "As vehicle speed increases, your field of vision would be",
+    "result": "correct",
+    "selected": "reduced."
+  },
+  {
+    "correctAnswer": "slightly bent",
+    "id": "89137",
+    "media": [],
+    "number": 5,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "straighten"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "slightly bent"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "bent at 90 degree"
+      }
+    ],
+    "question": "When driving, your arms should be",
+    "result": "correct",
+    "selected": "slightly bent"
+  },
+  {
+    "correctAnswer": "Only on the rear wheels.",
+    "id": "89137",
+    "media": [],
+    "number": 6,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Only on the rear wheels."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Only on the front wheels."
+      },
+      {
+        "correct": false,
+        "selectedWrong": true,
+        "text": "On both the front and rear wheels."
+      }
+    ],
+    "question": "The handbrake of a car acts",
+    "result": "wrong",
+    "selected": "On both the front and rear wheels."
+  },
+  {
+    "correctAnswer": "when the car is stationary during stopping, waiting and parking.",
+    "id": "89137",
+    "media": [],
+    "number": 7,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "when driving up a hill."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to control the speed of the car."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "when the car is stationary during stopping, waiting and parking."
+      }
+    ],
+    "question": "The handbrake is used",
+    "result": "correct",
+    "selected": "when the car is stationary during stopping, waiting and parking."
+  },
+  {
+    "correctAnswer": "Slow down and be ready to stop for pedestrian who may cross the road in front of the bus.",
+    "id": "89137",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/busatbusstop_GUEMwLv.png",
+        "tag": "div"
+      }
+    ],
+    "number": 8,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound the horn to warn the bus driver of your presence."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up to overtake the bus before it moves off."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down and be ready to stop for pedestrian who may cross the road in front of the bus."
+      }
+    ],
+    "question": "When passing the stationary bus at the bus-stop, you should",
+    "result": "correct",
+    "selected": "Slow down and be ready to stop for pedestrian who may cross the road in front of the bus."
+  },
+  {
+    "correctAnswer": "Because it is not safe to do so",
+    "id": "89137",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/carovertakevan_76JnX0y.png",
+        "tag": "div"
+      }
+    ],
+    "number": 9,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Because of the centre white line"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Because of the double yellow line"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Because it is not safe to do so"
+      }
+    ],
+    "question": "Both the van and the car are entering a car park, the car should not overtake the van",
+    "result": "correct",
+    "selected": "Because it is not safe to do so"
+  },
+  {
+    "correctAnswer": "slow down and turn after the motorcyclist",
+    "id": "89137",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/turnaftermotorcyclist_ro5OQHg.png",
+        "tag": "div"
+      }
+    ],
+    "number": 10,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "slow down and turn after the motorcyclist"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "speed up and turn before the motorcyclist reaches the junction"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "turn side by side with the motorcyclist"
+      }
+    ],
+    "question": "In the situation as shown, the motor car should",
+    "result": "correct",
+    "selected": "slow down and turn after the motorcyclist"
+  },
+  {
+    "correctAnswer": "It reduces your concentration.",
+    "id": "89137",
+    "media": [],
+    "number": 11,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "It reduces your concentration."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It increases your awareness."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It improves your co-ordination."
+      }
+    ],
+    "question": "How does alcohol affect you?",
+    "result": "correct",
+    "selected": "It reduces your concentration."
+  },
+  {
+    "correctAnswer": "may affect your reaction time.",
+    "id": "89137",
+    "media": [],
+    "number": 12,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "will not affect your reaction time."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "may affect your reaction time."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "may cause you to react faster."
+      }
+    ],
+    "question": "Drink driving",
+    "result": "correct",
+    "selected": "may affect your reaction time."
+  },
+  {
+    "correctAnswer": "Turn your head and look over your shoulder.",
+    "id": "89137",
+    "media": [],
+    "number": 13,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Turn your head and look over your shoulder."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Turn your head and look into the wing mirrors."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Turn your head and look into the rear-view mirror."
+      }
+    ],
+    "question": "To check 'blind spot' when driving, you must",
+    "result": "correct",
+    "selected": "Turn your head and look over your shoulder."
+  },
+  {
+    "correctAnswer": "Good.",
+    "id": "89137",
+    "media": [],
+    "number": 14,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Wet."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Good."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Hazy."
+      }
+    ],
+    "question": "The 'three-second rule' is a sufficient distance between your vehicle and the car in front when road condition is",
+    "result": "correct",
+    "selected": "Good."
+  },
+  {
+    "correctAnswer": "13 demerit points.",
+    "id": "89137",
+    "media": [],
+    "number": 15,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "6 demerit points."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "9 demerit points."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "13 demerit points."
+      }
+    ],
+    "question": "You will not be allowed to apply for a Provisional Driving Licence (PDL) if you have",
+    "result": "correct",
+    "selected": "13 demerit points."
+  },
+  {
+    "correctAnswer": "Pull over to the left or right side of the road.",
+    "id": "89137",
+    "media": [],
+    "number": 16,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stop immediately where you are in order to make way."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Pull over to the left or right side of the road."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound your horn to warn the front vehicles to speed up."
+      }
+    ],
+    "question": "When you hear the siren of an emergency vehicle, you should",
+    "result": "correct",
+    "selected": "Pull over to the left or right side of the road."
+  },
+  {
+    "correctAnswer": "1.0 metre between your vehicle and the parked vehicle.",
+    "id": "89137",
+    "media": [],
+    "number": 17,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "0.3 metre between your vehicle and the parked vehicle."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "0.5 metre between your vehicle and the parked vehicle."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "1.0 metre between your vehicle and the parked vehicle."
+      }
+    ],
+    "question": "When passing a parked vehicle, you should leave a safe gap of at least",
+    "result": "correct",
+    "selected": "1.0 metre between your vehicle and the parked vehicle."
+  },
+  {
+    "correctAnswer": "Pump the brake pedal repeatedly to dry the brakes.",
+    "id": "89137",
+    "media": [],
+    "number": 18,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stop the vehicle on a slope to allow water to flow out from the brakes."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Pump the brake pedal repeatedly to dry the brakes."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Drive at normal speed to spin-dry the brakes."
+      }
+    ],
+    "question": "After driving through flood the brakes may malfunction. In order to correct this, you must",
+    "result": "correct",
+    "selected": "Pump the brake pedal repeatedly to dry the brakes."
+  },
+  {
+    "correctAnswer": "emergency vehicles and overtaking.",
+    "id": "89137",
+    "media": [],
+    "number": 19,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "emergency vehicles and overtaking."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "vehicles travelling at the maximum speed limit."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "slow moving vehicles."
+      }
+    ],
+    "question": "The right-most outer lane of the expressway is meant for",
+    "result": "correct",
+    "selected": "emergency vehicles and overtaking."
+  },
+  {
+    "correctAnswer": "to keep to the left lane unless overtaking.",
+    "id": "89137",
+    "media": [],
+    "number": 20,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "to use the lane that has least traffic."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "to keep to the left lane unless overtaking."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "always use the road shoulder."
+      }
+    ],
+    "question": "A basic rule when driving on an expressway is",
+    "result": "correct",
+    "selected": "to keep to the left lane unless overtaking."
+  },
+  {
+    "correctAnswer": "Form up into the correct lane which you intend to travel.",
+    "id": "89137",
+    "media": [],
+    "number": 21,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Form up into the correct lane which you intend to travel."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound your horn to caution other road users."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up so as not to cause a traffic jam."
+      }
+    ],
+    "question": "Before reaching a junction, you should",
+    "result": "correct",
+    "selected": "Form up into the correct lane which you intend to travel."
+  },
+  {
+    "correctAnswer": "Going down a long steep slope.",
+    "id": "89137",
+    "media": [],
+    "number": 22,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Going down a long steep slope."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Going up a steep hill."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Driving on a level road."
+      }
+    ],
+    "question": "You should use the engine-brake when",
+    "result": "correct",
+    "selected": "Going down a long steep slope."
+  },
+  {
+    "correctAnswer": "lesser than with the 2nd gear.",
+    "id": "89137",
+    "media": [],
+    "number": 23,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "greater than with the 2nd gear."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "the same as with the 2nd gear."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "lesser than with the 2nd gear."
+      }
+    ],
+    "question": "When you use engine-brake with the 3rd gear, its effectiveness will be",
+    "result": "correct",
+    "selected": "lesser than with the 2nd gear."
+  },
+  {
+    "correctAnswer": "The foot-brake first followed by the handbrake",
+    "id": "89137",
+    "media": [],
+    "number": 24,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The handbrake first followed by the foot-brake"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "The foot-brake first followed by the handbrake"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Both brakes together"
+      }
+    ],
+    "question": "When stopping the vehicle on a slope, you should apply",
+    "result": "correct",
+    "selected": "The foot-brake first followed by the handbrake"
+  },
+  {
+    "correctAnswer": "Step on the brake pedal.",
+    "id": "89137",
+    "media": [],
+    "number": 25,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Step on the brake pedal."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Reach for the ignition key and re-start the engine."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Shift gear lever to neutral position."
+      }
+    ],
+    "question": "While trying to move off on an incline (uphill) and the engine stalls, you should immediately",
+    "result": "correct",
+    "selected": "Step on the brake pedal."
+  },
+  {
+    "correctAnswer": "When you can see the overtaken vehicle in your rear view mirror inside the cabin.",
+    "id": "89137",
+    "media": [],
+    "number": 26,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "As soon as you are ahead of the overtaken vehicle."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "When you can see the overtaken vehicle in your left wing mirror."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "When you can see the overtaken vehicle in your rear view mirror inside the cabin."
+      }
+    ],
+    "question": "When should you start to keep left after overtaking?",
+    "result": "correct",
+    "selected": "When you can see the overtaken vehicle in your rear view mirror inside the cabin."
+  },
+  {
+    "correctAnswer": "Not allowed for it is unsafe and could cause road accident.",
+    "id": "89137",
+    "media": [],
+    "number": 27,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Allowed if there is no vehicle around."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Not allowed for it is unsafe and could cause road accident."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Allowed during the daytime only."
+      }
+    ],
+    "question": "Reversing from a side road into a main road is",
+    "result": "correct",
+    "selected": "Not allowed for it is unsafe and could cause road accident."
+  },
+  {
+    "correctAnswer": "To the right.",
+    "id": "89137",
+    "media": [],
+    "number": 28,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "To the right."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "To the left."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "First to the left then to the right."
+      }
+    ],
+    "question": "When you want to reverse your car to your right, you should turn the steering wheel",
+    "result": "correct",
+    "selected": "To the right."
+  },
+  {
+    "correctAnswer": "both answers (A) and (B).",
+    "id": "89137",
+    "media": [],
+    "number": 29,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "it skids more easily."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "there is greater probability of punctures."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "both answers (A) and (B)."
+      }
+    ],
+    "question": "Driving with a 'bald' tyre is dangerous because",
+    "result": "correct",
+    "selected": "both answers (A) and (B)."
+  },
+  {
+    "correctAnswer": "outwards.",
+    "id": "89137",
+    "media": [],
+    "number": 30,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "inwards."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "outwards."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "forward."
+      }
+    ],
+    "question": "When negotiating a sharp bend, centrifugal force pushes your vehicle",
+    "result": "correct",
+    "selected": "outwards."
+  },
+  {
+    "correctAnswer": "swerve outwards.",
+    "id": "89137",
+    "media": [],
+    "number": 31,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "slow down."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "swerve outwards."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "swerve inwards."
+      }
+    ],
+    "question": "When going round a bend, centrifugal force will cause your car to",
+    "result": "correct",
+    "selected": "swerve outwards."
+  },
+  {
+    "correctAnswer": "There is no engine braking.",
+    "id": "89137",
+    "media": [],
+    "number": 32,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It will cause the vehicle to skid."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "There is no engine braking."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The engine will run faster."
+      }
+    ],
+    "question": "Why is free wheeling wrong?",
+    "result": "correct",
+    "selected": "There is no engine braking."
+  },
+  {
+    "correctAnswer": "7.00 pm and 7.00 am.",
+    "id": "89137",
+    "media": [],
+    "number": 33,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "7.00 pm and 7.00 am."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "7.15 pm and 7.15 am."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "7.30 pm and 7.30 am."
+      }
+    ],
+    "question": "All drivers are required by law to switch on the vehicle's headlights whilst driving between",
+    "result": "correct",
+    "selected": "7.00 pm and 7.00 am."
+  },
+  {
+    "correctAnswer": "Is advisable because you can be readily seen by others.",
+    "id": "89137",
+    "media": [],
+    "number": 34,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Is advisable because you can be readily seen by others."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Is not advisable because it will shorten the battery life."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Is not advisable because the rain water will reflect the light."
+      }
+    ],
+    "question": "Switching on the headlights whilst driving in heavy rain during the daytime",
+    "result": "correct",
+    "selected": "Is advisable because you can be readily seen by others."
+  },
+  {
+    "correctAnswer": "Wait because they will take longer to cross",
+    "id": "89137",
+    "media": [],
+    "number": 35,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Rev your engine to make them hurry"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Wait because they will take longer to cross"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Flash your lights to hurry them"
+      }
+    ],
+    "question": "As you appoach a controlled junction the lights change to green. Elderly people are halfway across, you should",
+    "result": "correct",
+    "selected": "Wait because they will take longer to cross"
+  },
+  {
+    "correctAnswer": "Slow down and be prepared to stop.",
+    "id": "89137",
+    "media": [],
+    "number": 36,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Speed up to drive through the junction."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down and be prepared to stop."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Maintain your speed."
+      }
+    ],
+    "question": "When approaching a green traffic light signal at a junction, you must",
+    "result": "correct",
+    "selected": "Slow down and be prepared to stop."
+  },
+  {
+    "correctAnswer": "the school children.",
+    "id": "89137",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/caratzebra_m0JhJeM.png",
+        "tag": "div"
+      }
+    ],
+    "number": 37,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "the school children."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "the turning vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "the traffic light"
+      }
+    ],
+    "question": "In this situation, the 'red' car should pay special attention to",
+    "result": "correct",
+    "selected": "the school children."
+  },
+  {
+    "correctAnswer": "Keep a longer following distance as you would with other vehicles.",
+    "id": "89137",
+    "media": [],
+    "number": 38,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Move more to the right to have a better view."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Keep a longer following distance as you would with other vehicles."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Follow at the same distance as you would with other vehicles."
+      }
+    ],
+    "question": "When following behind a large vehicle, you should",
+    "result": "correct",
+    "selected": "Keep a longer following distance as you would with other vehicles."
+  },
+  {
+    "correctAnswer": "emergency vehicles and overtaking only.",
+    "id": "89137",
+    "media": [],
+    "number": 39,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "emergency vehicles and overtaking only."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "vehicles travelling at the maximum speed limit of the road."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "vehicles which are capable of travelling at high speed."
+      }
+    ],
+    "question": "The right most outer lane on a three-lane carriageway is for",
+    "result": "correct",
+    "selected": "emergency vehicles and overtaking only."
+  },
+  {
+    "correctAnswer": "Stay in your lane.",
+    "id": "89137",
+    "media": [],
+    "number": 40,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Sound the horn so that vehicles in front will move faster."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Stay in your lane."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Move quickly to another lane with a shorter queue."
+      }
+    ],
+    "question": "In slow moving traffic, you should always",
+    "result": "correct",
+    "selected": "Stay in your lane."
+  },
+  {
+    "correctAnswer": "poor vehicle maintenance.",
+    "id": "89137",
+    "media": [],
+    "number": 41,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "long distance driving."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "poor vehicle maintenance."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "lack of petrol."
+      }
+    ],
+    "question": "Generally, overheating of the engine is largely due to",
+    "result": "correct",
+    "selected": "poor vehicle maintenance."
+  },
+  {
+    "correctAnswer": "move your vehicle to the side of the road.",
+    "id": "89137",
+    "media": [],
+    "number": 42,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "not move your vehicle."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "wait for the police to arrive."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "move your vehicle to the side of the road."
+      }
+    ],
+    "question": "In an accident where there is no injury, you should",
+    "result": "correct",
+    "selected": "move your vehicle to the side of the road."
+  },
+  {
+    "correctAnswer": "Release the brake pedal and apply it again.",
+    "id": "89137",
+    "media": [],
+    "number": 43,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Step harder on the brake pedal."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Release the brake pedal and apply it again."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Pull up the handbrake."
+      }
+    ],
+    "question": "If your car skids while braking, you should",
+    "result": "correct",
+    "selected": "Release the brake pedal and apply it again."
+  },
+  {
+    "correctAnswer": "Carry on driving and find a safe spot out of the expressway before answering the call.",
+    "id": "89137",
+    "media": [],
+    "number": 44,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Answer the call immediately."
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Carry on driving and find a safe spot out of the expressway before answering the call."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Stop at the road shoulder and answer the call."
+      }
+    ],
+    "question": "While driving along an expressway and your handphone (without hands-free kit) rings, you should",
+    "result": "correct",
+    "selected": "Carry on driving and find a safe spot out of the expressway before answering the call."
+  },
+  {
+    "correctAnswer": "Yes, it is an offence.",
+    "id": "89137",
+    "media": [],
+    "number": 45,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Yes, it is an offence."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It is not an offence."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "It is not an offence if the road is congested."
+      }
+    ],
+    "question": "Is it an offence to drive on the road shoulder of the expressway?",
+    "result": "correct",
+    "selected": "Yes, it is an offence."
+  },
+  {
+    "correctAnswer": "1.5m",
+    "id": "89137",
+    "media": [
+      {
+        "alt": "",
+        "src": "https://mapp.cdc.com.sg/site_media/SAS/eTrial-data/cyclistsideclearance_Z2vNRTh.png",
+        "tag": "div"
+      }
+    ],
+    "number": 46,
+    "options": [
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "0.5m"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "1m"
+      },
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "1.5m"
+      }
+    ],
+    "question": "When passing a cyclist, what is the minimum side clearance you must ensure between the cyclist and your car?",
+    "result": "correct",
+    "selected": "1.5m"
+  },
+  {
+    "correctAnswer": "he might change direction.",
+    "id": "89137",
+    "media": [],
+    "number": 47,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "he might change direction."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "he is going to stop."
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "he is about to speed up."
+      }
+    ],
+    "question": "When a cyclist in front of you is glancing to the rear, it means that",
+    "result": "correct",
+    "selected": "he might change direction."
+  },
+  {
+    "correctAnswer": "confuse other drivers and cause them to turn into your path",
+    "id": "89137",
+    "media": [],
+    "number": 48,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "confuse other drivers and cause them to turn into your path"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "damage the electrical system"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "keep other drivers from seeing your brake light"
+      }
+    ],
+    "question": "A turn signal that keeps flashing after a turn is very likely to",
+    "result": "correct",
+    "selected": "confuse other drivers and cause them to turn into your path"
+  },
+  {
+    "correctAnswer": "Slow down or stop to give way to oncoming vehicles and pedestrians",
+    "id": "89137",
+    "media": [],
+    "number": 49,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "Slow down or stop to give way to oncoming vehicles and pedestrians"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Slow down and turn sharply"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "Not give way to oncoming vehicle"
+      }
+    ],
+    "question": "Before turning right into a minor road, you should",
+    "result": "correct",
+    "selected": "Slow down or stop to give way to oncoming vehicles and pedestrians"
+  },
+  {
+    "correctAnswer": "The driver",
+    "id": "89137",
+    "media": [],
+    "number": 50,
+    "options": [
+      {
+        "correct": true,
+        "selectedWrong": false,
+        "text": "The driver"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The vehicle"
+      },
+      {
+        "correct": false,
+        "selectedWrong": false,
+        "text": "The environment"
+      }
+    ],
+    "question": "The most important factor in ensuring safe driving journey depends on",
+    "result": "correct",
+    "selected": "The driver"
+  }
+]
+

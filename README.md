@@ -1,12 +1,12 @@
 # Theory Go Where
 
-An offline-friendly Singapore driving-theory practice app. It currently contains five completed Final Theory mock papers and is structured to support Basic Theory papers later.
+An offline-friendly Singapore driving-theory practice app. It currently contains six completed Final Theory mock papers and is structured to support Basic Theory papers later.
 
 ## Included
 
-- Final Theory Papers 2, 4, 5, 6, and 9
-- 250 multiple-choice questions
-- 19 embedded diagrams that work offline
+- Final Theory Papers 1, 2, 4, 5, 6, and 9
+- 300 multiple-choice questions
+- 24 embedded diagrams that work offline
 - Progress saved locally in the browser
 - Phone-first practice mode with a persistent Papers/Cheatsheets/Scores tab bar, thumb-friendly exam controls, and a collapsible question palette
 - Shuffled practice attempts, scoring, flags, and answer review
@@ -14,7 +14,7 @@ An offline-friendly Singapore driving-theory practice app. It currently contains
 - Choice-specific teaching feedback for incorrect answers
 - A mobile-friendly tricky-topics cheat sheet with memory hooks and date-sensitive demerit-point guidance
 - Topic-matched links to official Traffic Police and LTA guidance
-- Placeholder cards for Papers 1, 3, 7, 8, and 10
+- Placeholder cards for Papers 3, 7, 8, and 10
 
 Open `index.html` directly in a browser. No installation or internet connection is required for practice; internet access is only needed when opening an official-source link.
 
