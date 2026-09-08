@@ -31,14 +31,14 @@
       --info-bg:#0d2836; --info-border:#2c6078; --info-ink:#d5e9f3; --tab-muted:#9ba8b3;
     }
     *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;line-height:1.5}
+    body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
     button,input,select{font:inherit} button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
     button:focus-visible,input:focus-visible{outline:3px solid rgba(7,89,133,.25);outline-offset:2px}
     .topbar{position:relative;z-index:30;background:linear-gradient(135deg,var(--top-start),var(--top-end));color:var(--on-accent);padding:18px 20px;box-shadow:0 3px 16px rgba(9,42,68,.18)}
     .topbar-inner{width:min(1160px,100%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.top-actions{display:flex;align-items:center;gap:8px}
     .brand{display:flex;align-items:center;gap:12px}.brand-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:12px;background:rgba(255,255,255,.12);font-weight:900}
     .brand h1{margin:0;font-size:1.08rem;letter-spacing:-.015em}.brand p{margin:1px 0 0;color:rgba(255,255,255,.68);font-size:.78rem}
-    .ghost-light{border:1px solid rgba(255,255,255,.35);border-radius:9px;background:transparent;color:var(--on-accent);padding:9px 13px;font-weight:750}
+    .ghost-light{border:1px solid rgba(255,255,255,.35);border-radius:9px;background:transparent;color:var(--on-accent);padding:9px 13px;font-weight:750}.theme-toggle{display:grid;width:42px;min-width:42px;height:42px;place-items:center;padding:0;font-size:1.25rem;line-height:1}
     main{width:min(1160px,calc(100% - 28px));margin:30px auto 64px}
     .hero{padding:28px 0 16px}.kicker{margin:0 0 8px;color:var(--blue);font-size:.77rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
     .hero h2{margin:0;max-width:720px;font-size:clamp(2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.05em}.hero-copy{max-width:650px;margin:14px 0 0;color:var(--muted);font-size:1.02rem}
@@ -96,6 +96,11 @@
     .mobile-tabs{display:none}
     [hidden]{display:none!important}.empty{padding:50px 20px;text-align:center;color:var(--muted)}
     footer{text-align:center;color:var(--muted);font-size:.75rem;padding:0 20px 30px}
+    body *{font-weight:400!important}
+    body :is(h1,h2,h3,strong,button,.brand-mark,.kicker,.paper-no,.answered-count,.choice-letter,.answer-tag,.teaching-label,.knowledge-total,.knowledge-ref,.cheat-topic,.score-status){font-weight:500!important}
+    .hero h2{font-size:clamp(1.8rem,4vw,3rem)}.cheat-hero h2,.scores-hero h2{font-size:clamp(1.9rem,4vw,3.2rem)}
+    .paper-card h3{font-size:1.35rem}.question h3{font-size:clamp(1.08rem,2vw,1.35rem)}.cheat-card h3,.score-card h3{font-size:1.2rem}.knowledge-bank h3{font-size:1.35rem}.result-panel h2{font-size:1.7rem}
+    .hero h2,.cheat-hero h2,.scores-hero h2{letter-spacing:-.025em}.paper-card h3,.question h3,.cheat-card h3,.knowledge-bank h3,.score-card h3,.result-panel h2{letter-spacing:-.012em}
     @media(max-width:860px){
       body.palette-open{overflow:hidden}.exam-shell{display:block}.palette-toggle,.sidebar-close{display:inline-flex;align-items:center;justify-content:center}
       .palette-toggle{min-height:40px;border:1px solid var(--info-border);border-radius:9px;background:var(--info-bg);color:var(--blue);padding:0 11px;font-size:.78rem;font-weight:900}
@@ -105,8 +110,8 @@
       .palette{grid-template-columns:repeat(10,1fr)}
     }
     @media(max-width:600px){
-      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:7px}.top-actions{gap:6px}.brand{gap:8px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.94rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 8px;font-size:.72rem;white-space:nowrap}body:not([data-view="home"]) .brand-mark{display:none}#cheatButton{display:none!important}body:not([data-view="cheat"]) #homeButton{display:none!important}
-      main{width:min(100% - 18px,1160px);margin-top:18px;padding-bottom:calc(74px + env(safe-area-inset-bottom))}.hero{padding:12px 0 10px}.hero h2{font-size:2.15rem}.hero-copy{font-size:.94rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
+      .topbar{position:sticky;top:0;padding:calc(11px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 11px max(12px,env(safe-area-inset-left))}.topbar-inner{gap:7px}.top-actions{gap:6px}.brand{gap:8px}.brand-mark{width:38px;height:38px;border-radius:10px}.brand h1{font-size:.94rem}.brand p{display:none}.ghost-light{min-height:38px;padding:0 8px;font-size:.72rem;white-space:nowrap}.theme-toggle{width:38px;min-width:38px;height:38px;padding:0;font-size:1.12rem}body:not([data-view="home"]) .brand-mark{display:none}#cheatButton{display:none!important}body:not([data-view="cheat"]) #homeButton{display:none!important}
+      main{width:min(100% - 18px,1160px);margin-top:18px;padding-bottom:calc(74px + env(safe-area-inset-bottom))}.hero{padding:12px 0 10px}.hero h2{font-size:1.9rem}.hero-copy{font-size:.9rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
       .paper-grid{grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.paper-card{min-height:180px;padding:14px;border-radius:15px}.paper-card h3{font-size:1.2rem}.paper-no{font-size:.68rem}.paper-meta{font-size:.8rem}.paper-progress{margin-top:13px}.card-actions{flex-direction:column;gap:7px;padding-top:12px}.card-actions .btn{width:100%}
       body[data-view="exam"] main{width:100%;margin:0;padding-bottom:calc(144px + env(safe-area-inset-bottom))}body[data-view="exam"] footer{display:none}.exam-main{border:0;border-radius:0;box-shadow:none;min-height:calc(100dvh - 60px)}
       .exam-head{position:sticky;z-index:20;top:calc(60px + env(safe-area-inset-top));padding:11px 14px;background:var(--glass);backdrop-filter:blur(14px)}.exam-head h2{font-size:.98rem}.exam-sub{display:none}.exam-status{gap:8px}.answered-count{font-size:.72rem;white-space:nowrap}.palette-toggle{min-height:36px;padding-inline:9px;font-size:.72rem}
@@ -115,10 +120,10 @@
       .exam-actions{position:fixed;z-index:40;inset:auto 0 calc(60px + env(safe-area-inset-bottom));display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-right));border-top:1px solid var(--line);background:var(--glass);box-shadow:0 -10px 30px rgba(0,0,0,.18);backdrop-filter:blur(14px)}.exam-actions .spacer{display:none}.exam-actions .btn{min-height:50px;padding-inline:14px}.exam-actions #nextButton,.exam-actions #submitButton{width:100%}
       .palette{grid-template-columns:repeat(5,1fr);gap:8px}.q-dot{min-height:48px;aspect-ratio:auto;border-radius:9px;font-size:.82rem}.legend{margin-bottom:2px}
       .teaching{padding:14px}.source-link{display:flex;min-height:48px;width:100%;justify-content:center;text-align:center}.result-panel{padding:28px 18px;border:0;border-radius:0;box-shadow:none}.result-actions{display:grid}.result-actions .btn{width:100%;min-height:50px}
-      .cheat-hero{display:block;padding-top:8px}.cheat-hero h2{font-size:2.35rem}.cheat-intro{font-size:.93rem}.shortcut-box{margin-top:17px}.cheat-jumps{margin:16px 0}.cheat-jumps a{padding:8px 10px;font-size:.73rem}.cheat-grid{grid-template-columns:1fr;gap:11px}.cheat-card,.cheat-card.featured{grid-column:auto;padding:17px;border-radius:15px}.cheat-card h3{font-size:1.22rem}.rule{display:block;padding:10px 0}.rule strong{display:block;margin-bottom:3px}.cheat-sources a{min-height:44px}.cheat-alert{font-size:.86rem}
+      .cheat-hero{display:block;padding-top:8px}.cheat-hero h2{font-size:2rem}.cheat-intro{font-size:.9rem}.shortcut-box{margin-top:17px}.cheat-jumps{margin:16px 0}.cheat-jumps a{padding:8px 10px;font-size:.73rem}.cheat-grid{grid-template-columns:1fr;gap:11px}.cheat-card,.cheat-card.featured{grid-column:auto;padding:17px;border-radius:15px}.cheat-card h3{font-size:1.15rem}.rule{display:block;padding:10px 0}.rule strong{display:block;margin-bottom:3px}.cheat-sources a{min-height:44px}.cheat-alert{font-size:.84rem}
       .distance-strip{gap:6px}.distance-item{padding:10px 8px}.distance-item strong{font-size:1.3rem}.distance-item span{font-size:.68rem}
       .knowledge-bank{margin-top:12px;padding:17px;border-radius:15px}.knowledge-bank-head{display:block}.knowledge-bank h3{font-size:1.25rem}.knowledge-total{display:inline-block;margin-top:12px}.knowledge-controls{grid-template-columns:1fr;margin-top:15px}.knowledge-controls input,.knowledge-controls select{min-height:50px}.knowledge-items{grid-template-columns:1fr;padding-inline:13px}.knowledge-group>summary{padding:14px 13px}.knowledge-item{padding:12px 0}.knowledge-question,.knowledge-answer{font-size:.84rem}
-      .scores-hero{padding-top:8px}.scores-hero h2{font-size:2.35rem}.score-summary{gap:7px;margin:16px 0}.score-stat{padding:12px 9px}.score-stat strong{font-size:1.3rem}.score-stat span{font-size:.68rem}.score-grid{grid-template-columns:1fr;gap:10px}.score-card{min-height:190px;padding:16px}.score-card .card-actions .btn{width:100%}
+      .scores-hero{padding-top:8px}.scores-hero h2{font-size:2rem}.score-summary{gap:7px;margin:16px 0}.score-stat{padding:12px 9px}.score-stat strong{font-size:1.2rem}.score-stat span{font-size:.68rem}.score-grid{grid-template-columns:1fr;gap:10px}.score-card{min-height:190px;padding:16px}.score-card .card-actions .btn{width:100%}
       .mobile-tabs{position:fixed;z-index:45;inset:auto 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px max(8px,env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));border-top:1px solid var(--line);background:var(--tab-glass);box-shadow:0 -8px 24px rgba(0,0,0,.18);backdrop-filter:blur(15px)}.mobile-tab{display:grid;min-height:50px;place-items:center;border:0;border-radius:10px;background:transparent;color:var(--tab-muted);font-size:.72rem;font-weight:850}.mobile-tab.active{background:var(--sky);color:var(--blue)}.mobile-tab:active{background:var(--surface-soft)}footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     }
     @media print{.topbar,.sidebar,.exam-actions,.mobile-tabs{display:none!important}body{background:#fff}.exam-shell{display:block}.exam-main{box-shadow:none}.question{break-inside:avoid}}
@@ -128,7 +133,7 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand"><span class="brand-mark">FT</span><div><h1>Final Theory Practice</h1><p>Personal offline study copy</p></div></div>
-      <div class="top-actions"><button id="cheatButton" class="ghost-light" type="button">Cheat sheet</button><button id="homeButton" class="ghost-light" type="button" hidden>Papers</button><button id="themeButton" class="ghost-light" type="button" aria-pressed="false">Night</button></div>
+      <div class="top-actions"><button id="cheatButton" class="ghost-light" type="button">Cheat sheet</button><button id="homeButton" class="ghost-light" type="button" hidden>Papers</button><button id="themeButton" class="ghost-light theme-toggle" type="button" aria-pressed="false" aria-label="Switch to night mode"><span aria-hidden="true">☾</span></button></div>
     </div>
   </header>
   <main>
@@ -335,7 +340,7 @@
     function esc(value) { return String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
     function setTheme(theme,persist=true) {
       const dark=theme==="dark"; document.documentElement.dataset.theme=dark?"dark":"light";
-      const button=$("#themeButton"); button.textContent=dark?"Light":"Night"; button.setAttribute("aria-pressed",String(dark)); button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to night mode");
+      const button=$("#themeButton"); button.innerHTML='<span aria-hidden="true">'+(dark?"☼":"☾")+'</span>'; button.setAttribute("aria-pressed",String(dark)); button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to night mode");
       $("#themeColor").setAttribute("content",dark?"#070a0d":"#f3f5f7");
       if(persist) try{localStorage.setItem(THEME_KEY,dark?"dark":"light");}catch{}
     }

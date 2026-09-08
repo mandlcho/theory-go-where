@@ -8,7 +8,7 @@ An offline-friendly Singapore driving-theory practice app. It contains all ten F
 - 500 multiple-choice questions
 - 36 embedded diagrams that work offline
 - Progress saved locally in the browser
-- Persistent light/night themes with console-style monospace typography throughout
+- Persistent icon-controlled light/night themes with compact, low-weight console typography throughout
 - Phone-first practice mode with a persistent Papers/Cheatsheets/Scores tab bar, thumb-friendly exam controls, and a collapsible question palette
 - Shuffled practice attempts, scoring, flags, and answer review
 - Missed-answer review that opens on the first wrong response and jumps directly between wrong questions
