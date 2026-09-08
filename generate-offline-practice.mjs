@@ -53,6 +53,7 @@ function parsePaper6(markdown) {
 const rawPapers = {
   1: normalizeRaw(1, JSON.parse(await readText("final-theory-paper-1.json"))),
   2: normalizeRaw(2, JSON.parse(await readText("final-theory-paper-2.json"))),
+  3: normalizeRaw(3, JSON.parse(await readText("final-theory-paper-3.json"))),
   4: normalizeRaw(4, JSON.parse(await readText("final-theory-paper-4.json"))),
   5: normalizeRaw(5, JSON.parse(await readText("final-theory-paper-5.json"))),
   6: parsePaper6(await readText("final-theory-paper-6.md")),
