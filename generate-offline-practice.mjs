@@ -57,6 +57,7 @@ const rawPapers = {
   4: normalizeRaw(4, JSON.parse(await readText("final-theory-paper-4.json"))),
   5: normalizeRaw(5, JSON.parse(await readText("final-theory-paper-5.json"))),
   6: parsePaper6(await readText("final-theory-paper-6.md")),
+  7: normalizeRaw(7, JSON.parse(await readText("final-theory-paper-7.json"))),
   9: normalizeRaw(9, JSON.parse(await readText("final-theory-paper-9.json"))),
 };
 
