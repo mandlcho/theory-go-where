@@ -13,6 +13,7 @@ An offline-friendly Singapore driving-theory practice app. It contains all ten F
 - Missed-answer review that opens on the first wrong response and jumps directly between wrong questions
 - Choice-specific teaching feedback for incorrect answers
 - A mobile-friendly tricky-topics cheat sheet with memory hooks and date-sensitive demerit-point guidance
+- A searchable, topic-grouped knowledge index with 464 distinct question-and-answer facts after exact duplicate merging
 - Topic-matched links to official Traffic Police and LTA guidance
 
 Open `index.html` directly in a browser. No installation or internet connection is required for practice; internet access is only needed when opening an official-source link.

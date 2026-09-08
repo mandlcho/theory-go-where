@@ -77,7 +77,95 @@ for (const questions of Object.values(rawPapers)) {
   }
 }
 
+const knowledgeTopicOrder = [
+  "Licensing, offences & penalties",
+  "Driver fitness & attitude",
+  "Observation & communication",
+  "Junctions, signs & signals",
+  "Speed, distance & road conditions",
+  "Overtaking & lane discipline",
+  "Expressways & emergency vehicles",
+  "Vulnerable road users",
+  "Parking & reversing",
+  "Vehicle control & maintenance",
+  "Collisions & breakdowns",
+  "General defensive driving",
+];
+
+const knowledgeSources = {
+  "Licensing, offences & penalties": {
+    title: "Traffic Police — Driver Improvement Point System",
+    url: "https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Driver-Improvement-Point-Systems",
+  },
+  "Driver fitness & attitude": {
+    title: "Traffic Police — Penalties for Traffic Offences",
+    url: "https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Penalties-for-Traffic-Offences",
+  },
+  "Junctions, signs & signals": {
+    title: "LTA — Driving Rules and Information",
+    url: "https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/road_safety_and_vehicle_rules/driving-rules.html",
+  },
+  "Expressways & emergency vehicles": {
+    title: "LTA — Driving on Expressways and in Tunnels",
+    url: "https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/road_safety_and_vehicle_rules/driving-in-expressway-and-tunnel.html",
+  },
+  "Vulnerable road users": {
+    title: "Traffic Police — Road Safety Tips for Drivers",
+    url: "https://www.police.gov.sg/Knowledge-Hub/Traffic/Road-Safety-Tips/Road-Safety-Tips-for-Drivers",
+  },
+};
+
+function knowledgeTopic(question) {
+  const text = `${question.question} ${question.options.map((option) => option.text).join(" ")}`.toLowerCase();
+  if (/demerit|licen[cs]e|provisional|probation|suspend|revok|disqualif|fine|offence|driving test/.test(text)) return knowledgeTopicOrder[0];
+  if (/alcohol|drink.?driv|drug|drows|tired|fatigue|sleep|angry|aggressive|attitude|concentration|reaction time/.test(text)) return knowledgeTopicOrder[1];
+  if (/pedestrian|child|elderly|cyclist|bicycle|motorcycl|wheelchair|school children|visually handicapped/.test(text)) return knowledgeTopicOrder[7];
+  if (/expressway|tunnel|road shoulder|emergency vehicle|ambulance|fire engine|siren/.test(text)) return knowledgeTopicOrder[6];
+  if (/traffic light|amber|green light|junction|intersection|roundabout|give way|stop line|crossing|road sign|road marking|white line|yellow line|bus lane|no entry|no parking|no stopping/.test(text)) return knowledgeTopicOrder[3];
+  if (/overtak|large vehicle|lorry|bus|right.?most lane|outer lane|keep left|lane discipline|change lane|filtering/.test(text)) return knowledgeTopicOrder[5];
+  if (/revers|parking|park your car|parked vehicle|parked car/.test(text)) return knowledgeTopicOrder[8];
+  if (/accident|collision|injur|fatal|breakdown/.test(text)) return knowledgeTopicOrder[10];
+  if (/brake|skid|tyre|tire|puncture|engine|clutch|gear|radiator|steering|handbrake|headlight|high beam|windscreen|wiper|shock absorber|maintenance|oil|petrol/.test(text)) return knowledgeTopicOrder[9];
+  if (/speed|following distance|three.second|safe gap|tailgat|wet road|rain|fog|weather|visibility|bend|curve|corner|slope|friction|stopping distance/.test(text)) return knowledgeTopicOrder[4];
+  if (/blind spot|mirror|signal|horn|look|observe|moving off|open.*door/.test(text)) return knowledgeTopicOrder[2];
+  return knowledgeTopicOrder[11];
+}
+
+function canonicalKnowledge(value) {
+  return value
+    .toLowerCase()
+    .replace(/[‘’]/g, "'")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+const knowledgeByKey = new Map();
+for (const questions of Object.values(rawPapers)) {
+  for (const question of questions) {
+    const correct = question.options.find((option) => option.correct);
+    const key = `${canonicalKnowledge(question.question)}|${canonicalKnowledge(correct.text)}`;
+    const reference = { paper: question.paper, number: question.number };
+    const existing = knowledgeByKey.get(key);
+    if (existing) existing.references.push(reference);
+    else {
+      knowledgeByKey.set(key, {
+        topic: knowledgeTopic(question),
+        question: question.question,
+        answer: correct.text,
+        references: [reference],
+      });
+    }
+  }
+}
+
+const knowledgeItems = [...knowledgeByKey.values()].sort((a, b) => {
+  const topicDifference = knowledgeTopicOrder.indexOf(a.topic) - knowledgeTopicOrder.indexOf(b.topic);
+  return topicDifference || a.question.localeCompare(b.question);
+});
+
 const appData = JSON.stringify(rawPapers).replaceAll("<", "\\u003c");
+const knowledgeData = JSON.stringify(knowledgeItems).replaceAll("<", "\\u003c");
+const knowledgeSourcesData = JSON.stringify(knowledgeSources).replaceAll("<", "\\u003c");
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -148,6 +236,10 @@ const html = `<!doctype html>
     .cheat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.cheat-card{scroll-margin-top:22px;padding:21px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:0 8px 25px rgba(9,42,68,.05)}.cheat-card.featured{grid-column:1/-1}.cheat-topic{color:var(--blue);font-size:.7rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.cheat-card h3{margin:5px 0 7px;font-size:1.35rem;letter-spacing:-.025em}.memory-hook{margin:0 0 15px;color:var(--navy);font-weight:850}.rule-list{display:grid;gap:0;border-top:1px solid var(--line)}.rule{display:grid;grid-template-columns:minmax(110px,155px) 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}.rule strong{color:var(--navy)}.rule span{color:var(--muted)}
     .future-note{margin-top:15px;padding:12px 14px;border-radius:11px;background:#f1f5f8;color:#445461;font-size:.85rem}.future-note strong{color:var(--ink)}.cheat-sources{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.cheat-sources a{display:inline-flex;align-items:center;min-height:38px;padding:0 10px;border:1px solid #a8c9da;border-radius:8px;color:var(--blue);font-size:.76rem;font-weight:850;text-decoration:none}.cheat-sources a:hover{text-decoration:underline;border-color:var(--blue)}
     .distance-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}.distance-item{padding:12px;border:1px solid #b8d4e3;border-radius:12px;background:#eef7fb}.distance-item strong{display:block;color:var(--blue);font-size:1.55rem;line-height:1}.distance-item span{display:block;margin-top:6px;color:#415563;font-size:.75rem;font-weight:750;line-height:1.35}
+    .knowledge-bank{scroll-margin-top:22px;margin-top:17px;padding:23px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 8px 25px rgba(9,42,68,.05)}.knowledge-bank-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.knowledge-bank h3{margin:5px 0 6px;font-size:1.55rem;letter-spacing:-.03em}.knowledge-bank-intro{max-width:720px;margin:0;color:var(--muted)}.knowledge-total{flex:0 0 auto;padding:10px 13px;border-radius:11px;background:var(--sky);color:var(--blue);font-size:.78rem;font-weight:900}
+    .knowledge-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,280px);gap:10px;margin:20px 0 9px}.knowledge-controls input,.knowledge-controls select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:0 13px}.knowledge-controls input:focus,.knowledge-controls select:focus{border-color:var(--blue);outline:3px solid rgba(7,89,133,.14)}.knowledge-count{margin:0 0 13px;color:var(--muted);font-size:.8rem;font-weight:750}
+    .knowledge-groups{display:grid;gap:9px}.knowledge-group{overflow:hidden;border:1px solid var(--line);border-radius:13px;background:#fff}.knowledge-group>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 15px;background:#f8fafb;color:var(--navy);font-weight:900;cursor:pointer;list-style:none}.knowledge-group>summary::-webkit-details-marker{display:none}.knowledge-group>summary:after{content:"＋";color:var(--blue);font-size:1.15rem}.knowledge-group[open]>summary:after{content:"−"}.knowledge-group>summary small{color:var(--muted);font-size:.73rem;font-weight:800}
+    .knowledge-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px;padding:2px 15px 14px}.knowledge-item{padding:13px 0;border-bottom:1px solid var(--line)}.knowledge-question{margin:0 0 5px;color:var(--ink);font-size:.87rem;line-height:1.45}.knowledge-answer{display:block;color:var(--green);font-size:.88rem;line-height:1.45}.knowledge-ref{display:block;margin-top:6px;color:var(--muted);font-size:.67rem;font-weight:750}.knowledge-source{display:inline-flex;margin:13px 15px 15px;color:var(--blue);font-size:.74rem;font-weight:850;text-decoration:none}.knowledge-source:hover{text-decoration:underline}.knowledge-empty{padding:30px 16px;text-align:center;color:var(--muted)}
     .scores-hero{padding:20px 0 12px}.scores-hero h2{margin:0;font-size:clamp(2.2rem,5vw,4rem);line-height:1;letter-spacing:-.055em}.scores-hero p:last-child{max-width:650px;margin:14px 0 0;color:var(--muted)}
     .score-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:20px 0}.score-stat{padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:#fff}.score-stat strong{display:block;color:var(--navy);font-size:1.55rem;line-height:1}.score-stat span{color:var(--muted);font-size:.77rem;font-weight:750}
     .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}.score-card{display:flex;min-height:205px;flex-direction:column;padding:19px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:0 8px 25px rgba(9,42,68,.05)}.score-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.score-card h3{margin:4px 0 1px;font-size:1.35rem}.score-status{padding:5px 8px;border-radius:999px;background:#edf1f4;color:var(--muted);font-size:.68rem;font-weight:900}.score-status.pass{background:var(--green-bg);color:var(--green)}.score-status.retry{background:var(--red-bg);color:var(--red)}.score-big{margin:19px 0 2px;color:var(--navy);font-size:2rem;font-weight:950;letter-spacing:-.04em}.score-detail{margin:0;color:var(--muted);font-size:.82rem}.score-card .paper-progress{margin:13px 0 7px}.score-card .card-actions{padding-top:14px}.score-empty{grid-column:1/-1;padding:38px 20px;border:1px dashed var(--line);border-radius:16px;background:#f8fafb;text-align:center;color:var(--muted)}
@@ -175,6 +267,7 @@ const html = `<!doctype html>
       .teaching{padding:14px}.source-link{display:flex;min-height:48px;width:100%;justify-content:center;text-align:center}.result-panel{padding:28px 18px;border:0;border-radius:0;box-shadow:none}.result-actions{display:grid}.result-actions .btn{width:100%;min-height:50px}
       .cheat-hero{display:block;padding-top:8px}.cheat-hero h2{font-size:2.35rem}.cheat-intro{font-size:.93rem}.shortcut-box{margin-top:17px}.cheat-jumps{margin:16px 0}.cheat-jumps a{padding:8px 10px;font-size:.73rem}.cheat-grid{grid-template-columns:1fr;gap:11px}.cheat-card,.cheat-card.featured{grid-column:auto;padding:17px;border-radius:15px}.cheat-card h3{font-size:1.22rem}.rule{display:block;padding:10px 0}.rule strong{display:block;margin-bottom:3px}.cheat-sources a{min-height:44px}.cheat-alert{font-size:.86rem}
       .distance-strip{gap:6px}.distance-item{padding:10px 8px}.distance-item strong{font-size:1.3rem}.distance-item span{font-size:.68rem}
+      .knowledge-bank{margin-top:12px;padding:17px;border-radius:15px}.knowledge-bank-head{display:block}.knowledge-bank h3{font-size:1.25rem}.knowledge-total{display:inline-block;margin-top:12px}.knowledge-controls{grid-template-columns:1fr;margin-top:15px}.knowledge-controls input,.knowledge-controls select{min-height:50px}.knowledge-items{grid-template-columns:1fr;padding-inline:13px}.knowledge-group>summary{padding:14px 13px}.knowledge-item{padding:12px 0}.knowledge-question,.knowledge-answer{font-size:.84rem}
       .scores-hero{padding-top:8px}.scores-hero h2{font-size:2.35rem}.score-summary{gap:7px;margin:16px 0}.score-stat{padding:12px 9px}.score-stat strong{font-size:1.3rem}.score-stat span{font-size:.68rem}.score-grid{grid-template-columns:1fr;gap:10px}.score-card{min-height:190px;padding:16px}.score-card .card-actions .btn{width:100%}
       .mobile-tabs{position:fixed;z-index:45;inset:auto 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px max(8px,env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));border-top:1px solid var(--line);background:rgba(255,255,255,.97);box-shadow:0 -8px 24px rgba(9,42,68,.1);backdrop-filter:blur(15px)}.mobile-tab{display:grid;min-height:50px;place-items:center;border:0;border-radius:10px;background:transparent;color:#6a7883;font-size:.72rem;font-weight:850}.mobile-tab.active{background:#eaf4f9;color:var(--blue)}.mobile-tab:active{background:#dcecf4}footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     }
@@ -204,11 +297,11 @@ const html = `<!doctype html>
         <div>
           <p class="kicker">Final Theory cheat sheet</p>
           <h2>The tricky bits, made memorable.</h2>
-          <p class="cheat-intro">Use these memory hooks when two answers both sound reasonable. They summarise the rules that repeat across your captured papers; open the official links when you want the full rule.</p>
+          <p class="cheat-intro">Start with the memory hooks for recurring traps, then search the complete knowledge index for every distinct fact tested across all ten papers.</p>
         </div>
         <aside class="shortcut-box" aria-label="Practice keyboard shortcuts"><strong>Practice faster</strong><span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> choose an answer</span><span><kbd>Space</kbd> next question</span><span><kbd>←</kbd><kbd>→</kbd> move between questions</span></aside>
       </div>
-      <nav class="cheat-jumps" aria-label="Cheat sheet topics"><a href="#cheat-points">Demerit points</a><a href="#cheat-observation">Observation</a><a href="#cheat-distance">Distance & grip</a><a href="#cheat-overtaking">Overtaking</a><a href="#cheat-expressway">Expressways</a><a href="#cheat-people">People</a><a href="#cheat-control">Vehicle control</a></nav>
+      <nav class="cheat-jumps" aria-label="Cheat sheet topics"><a href="#cheat-points">Demerit points</a><a href="#cheat-observation">Observation</a><a href="#cheat-distance">Distance & grip</a><a href="#cheat-overtaking">Overtaking</a><a href="#cheat-expressway">Expressways</a><a href="#cheat-people">People</a><a href="#cheat-control">Vehicle control</a><a href="#cheat-bank">All unique facts</a></nav>
       <p class="cheat-alert"><strong>Date-sensitive:</strong> The demerit-point answers in these 2026 mock papers use the rules in force on 31 August 2026. New thresholds begin on 1 January 2027.</p>
 
       <div class="cheat-grid">
@@ -299,6 +392,33 @@ const html = `<!doctype html>
           <div class="cheat-sources"><a href="https://www.police.gov.sg/-/media/SPF/Knowledge-Hub/Traffic/FT-ENG-2126-Revised.pdf" target="_blank" rel="noopener noreferrer">Official Final Theory handbook ↗</a></div>
         </article>
       </div>
+
+      <article id="cheat-bank" class="knowledge-bank">
+        <div class="knowledge-bank-head">
+          <div><span class="cheat-topic">All ten papers, de-duplicated</span><h3>Complete knowledge index</h3><p class="knowledge-bank-intro">Each item pairs a tested question with its correct answer. Exact duplicates across papers are merged, and the paper references show where the fact appeared.</p></div>
+          <span class="knowledge-total">${knowledgeItems.length} distinct facts</span>
+        </div>
+        <div class="knowledge-controls">
+          <input id="knowledgeSearch" type="search" placeholder="Search facts: skid, cyclist, demerit points…" aria-label="Search the complete knowledge index">
+          <select id="knowledgeTopic" aria-label="Filter knowledge index by topic">
+            <option value="">All topics</option>
+            <option>Licensing, offences &amp; penalties</option>
+            <option>Driver fitness &amp; attitude</option>
+            <option>Observation &amp; communication</option>
+            <option>Junctions, signs &amp; signals</option>
+            <option>Speed, distance &amp; road conditions</option>
+            <option>Overtaking &amp; lane discipline</option>
+            <option>Expressways &amp; emergency vehicles</option>
+            <option>Vulnerable road users</option>
+            <option>Parking &amp; reversing</option>
+            <option>Vehicle control &amp; maintenance</option>
+            <option>Collisions &amp; breakdowns</option>
+            <option>General defensive driving</option>
+          </select>
+        </div>
+        <p id="knowledgeCount" class="knowledge-count"></p>
+        <div id="knowledgeList" class="knowledge-groups"></div>
+      </article>
     </section>
 
     <section id="scoresView" hidden>
@@ -342,7 +462,7 @@ const html = `<!doctype html>
 
     <section id="resultView" hidden></section>
   </main>
-  <footer>Questions captured from completed CDC e-Trial review pages on 31 August 2026. Teaching notes link to official Singapore Traffic Police and LTA guidance; source links require internet access. For personal study use.</footer>
+  <footer>Questions captured from completed CDC e-Trial review pages. Teaching notes link to official Singapore Traffic Police and LTA guidance; source links require internet access. For personal study use.</footer>
   <nav class="mobile-tabs" aria-label="Primary navigation">
     <button id="tabPapers" class="mobile-tab active" type="button">Papers</button>
     <button id="tabCheats" class="mobile-tab" type="button">Cheatsheets</button>
@@ -351,6 +471,8 @@ const html = `<!doctype html>
 
   <script>
     const PAPERS = ${appData};
+    const KNOWLEDGE_ITEMS = ${knowledgeData};
+    const KNOWLEDGE_SOURCES = ${knowledgeSourcesData};
     const STORAGE_KEY = "ft-offline-practice-v1";
     const PASS_MARK = 45;
     const $ = (selector) => document.querySelector(selector);
@@ -367,6 +489,23 @@ const html = `<!doctype html>
     function paperQuestions() { return PAPERS[String(state.paper)]; }
     function currentQuestion() { return paperQuestions().find((q)=>q.number===state.order[state.index]); }
     function answerCount() { return Object.keys(state.answers).length; }
+
+    function renderKnowledge() {
+      const query=$("#knowledgeSearch").value.trim().toLowerCase(), selectedTopic=$("#knowledgeTopic").value;
+      const matches=KNOWLEDGE_ITEMS.filter(item=>(!selectedTopic||item.topic===selectedTopic)&&(!query||(item.question+" "+item.answer+" "+item.topic).toLowerCase().includes(query)));
+      $("#knowledgeCount").textContent="Showing "+matches.length+" of "+KNOWLEDGE_ITEMS.length+" distinct facts";
+      if(!matches.length){$("#knowledgeList").innerHTML='<div class="knowledge-empty">No facts match that search. Try a shorter word or choose all topics.</div>';return;}
+      const topics=[...new Set(matches.map(item=>item.topic))];
+      const fallback={title:"Traffic Police — Official Final Driving Theory Handbook",url:"https://www.police.gov.sg/-/media/SPF/Knowledge-Hub/Traffic/FT-ENG-2126-Revised.pdf"};
+      $("#knowledgeList").innerHTML=topics.map((topic)=>{
+        const facts=matches.filter(item=>item.topic===topic), source=KNOWLEDGE_SOURCES[topic]||fallback, expanded=query||selectedTopic?" open":"";
+        const items=facts.map(item=>{
+          const references=item.references.map(ref=>"P"+ref.paper+" Q"+ref.number).join(" · ");
+          return '<article class="knowledge-item"><p class="knowledge-question">'+esc(item.question)+'</p><strong class="knowledge-answer">Correct: '+esc(item.answer)+'</strong><span class="knowledge-ref">'+esc(references)+'</span></article>';
+        }).join("");
+        return '<details class="knowledge-group"'+expanded+'><summary><span>'+esc(topic)+'</span><small>'+facts.length+' fact'+(facts.length===1?"":"s")+'</small></summary><div class="knowledge-items">'+items+'</div><a class="knowledge-source" href="'+source.url+'" target="_blank" rel="noopener noreferrer">Official source: '+esc(source.title)+' ↗</a></details>';
+      }).join("");
+    }
 
     function setPaletteOpen(open,restoreFocus=false) {
       const shouldOpen=Boolean(open)&&window.matchMedia("(max-width:860px)").matches;
@@ -544,7 +683,8 @@ const html = `<!doctype html>
       if(event.code==="Space"||event.key===" "){event.preventDefault();if(!$("#nextButton").hidden)$("#nextButton").click();return;}
       if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();
     });
-    renderHome(); show("home");
+    $("#knowledgeSearch").addEventListener("input",renderKnowledge); $("#knowledgeTopic").addEventListener("change",renderKnowledge);
+    renderKnowledge(); renderHome(); show("home");
   </script>
 </body>
 </html>`;
