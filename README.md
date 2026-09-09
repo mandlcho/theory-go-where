@@ -9,7 +9,7 @@ An offline-friendly Singapore driving-theory practice app. It contains all ten F
 - 36 diagrams represented by 31 de-duplicated, high-quality WebP assets
 - Progress saved locally in the browser
 - Persistent icon-controlled light/night themes with compact, low-weight console typography throughout
-- Phone-first practice mode with a persistent Papers/Cheatsheets/Scores tab bar, thumb-friendly exam controls, and a collapsible question palette
+- Viewport-fitted phone practice with persistent Papers/Cheatsheets/Scores tabs, thumb-friendly controls, a collapsible question palette, and no scrolling for typical answer and feedback states
 - Shuffled practice attempts, scoring, flags, and answer review
 - Missed-answer review that opens on the first wrong response and jumps directly between wrong questions
 - Immediate right/wrong feedback after each locked answer, with choice-specific teaching explanations for mistakes
