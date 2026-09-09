@@ -555,6 +555,8 @@ function buildHtml(papers, progressive = false) {
     let KNOWLEDGE_ITEMS = ${progressive ? "null" : knowledgeData};
     const KNOWLEDGE_SOURCES = ${knowledgeSourcesData};
     const STORAGE_KEY = "ft-offline-practice-v1";
+    const PAPER_STORAGE_PREFIX = "ft-offline-practice-v2-paper-";
+    const STORAGE_MIGRATION_KEY = "ft-offline-practice-v2-migrated";
     const THEME_KEY = "ft-theme-v1";
     const PASS_MARK = 45;
     const $ = (selector) => document.querySelector(selector);
@@ -573,26 +575,52 @@ function buildHtml(papers, progressive = false) {
       $("#themeColor").setAttribute("content",dark?"#070a0d":"#f3f5f7");
       if(persist) try{localStorage.setItem(THEME_KEY,dark?"dark":"light");}catch{}
     }
-    function readRawStore() { try { const value=JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); return value && typeof value==="object" && !Array.isArray(value) ? value : {}; } catch { return {}; } }
+    function parseStored(value,fallback={}) { try { const parsed=JSON.parse(value||""); return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:fallback; } catch { return fallback; } }
     function newAttempt(id,order=Object.keys(PAPER_META[String(id)].answerKey).map(Number)) { return {paper:Number(id),index:0,order:[...order],answers:{},flags:[],submitted:false,startedAt:Date.now()}; }
+    function normalizeAttempt(id,saved) {
+      const key=String(Number(id)); if(!PAPER_META[key]||!saved||typeof saved!=="object"||Array.isArray(saved))return null;
+      if(saved.paper!==undefined&&Number(saved.paper)!==Number(key))return null;
+      const canonical=Object.keys(PAPER_META[key].answerKey).map(Number), valid=new Set(canonical), clean=newAttempt(key,canonical);
+      clean.answers=Object.fromEntries(Object.entries(saved.answers||{}).flatMap(([number,answer])=>{const n=Number(number),a=Number(answer);return valid.has(n)&&Number.isInteger(a)&&a>=0&&a<=2?[[String(n),a]]:[];}));
+      if(Array.isArray(saved.order)&&saved.order.length===canonical.length&&new Set(saved.order.map(Number)).size===canonical.length&&saved.order.every(number=>valid.has(Number(number))))clean.order=saved.order.map(Number);
+      clean.index=Number.isInteger(Number(saved.index))?Math.max(0,Math.min(Number(saved.index),canonical.length-1)):0;
+      clean.flags=Array.isArray(saved.flags)?[...new Set(saved.flags.map(Number).filter(number=>valid.has(number)))]:[];
+      clean.submitted=saved.submitted===true;
+      clean.startedAt=Number.isFinite(Number(saved.startedAt))?Number(saved.startedAt):null;
+      clean.updatedAt=Number.isFinite(Number(saved.updatedAt))?Number(saved.updatedAt):(clean.startedAt||0);
+      return clean;
+    }
+    function preferAttempt(current,candidate) {
+      if(!current)return candidate;
+      if(current.submitted!==candidate.submitted)return candidate.submitted?candidate:current;
+      const currentCount=Object.keys(current.answers).length,candidateCount=Object.keys(candidate.answers).length;
+      if(currentCount!==candidateCount)return candidateCount>currentCount?candidate:current;
+      return candidate.updatedAt>current.updatedAt?candidate:current;
+    }
+    function migrateStore() {
+      try {
+        if(localStorage.getItem(STORAGE_MIGRATION_KEY))return;
+        const legacy=parseStored(localStorage.getItem(STORAGE_KEY),{}), recovered={};
+        for(const [legacyKey,saved] of Object.entries(legacy)) {
+          const embedded=String(Number(saved?.paper)), fallback=String(Number(legacyKey));
+          const id=PAPER_META[embedded]?embedded:(PAPER_META[fallback]?fallback:null); if(!id)continue;
+          const clean=normalizeAttempt(id,saved); if(clean)recovered[id]=preferAttempt(recovered[id],clean);
+        }
+        for(const [id,saved] of Object.entries(recovered))if(!localStorage.getItem(PAPER_STORAGE_PREFIX+id))localStorage.setItem(PAPER_STORAGE_PREFIX+id,JSON.stringify(saved));
+        localStorage.setItem(STORAGE_MIGRATION_KEY,"1");
+      } catch {}
+    }
     function readStore() {
-      const store={};
-      for(const [id,saved] of Object.entries(readRawStore())) {
-        // Never relabel a saved attempt as a different paper or inherit another attempt's fields.
-        if(!PAPER_META[id] || !saved || typeof saved!=="object" || Array.isArray(saved) || Number(saved.paper)!==Number(id))continue;
-        const clean=newAttempt(id), numbers=clean.order;
-        clean.answers=Object.fromEntries(Object.entries(saved.answers||{}).filter(([number,answer])=>numbers.includes(Number(number)) && Number.isInteger(answer) && answer>=0 && answer<=2));
-        if(Array.isArray(saved.order) && saved.order.length===numbers.length && new Set(saved.order).size===numbers.length && saved.order.every(number=>numbers.includes(number)))clean.order=[...saved.order];
-        clean.index=Number.isInteger(saved.index)?Math.max(0,Math.min(saved.index,numbers.length-1)):0;
-        clean.flags=Array.isArray(saved.flags)?saved.flags.filter(number=>numbers.includes(number)):[];
-        clean.submitted=saved.submitted===true;
-        clean.startedAt=Number.isFinite(saved.startedAt)?saved.startedAt:null;
-        store[id]=clean;
-      }
+      migrateStore(); const store={};
+      for(const id of Object.keys(PAPER_META)) { try { const clean=normalizeAttempt(id,parseStored(localStorage.getItem(PAPER_STORAGE_PREFIX+id),null)); if(clean)store[id]=clean; } catch {} }
       return store;
     }
-    function writeStore() { if(!PAPER_META[String(state.paper)])return; const saved=snapshot(), all=readRawStore(); all[String(saved.paper)]=saved; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); }
-    function snapshot() { return {paper:state.paper,index:state.index,order:state.order,answers:state.answers,flags:state.flags,submitted:state.submitted,startedAt:state.startedAt}; }
+    function writeStore(update) {
+      const paper=String(Number(update?.paper??state.paper)); if(!PAPER_META[paper])return;
+      const saved=normalizeAttempt(paper,update||snapshot()); if(!saved)return;
+      saved.updatedAt=Date.now(); try{localStorage.setItem(PAPER_STORAGE_PREFIX+paper,JSON.stringify(saved));}catch{}
+    }
+    function snapshot() { return {paper:state.paper,index:state.index,order:state.order,answers:state.answers,flags:state.flags,submitted:state.submitted,startedAt:state.startedAt,updatedAt:Date.now()}; }
     async function loadPaper(id) {
       const key=String(id); if(PAPERS[key])return PAPERS[key];
       if(!paperLoads[key]) paperLoads[key]=fetch("paper-data/paper-"+key+".json").then(response=>{if(!response.ok)throw new Error("Paper "+key+" could not be loaded");return response.json();}).then(questions=>{if(questions.length!==PAPER_META[key].count)throw new Error("Paper "+key+" is incomplete");PAPERS[key]=questions;return questions;});
@@ -645,7 +673,7 @@ function buildHtml(papers, progressive = false) {
         if(!PAPER_META[id]) return '<article class="paper-card placeholder"><span class="paper-no">Final Theory · Pending</span><h3>Paper '+id+'</h3><p class="paper-meta">Questions not captured yet</p><div class="paper-progress"><i style="width:0%"></i></div><p class="progress-label">Add this paper in a future session</p><div class="card-actions"><button class="btn" type="button" disabled>Not added yet</button></div></article>';
         const saved=store[id]||{}; const answered=Object.keys(saved.answers||{}).length; const score=saved.submitted ? scoreFor(id,saved.answers||{}) : null; const pct=Math.round(answered/50*100);
         const label=saved.submitted ? score+'/50 last score' : answered ? answered+'/50 answered' : 'Not started';
-        return '<article class="paper-card"><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3><p class="paper-meta">'+PAPER_META[id].count+' questions · '+PAPER_META[id].images+' diagrams</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><p class="progress-label">'+label+'</p><div class="card-actions"><button class="btn primary" data-start="'+id+'">'+(answered&&!saved.submitted?'Resume':'Start')+'</button><button class="btn" data-shuffle="'+id+'">Shuffle</button>'+(answered||saved.submitted?'<button class="btn small danger" data-reset="'+id+'" title="Clear saved progress">Reset</button>':'')+'</div></article>';
+        return '<article class="paper-card"><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3><p class="paper-meta">'+PAPER_META[id].count+' questions · '+PAPER_META[id].images+' diagrams</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><p class="progress-label">'+label+'</p><div class="card-actions"><button class="btn primary" type="button" data-start="'+id+'">'+(answered&&!saved.submitted?'Resume':'Start')+'</button><button class="btn" type="button" data-shuffle="'+id+'">Shuffle</button>'+(answered||saved.submitted?'<button class="btn small danger" type="button" data-reset="'+id+'" title="Clear saved progress">Reset</button>':'')+'</div></article>';
       }).join("");
       document.querySelectorAll("[data-start]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.start,false)));
       document.querySelectorAll("[data-shuffle]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.shuffle,true)));
@@ -669,7 +697,7 @@ function buildHtml(papers, progressive = false) {
 
     async function openStoredPaper(id) { const request=++paperRequest; if(!await ensurePaper(id) || request!==paperRequest)return; const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,saved); if(state.submitted)state.index=wrongIndexes()[0]??0; writeStore(); renderExam(); show("exam"); }
 
-    function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; paperRequest++; const all=readRawStore(); delete all[id]; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); if(String(state.paper)===String(id))Object.assign(state,{paper:null,index:0,order:[],answers:{},flags:[],submitted:false,startedAt:null}); renderHome(); }
+    function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; paperRequest++; try{localStorage.removeItem(PAPER_STORAGE_PREFIX+String(id));}catch{} if(String(state.paper)===String(id))Object.assign(state,{paper:null,index:0,order:[],answers:{},flags:[],submitted:false,startedAt:null}); renderHome(); }
     async function startPaper(id,randomize) {
       const request=++paperRequest;
       if(!await ensurePaper(id) || request!==paperRequest)return;
@@ -802,6 +830,7 @@ function buildHtml(papers, progressive = false) {
     $("#nextWrongButton").addEventListener("click",goToNextWrong);
     paletteToggle.addEventListener("click",()=>setPaletteOpen(!questionSidebar.classList.contains("mobile-open"))); $("#paletteClose").addEventListener("click",()=>setPaletteOpen(false,true)); paletteBackdrop.addEventListener("click",()=>setPaletteOpen(false,true));
     window.addEventListener("resize",()=>{if(!window.matchMedia("(max-width:860px)").matches)setPaletteOpen(false);});
+    window.addEventListener("storage",event=>{if(!event.key?.startsWith(PAPER_STORAGE_PREFIX))return;const view=document.body.dataset.view;if(view==="home")renderHome();else if(view==="scores")renderScores();});
     document.addEventListener("keydown",(event)=>{
       if(event.key==="Escape"&&questionSidebar.classList.contains("mobile-open")){setPaletteOpen(false,true);return;}
       if(examView.hidden||questionSidebar.classList.contains("mobile-open")||event.ctrlKey||event.metaKey||event.altKey||event.target.matches("textarea,select,input:not([type=radio])"))return;
@@ -810,7 +839,7 @@ function buildHtml(papers, progressive = false) {
       if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();
     });
     $("#knowledgeSearch").addEventListener("input",renderKnowledge); $("#knowledgeTopic").addEventListener("change",renderKnowledge);
-    setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light",false); if(KNOWLEDGE_ITEMS)renderKnowledge(); renderHome(); show("home");
+    migrateStore(); setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light",false); if(KNOWLEDGE_ITEMS)renderKnowledge(); renderHome(); show("home");
     ${serviceWorkerRegistration}
   </script>
 </body>
