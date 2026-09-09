@@ -672,6 +672,7 @@ function buildHtml(papers, progressive = false) {
       if(/blind spot|mirror|change lane|changing lane|move off|moving off|open.*door|signal/.test(s)) return "safe movement starts with mirrors, a signal and a direct blind-spot check; mirrors alone cannot show every cyclist, motorcycle or vehicle beside you";
       if(/three.second|following distance|follow.*clos|vehicle in front|tailgat|safe gap|time gap/.test(s)) return "a time gap gives you room to perceive, react and brake, and unlike a fixed car-length estimate it grows naturally with speed";
       if(/pedestrian|zebra|elderly|child|cyclist|bicycle|motorcycl/.test(s)) return "vulnerable road users have little physical protection and may move unexpectedly, so a driver should reduce speed, create space and be ready to stop";
+      if(/right.?most outer lane.*expressway/.test(s)) return "the wording means the outermost right lane: it is for overtaking and emergency vehicles, while normal traffic keeps left and slower vehicles use the leftmost lane";
       if(/ambulance|emergency vehicle|siren|fire engine|police vehicle/.test(s)) return "emergency vehicles need a clear, predictable path; slow down, keep left and stop if necessary instead of racing them or making a sudden move";
       if(/expressway|tunnel|road shoulder|missed.*exit|break.*down|puncture.*expressway/.test(s)) return "expressway traffic is fast and expects one-way, predictable movement; use the shoulder only for an emergency, never reverse for a missed exit, and continue to the next safe exit";
       if(/bend|curve|centrifugal|corner/.test(s)) return "speed should be reduced before the bend, while the vehicle is straight; entering slowly preserves tyre grip and leaves steering capacity for the curve";
@@ -694,7 +695,9 @@ function buildHtml(papers, progressive = false) {
     }
 
     function distractorContrast(choice,q) {
-      const s=choice.toLowerCase();
+      const s=choice.toLowerCase(), context=q.question.toLowerCase();
+      if(/right.?most outer lane.*expressway/.test(context)&&/maximum speed limit/.test(s)) return "Reaching the speed limit does not make the right lane a cruising lane; after overtaking, move back left when it is safe.";
+      if(/right.?most outer lane.*expressway/.test(context)&&/slow moving/.test(s)) return "Slow-moving vehicles should use the leftmost lane, not the rightmost overtaking lane.";
       if(/speed up|drive faster|accelerat|quickly|same speed|maintain.*speed/.test(s)) return "That choice reduces reaction time and increases stopping distance or impact severity instead of creating a safety margin.";
       if(/brake hard|hard.*brake|sudden|immediately.*stop|stop immediately|handbrake/.test(s)) return "That abrupt input can lock the wheels, start a skid or surprise following traffic when a controlled response is available.";
       if(/sound.*horn|horn|flash.*headlight|wave/.test(s)) return "A warning or gesture does not give you right of way and does not remove the physical conflict, so it cannot replace slowing or giving way.";
