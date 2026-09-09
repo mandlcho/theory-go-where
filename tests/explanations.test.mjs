@@ -33,6 +33,11 @@ test('one-year answers distinguish revocation from new-driver probation',()=>{
   assert.match(feedback(question(6,16),2),/36 months/);
   assert.match(feedback(question(6,16),0),/Correct — why/);
 });
+test('reversing explanation contrasts each viewing direction',()=>{
+  assert.match(feedback(question(6,29),1),/Looking ahead and at the side leaves the area behind the car unobserved/);
+  assert.match(feedback(question(6,29),0),/judge clearance, but misses the path directly behind/);
+  assert.match(feedback(question(6,29),2),/Also check around the car periodically/);
+});
 test('all choices render without fabricated keyword reasons or missing contrast text',()=>{
   for(let paper=1;paper<=10;paper++) {
     const questions=JSON.parse(readFileSync(new URL('../paper-data/paper-'+paper+'.json',import.meta.url),'utf8'));
