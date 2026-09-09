@@ -1,4 +1,5 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const here = new URL("./", import.meta.url);
 const readText = (name) => readFile(new URL(name, here), "utf8");
@@ -69,13 +70,55 @@ for (const questions of Object.values(rawPapers)) {
     if (question.options.length !== 3 || question.options.filter((option) => option.correct).length !== 1) {
       throw new Error(`Invalid answer key: Paper ${question.paper}, question ${question.number}`);
     }
-    if (question.image) {
-      const filename = new URL(question.image.src).pathname.split("/").pop();
-      const bytes = await readFile(new URL(`offline-assets/${filename}`, here));
-      question.image.src = `data:image/jpeg;base64,${bytes.toString("base64")}`;
-    }
   }
 }
+
+const optimizedPapers = structuredClone(rawPapers);
+const embeddedPapers = structuredClone(rawPapers);
+const optimizedAssetNames = new Set();
+
+function imageDimensions(bytes) {
+  if (bytes.subarray(0, 8).toString("hex") === "89504e470d0a1a0a") {
+    return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
+  }
+  if (bytes[0] === 0xff && bytes[1] === 0xd8) {
+    const sizeMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+    for (let offset = 2; offset + 8 < bytes.length;) {
+      if (bytes[offset] !== 0xff) { offset += 1; continue; }
+      const marker = bytes[offset + 1];
+      if (marker === 0xd8 || marker === 0x01) { offset += 2; continue; }
+      if (marker === 0xd9 || marker === 0xda) break;
+      const length = bytes.readUInt16BE(offset + 2);
+      if (sizeMarkers.has(marker)) return { width: bytes.readUInt16BE(offset + 7), height: bytes.readUInt16BE(offset + 5) };
+      offset += 2 + length;
+    }
+  }
+  throw new Error("Unsupported source diagram format");
+}
+
+for (const [paper, questions] of Object.entries(rawPapers)) {
+  for (let index = 0; index < questions.length; index += 1) {
+    const question = questions[index];
+    if (!question.image) continue;
+    const filename = new URL(question.image.src, "https://local.invalid/").pathname.split("/").pop();
+    const sourceBytes = await readFile(new URL(`offline-assets/${filename}`, here));
+    const hash = createHash("sha256").update(sourceBytes).digest("hex").slice(0, 12);
+    const optimizedName = `${hash}.webp`;
+    const optimizedBytes = await readFile(new URL(`optimized-assets/${optimizedName}`, here));
+    const dimensions = imageDimensions(sourceBytes);
+    optimizedAssetNames.add(optimizedName);
+    Object.assign(optimizedPapers[paper][index].image, dimensions, { src: `optimized-assets/${optimizedName}` });
+    Object.assign(embeddedPapers[paper][index].image, dimensions, { src: `data:image/webp;base64,${optimizedBytes.toString("base64")}` });
+  }
+}
+
+const paperMeta = Object.fromEntries(
+  Object.entries(rawPapers).map(([paper, questions]) => [paper, {
+    count: questions.length,
+    images: questions.filter((question) => question.image).length,
+    answerKey: Object.fromEntries(questions.map((question) => [question.number, question.options.findIndex((option) => option.correct)])),
+  }]),
+);
 
 const knowledgeTopicOrder = [
   "Licensing, offences & penalties",
@@ -163,10 +206,19 @@ const knowledgeItems = [...knowledgeByKey.values()].sort((a, b) => {
   return topicDifference || a.question.localeCompare(b.question);
 });
 
-const appData = JSON.stringify(rawPapers).replaceAll("<", "\\u003c");
 const knowledgeData = JSON.stringify(knowledgeItems).replaceAll("<", "\\u003c");
 const knowledgeSourcesData = JSON.stringify(knowledgeSources).replaceAll("<", "\\u003c");
-const html = `<!doctype html>
+const paperMetaData = JSON.stringify(paperMeta).replaceAll("<", "\\u003c");
+
+function buildHtml(papers, progressive = false) {
+  const appData = JSON.stringify(papers).replaceAll("<", "\\u003c");
+  const progressiveHead = progressive
+    ? '<link rel="manifest" href="manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes">'
+    : "";
+  const serviceWorkerRegistration = progressive
+    ? 'if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));'
+    : "";
+  return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -174,6 +226,7 @@ const html = `<!doctype html>
   <meta name="description" content="Offline Final Theory practice papers">
   <meta id="themeColor" name="theme-color" content="#f3f5f7">
   <title>Final Theory · Offline Practice</title>
+  ${progressiveHead}
   <script>try{const savedTheme=localStorage.getItem("ft-theme-v1");if(savedTheme==="dark"||(!savedTheme&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark";}catch{}</script>
   <style>
     :root {
@@ -228,7 +281,7 @@ const html = `<!doctype html>
     .bar{height:5px;background:var(--bar)}.bar i{display:block;height:100%;background:var(--blue);transition:width .25s}
     .question{padding:26px 28px 30px}.q-label{margin:0 0 9px;color:var(--blue);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
     .question h3{margin:0;font-size:clamp(1.16rem,2.4vw,1.52rem);line-height:1.4;letter-spacing:-.02em}
-    .diagram{display:block;width:min(100%,620px);max-height:390px;object-fit:contain;margin:22px auto 4px;border:1px solid var(--line);border-radius:13px;background:var(--surface-subtle)}
+    .diagram{display:block;width:auto;max-width:100%;height:auto;max-height:390px;object-fit:contain;margin:22px auto 4px;border:1px solid var(--line);border-radius:13px;background:var(--surface-subtle)}
     .choices{display:grid;gap:11px;margin-top:24px}.choice{display:grid;grid-template-columns:auto 34px 1fr auto;gap:11px;align-items:center;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);transition:.12s}
     .choice:hover{border-color:var(--blue);background:var(--surface-hover)}.choice input{width:18px;height:18px;margin:0;accent-color:var(--blue)}.choice-letter{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--surface-soft);color:var(--blue);font-weight:900}
     .choice.correct{border-color:var(--green);background:var(--green-bg)}.choice.wrong{border-color:var(--red);background:var(--red-bg)}.choice .answer-tag{font-size:.76rem;font-weight:900}.correct .answer-tag{color:var(--green)}.wrong .answer-tag{color:var(--red)}
@@ -282,8 +335,8 @@ const html = `<!doctype html>
       main{width:min(100% - 18px,1160px);margin-top:18px;padding-bottom:calc(74px + env(safe-area-inset-bottom))}.hero{padding:12px 0 10px}.hero h2{font-size:1.9rem}.hero-copy{font-size:.9rem}.status-strip{gap:7px;margin-top:17px}.chip{padding:6px 9px;font-size:.74rem}
       .paper-grid{grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.paper-card{min-height:180px;padding:14px;border-radius:15px}.paper-card h3{font-size:1.2rem}.paper-no{font-size:.68rem}.paper-meta{font-size:.8rem}.paper-progress{margin-top:13px}.card-actions{flex-direction:column;gap:7px;padding-top:12px}.card-actions .btn{width:100%}
       body[data-view="exam"] main{width:100%;margin:0;padding-bottom:calc(144px + env(safe-area-inset-bottom))}body[data-view="exam"] footer{display:none}.exam-main{border:0;border-radius:0;box-shadow:none;min-height:calc(100dvh - 60px)}
-      .exam-head{position:sticky;z-index:20;top:calc(60px + env(safe-area-inset-top));padding:11px 14px;background:var(--glass);backdrop-filter:blur(14px)}.exam-head h2{font-size:.98rem}.exam-sub{display:none}.exam-status{gap:8px}.answered-count{font-size:.72rem;white-space:nowrap}.palette-toggle{min-height:36px;padding-inline:9px;font-size:.72rem}
-      .question{padding:20px 15px 26px}.q-label{margin-bottom:8px;font-size:.7rem}.question h3{font-size:1.23rem;line-height:1.38}.diagram{width:100%;max-height:290px;margin-top:17px;border-radius:11px}
+      .exam-head{position:sticky;z-index:20;top:calc(60px + env(safe-area-inset-top));padding:11px 14px;background:var(--glass);backdrop-filter:blur(14px)}.exam-head h2{font-size:.98rem;white-space:nowrap}.exam-prefix{display:none}.exam-sub{display:none}.exam-status{gap:8px}.answered-count{font-size:.72rem;white-space:nowrap}.palette-toggle{min-height:36px;padding-inline:9px;font-size:.72rem}
+      .question{padding:20px 15px 26px}.q-label{margin-bottom:8px;font-size:.7rem}.question h3{font-size:1.23rem;line-height:1.38}.diagram{width:auto;max-width:100%;max-height:290px;margin-top:17px;border-radius:11px}
       .choices{gap:10px;margin-top:18px}.choice{min-height:64px;grid-template-columns:auto 36px minmax(0,1fr);gap:10px;padding:12px;border-radius:12px}.choice input{width:20px;height:20px}.choice-letter{width:36px;height:36px}.choice .answer-tag{grid-column:3;font-size:.72rem}
       .exam-actions{position:fixed;z-index:40;inset:auto 0 calc(60px + env(safe-area-inset-bottom));display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:10px max(12px,env(safe-area-inset-right));border-top:1px solid var(--line);background:var(--glass);box-shadow:0 -10px 30px rgba(0,0,0,.18);backdrop-filter:blur(14px)}.exam-actions .spacer{display:none}.exam-actions .btn{min-height:50px;padding-inline:14px}.exam-actions #nextButton,.exam-actions #submitButton{width:100%}
       .palette{grid-template-columns:repeat(5,1fr);gap:8px}.q-dot{min-height:48px;aspect-ratio:auto;border-radius:9px;font-size:.82rem}.legend{margin-bottom:2px}
@@ -294,6 +347,7 @@ const html = `<!doctype html>
       .scores-hero{padding-top:8px}.scores-hero h2{font-size:2rem}.score-summary{gap:7px;margin:16px 0}.score-stat{padding:12px 9px}.score-stat strong{font-size:1.2rem}.score-stat span{font-size:.68rem}.score-grid{grid-template-columns:1fr;gap:10px}.score-card{min-height:190px;padding:16px}.score-card .card-actions .btn{width:100%}
       .mobile-tabs{position:fixed;z-index:45;inset:auto 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px max(8px,env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));border-top:1px solid var(--line);background:var(--tab-glass);box-shadow:0 -8px 24px rgba(0,0,0,.18);backdrop-filter:blur(15px)}.mobile-tab{display:grid;min-height:50px;place-items:center;border:0;border-radius:10px;background:transparent;color:var(--tab-muted);font-size:.72rem;font-weight:850}.mobile-tab.active{background:var(--sky);color:var(--blue)}.mobile-tab:active{background:var(--surface-soft)}footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     }
+    @media(max-width:360px){.palette-label{display:none}.exam-head{gap:8px}.exam-status{gap:6px}}
     @media print{.topbar,.sidebar,.exam-actions,.mobile-tabs{display:none!important}body{background:#fff}.exam-shell{display:block}.exam-main{box-shadow:none}.question{break-inside:avoid}}
   </style>
 </head>
@@ -494,7 +548,8 @@ const html = `<!doctype html>
 
   <script>
     const PAPERS = ${appData};
-    const KNOWLEDGE_ITEMS = ${knowledgeData};
+    const PAPER_META = ${paperMetaData};
+    let KNOWLEDGE_ITEMS = ${progressive ? "null" : knowledgeData};
     const KNOWLEDGE_SOURCES = ${knowledgeSourcesData};
     const STORAGE_KEY = "ft-offline-practice-v1";
     const THEME_KEY = "ft-theme-v1";
@@ -503,6 +558,8 @@ const html = `<!doctype html>
     const homeView = $("#homeView"), cheatView = $("#cheatView"), scoresView = $("#scoresView"), examView = $("#examView"), resultView = $("#resultView");
     const questionSidebar = $("#questionSidebar"), paletteBackdrop = $("#paletteBackdrop"), paletteToggle = $("#paletteToggle");
     const state = { paper:null, index:0, order:[], answers:{}, flags:[], submitted:false, startedAt:null };
+    const paperLoads = {};
+    let knowledgeLoad;
     let viewBeforeCheat="home";
 
     function esc(value) { return String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
@@ -515,6 +572,17 @@ const html = `<!doctype html>
     function readStore() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; } }
     function writeStore(update) { const all=readStore(); all[String(state.paper)] = update || snapshot(); localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); }
     function snapshot() { return {paper:state.paper,index:state.index,order:state.order,answers:state.answers,flags:state.flags,submitted:state.submitted,startedAt:state.startedAt}; }
+    async function loadPaper(id) {
+      const key=String(id); if(PAPERS[key])return PAPERS[key];
+      if(!paperLoads[key]) paperLoads[key]=fetch("paper-data/paper-"+key+".json").then(response=>{if(!response.ok)throw new Error("Paper "+key+" could not be loaded");return response.json();}).then(questions=>{if(questions.length!==PAPER_META[key].count)throw new Error("Paper "+key+" is incomplete");PAPERS[key]=questions;return questions;});
+      return paperLoads[key];
+    }
+    async function ensurePaper(id) { try{document.body.setAttribute("aria-busy","true");await loadPaper(id);return true;}catch{alert("This paper is not available offline yet. Connect once and reload the site to finish offline setup.");return false;}finally{document.body.removeAttribute("aria-busy");} }
+    async function ensureKnowledge() {
+      if(KNOWLEDGE_ITEMS)return true;
+      if(!knowledgeLoad)knowledgeLoad=fetch("knowledge-data.json").then(response=>{if(!response.ok)throw new Error("Knowledge index could not be loaded");return response.json();}).then(items=>KNOWLEDGE_ITEMS=items);
+      try{document.body.setAttribute("aria-busy","true");await knowledgeLoad;return true;}catch{alert("The detailed knowledge index is not available offline yet. Connect once and reload the site to finish offline setup.");return false;}finally{document.body.removeAttribute("aria-busy");}
+    }
     function shuffle(list) { const copy=[...list]; for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]];} return copy; }
     function paperQuestions() { return PAPERS[String(state.paper)]; }
     function currentQuestion() { return paperQuestions().find((q)=>q.number===state.order[state.index]); }
@@ -545,18 +613,18 @@ const html = `<!doctype html>
     function updateTabs(view) { const active=view==="cheat"?"cheats":view==="scores"||view==="result"?"scores":"papers"; [["#tabPapers","papers"],["#tabCheats","cheats"],["#tabScores","scores"]].forEach(([selector,name])=>{const button=$(selector),selected=name===active;button.classList.toggle("active",selected);if(selected)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");}); }
     function show(view) { if(view==="scores")renderScores(); homeView.hidden=view!=="home"; cheatView.hidden=view!=="cheat"; scoresView.hidden=view!=="scores"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; $("#homeButton").textContent=view==="cheat"?"Back":"Papers"; $("#cheatButton").hidden=view==="cheat"; updateTabs(view); setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
     function goHome() { if(state.paper && !state.submitted) writeStore(); renderHome(); show("home"); }
-    function openCheat() { viewBeforeCheat=document.body.dataset.view||"home"; show("cheat"); }
+    async function openCheat() { viewBeforeCheat=document.body.dataset.view||"home"; if(!await ensureKnowledge())return; renderKnowledge(); show("cheat"); }
     function openScores() { if(state.paper&&!state.submitted)writeStore(); show("scores"); }
 
     function renderHome() {
-      const store=readStore(); const readyIds=Object.keys(PAPERS).sort((a,b)=>Number(a)-Number(b)); const ids=Array.from({length:10},(_,i)=>String(i+1));
-      const total=readyIds.reduce((sum,id)=>sum+PAPERS[id].length,0); const images=readyIds.reduce((sum,id)=>sum+PAPERS[id].filter(q=>q.image).length,0);
+      const store=readStore(); const readyIds=Object.keys(PAPER_META).sort((a,b)=>Number(a)-Number(b)); const ids=Array.from({length:10},(_,i)=>String(i+1));
+      const total=readyIds.reduce((sum,id)=>sum+PAPER_META[id].count,0); const images=readyIds.reduce((sum,id)=>sum+PAPER_META[id].images,0);
       $("#statusStrip").innerHTML='<span class="chip">'+readyIds.length+' of 10 papers ready</span><span class="chip">'+total+' questions</span><span class="chip">'+images+' offline diagrams</span><span class="chip">Pass mark '+PASS_MARK+'/50</span>';
       $("#paperGrid").innerHTML=ids.map((id)=>{
-        if(!PAPERS[id]) return '<article class="paper-card placeholder"><span class="paper-no">Final Theory · Pending</span><h3>Paper '+id+'</h3><p class="paper-meta">Questions not captured yet</p><div class="paper-progress"><i style="width:0%"></i></div><p class="progress-label">Add this paper in a future session</p><div class="card-actions"><button class="btn" type="button" disabled>Not added yet</button></div></article>';
+        if(!PAPER_META[id]) return '<article class="paper-card placeholder"><span class="paper-no">Final Theory · Pending</span><h3>Paper '+id+'</h3><p class="paper-meta">Questions not captured yet</p><div class="paper-progress"><i style="width:0%"></i></div><p class="progress-label">Add this paper in a future session</p><div class="card-actions"><button class="btn" type="button" disabled>Not added yet</button></div></article>';
         const saved=store[id]||{}; const answered=Object.keys(saved.answers||{}).length; const score=saved.submitted ? scoreFor(id,saved.answers||{}) : null; const pct=Math.round(answered/50*100);
         const label=saved.submitted ? score+'/50 last score' : answered ? answered+'/50 answered' : 'Not started';
-        return '<article class="paper-card"><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3><p class="paper-meta">50 questions · '+PAPERS[id].filter(q=>q.image).length+' diagrams</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><p class="progress-label">'+label+'</p><div class="card-actions"><button class="btn primary" data-start="'+id+'">'+(answered&&!saved.submitted?'Resume':'Start')+'</button><button class="btn" data-shuffle="'+id+'">Shuffle</button>'+(answered?'<button class="btn small danger" data-reset="'+id+'" title="Clear saved progress">Reset</button>':'')+'</div></article>';
+        return '<article class="paper-card"><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3><p class="paper-meta">'+PAPER_META[id].count+' questions · '+PAPER_META[id].images+' diagrams</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><p class="progress-label">'+label+'</p><div class="card-actions"><button class="btn primary" data-start="'+id+'">'+(answered&&!saved.submitted?'Resume':'Start')+'</button><button class="btn" data-shuffle="'+id+'">Shuffle</button>'+(answered?'<button class="btn small danger" data-reset="'+id+'" title="Clear saved progress">Reset</button>':'')+'</div></article>';
       }).join("");
       document.querySelectorAll("[data-start]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.start,false)));
       document.querySelectorAll("[data-shuffle]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.shuffle,true)));
@@ -564,7 +632,7 @@ const html = `<!doctype html>
     }
 
     function renderScores() {
-      const store=readStore(), ids=Object.keys(PAPERS).sort((a,b)=>Number(a)-Number(b));
+      const store=readStore(), ids=Object.keys(PAPER_META).sort((a,b)=>Number(a)-Number(b));
       const completed=ids.filter(id=>store[id]?.submitted);
       const best=completed.length?Math.max(...completed.map(id=>scoreFor(id,store[id].answers||{}))):null;
       const totalAnswered=ids.reduce((sum,id)=>sum+Object.keys(store[id]?.answers||{}).length,0);
@@ -578,17 +646,18 @@ const html = `<!doctype html>
       document.querySelectorAll("[data-score-paper]").forEach(button=>button.addEventListener("click",()=>openStoredPaper(button.dataset.scorePaper)));
     }
 
-    function openStoredPaper(id) { const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,{...saved,paper:Number(id)}); if(state.submitted)state.index=wrongIndexes()[0]??0; writeStore(); renderExam(); show("exam"); }
+    async function openStoredPaper(id) { if(!await ensurePaper(id))return; const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,{...saved,paper:Number(id)}); if(state.submitted)state.index=wrongIndexes()[0]??0; writeStore(); renderExam(); show("exam"); }
 
     function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; const all=readStore(); delete all[id]; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); renderHome(); }
-    function startPaper(id,randomize) {
+    async function startPaper(id,randomize) {
+      if(!await ensurePaper(id))return;
       state.paper=Number(id); const saved=readStore()[id]; const numbers=PAPERS[id].map(q=>q.number);
       if(saved && !randomize && !saved.submitted) Object.assign(state,{...saved,paper:Number(id)});
       else Object.assign(state,{paper:Number(id),index:0,order:randomize?shuffle(numbers):numbers,answers:{},flags:[],submitted:false,startedAt:Date.now()});
       writeStore(); renderExam(); show("exam");
     }
 
-    function scoreFor(id,answers) { return PAPERS[String(id)].reduce((sum,q)=>sum+(q.options[Number(answers[q.number])]?.correct?1:0),0); }
+    function scoreFor(id,answers) { return Object.entries(PAPER_META[String(id)].answerKey).reduce((sum,[number,correct])=>sum+(Number(answers[number])===correct?1:0),0); }
     function wrongIndexes() { return state.order.reduce((indexes,number,index)=>{const q=paperQuestions().find(item=>item.number===number);if(!q.options[Number(state.answers[number])]?.correct)indexes.push(index);return indexes;},[]); }
     function goToNextWrong() { const wrong=wrongIndexes(); if(!wrong.length)return; const next=wrong.find(index=>index>state.index)??wrong[0]; state.index=next; writeStore(); renderExam(); window.scrollTo({top:0,behavior:"smooth"}); }
 
@@ -663,9 +732,9 @@ const html = `<!doctype html>
 
     function renderExam() {
       const q=currentQuestion(); const review=state.submitted; const selected=state.answers[q.number]; const answered=selected!==undefined; const reveal=review||answered; const wrong=review?wrongIndexes():[];
-      $("#examTitle").textContent="Final Theory Paper "+state.paper; $("#examSub").textContent=review?"Answer review · Press Space for next":"Choose with 1, 2, or 3. Feedback appears immediately; press Space for next.";
-      $("#answeredCount").textContent=review?wrong.length+" wrong":answerCount()+" / 50 answered"; paletteToggle.textContent="Questions · "+(state.index+1)+"/50"; $("#progressBar").style.width=(answerCount()/50*100)+"%";
-      const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'">':"";
+      $("#examTitle").innerHTML='<span class="exam-prefix">Final Theory </span>Paper '+state.paper; $("#examSub").textContent=review?"Answer review · Press Space for next":"Choose with 1, 2, or 3. Feedback appears immediately; press Space for next.";
+      $("#answeredCount").textContent=review?wrong.length+" wrong":answerCount()+" / 50 answered"; paletteToggle.innerHTML='<span class="palette-label">Questions · </span>'+(state.index+1)+"/50"; paletteToggle.setAttribute("aria-label","Questions, "+(state.index+1)+" of 50"); $("#progressBar").style.width=(answerCount()/50*100)+"%";
+      const image=q.image?'<img class="diagram" src="'+q.image.src+'" alt="'+esc(q.image.alt)+'" width="'+q.image.width+'" height="'+q.image.height+'" loading="lazy" decoding="async" fetchpriority="high">':"";
       const choices=q.options.map((option,i)=>{
         let cls="choice", tag=""; if(reveal&&option.correct){cls+=" correct";tag="Correct";} else if(reveal&&String(i)===String(selected)&&!option.correct){cls+=" wrong";tag="Your answer";}
         return '<label class="'+cls+'"><input type="radio" name="answer" value="'+i+'" aria-keyshortcuts="'+(i+1)+'" title="Press '+(i+1)+' to select" '+(String(i)===String(selected)?'checked':'')+' '+(reveal?'disabled':'')+'><span class="choice-letter">'+option.label+'</span><span>'+esc(option.text)+'</span><span class="answer-tag">'+tag+'</span></label>';
@@ -714,13 +783,59 @@ const html = `<!doctype html>
       if(event.key==="ArrowLeft")$("#prevButton").click();if(event.key==="ArrowRight"&&!$("#nextButton").hidden)$("#nextButton").click();
     });
     $("#knowledgeSearch").addEventListener("input",renderKnowledge); $("#knowledgeTopic").addEventListener("change",renderKnowledge);
-    setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light",false); renderKnowledge(); renderHome(); show("home");
+    setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light",false); if(KNOWLEDGE_ITEMS)renderKnowledge(); renderHome(); show("home");
+    ${serviceWorkerRegistration}
   </script>
 </body>
-</html>`;
+</html>`.replace(/[ \t]+$/gm, "");
+}
 
+const optimizedHtml = buildHtml({}, true);
+const standaloneHtml = buildHtml(embeddedPapers, false);
+const paperDataEntries = Object.entries(optimizedPapers);
+const optimizedAssets = [...optimizedAssetNames].sort().map((name) => `./optimized-assets/${name}`);
+const paperAssets = paperDataEntries.map(([paper]) => `./paper-data/paper-${paper}.json`);
+const buildVersion = createHash("sha256")
+  .update(optimizedHtml)
+  .update(JSON.stringify(optimizedPapers))
+  .update(knowledgeData)
+  .digest("hex")
+  .slice(0, 12);
+
+const manifest = JSON.stringify({
+  id: "./",
+  name: "Theory Go Where",
+  short_name: "Theory",
+  description: "Offline Singapore Final Theory practice",
+  start_url: "./",
+  scope: "./",
+  display: "standalone",
+  background_color: "#070a0d",
+  theme_color: "#102d3c",
+  icons: [{ src: "app-icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any maskable" }],
+}, null, 2);
+
+const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#102d3c"/><rect x="76" y="76" width="360" height="360" rx="72" fill="none" stroke="#70c9f5" stroke-width="18"/><text x="256" y="310" fill="#e5edf3" font-family="ui-monospace,monospace" font-size="152" font-weight="500" text-anchor="middle">FT</text></svg>`;
+
+const precache = ["./", "./index.html", "./manifest.webmanifest", "./app-icon.svg", "./knowledge-data.json", ...paperAssets, ...optimizedAssets];
+const serviceWorker = `const CACHE="theory-go-where-${buildVersion}";
+const PRECACHE=${JSON.stringify(precache)};
+self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(PRECACHE)).then(()=>self.skipWaiting())));
+self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith("theory-go-where-")&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener("fetch",event=>{
+  const request=event.request;if(request.method!=="GET"||new URL(request.url).origin!==self.location.origin)return;
+  if(request.mode==="navigate")event.respondWith(fetch(request).then(response=>{if(response.ok)caches.open(CACHE).then(cache=>cache.put(request,response.clone()));return response;}).catch(()=>caches.match(request).then(hit=>hit||caches.match("./index.html"))));
+  else event.respondWith(caches.match(request).then(hit=>hit||fetch(request).then(response=>{if(response.ok)caches.open(CACHE).then(cache=>cache.put(request,response.clone()));return response;})));
+});`;
+
+await mkdir(new URL("paper-data/", here), { recursive: true });
 await Promise.all([
-  writeFile(new URL("final-theory-offline-practice.html", here), html),
-  writeFile(new URL("index.html", here), html),
+  writeFile(new URL("final-theory-offline-practice.html", here), standaloneHtml),
+  writeFile(new URL("index.html", here), optimizedHtml),
+  writeFile(new URL("manifest.webmanifest", here), manifest),
+  writeFile(new URL("app-icon.svg", here), iconSvg),
+  writeFile(new URL("sw.js", here), serviceWorker),
+  writeFile(new URL("knowledge-data.json", here), knowledgeData),
+  ...paperDataEntries.map(([paper, questions]) => writeFile(new URL(`paper-data/paper-${paper}.json`, here), JSON.stringify(questions).replaceAll("<", "\\u003c"))),
 ]);
-console.log(`Built index.html and final-theory-offline-practice.html with ${Object.keys(rawPapers).length} papers and ${Object.values(rawPapers).flat().length} questions.`);
+console.log(`Built optimized index.html (${buildVersion}) and standalone practice with ${Object.keys(rawPapers).length} papers, ${Object.values(rawPapers).flat().length} questions, and ${optimizedAssetNames.size} unique diagrams.`);

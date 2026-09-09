@@ -6,7 +6,7 @@ An offline-friendly Singapore driving-theory practice app. It contains all ten F
 
 - Final Theory Papers 1–10
 - 500 multiple-choice questions
-- 36 embedded diagrams that work offline
+- 36 diagrams represented by 31 de-duplicated, high-quality WebP assets
 - Progress saved locally in the browser
 - Persistent icon-controlled light/night themes with compact, low-weight console typography throughout
 - Phone-first practice mode with a persistent Papers/Cheatsheets/Scores tab bar, thumb-friendly exam controls, and a collapsible question palette
@@ -16,8 +16,9 @@ An offline-friendly Singapore driving-theory practice app. It contains all ten F
 - A mobile-friendly tricky-topics cheat sheet with memory hooks and date-sensitive demerit-point guidance
 - A searchable, topic-grouped knowledge index with 464 distinct question-and-answer facts after exact duplicate merging
 - Topic-matched links to official Traffic Police and LTA guidance
+- Per-paper and knowledge-index lazy loading, stable diagram sizing, and an offline cache for fast repeat visits
 
-Open `index.html` directly in a browser. No installation or internet connection is required for practice; internet access is only needed when opening an official-source link.
+Use the [GitHub Pages site](https://mandlcho.github.io/theory-go-where/) for the optimized installable experience. It caches all papers and diagrams after the first successful visit so subsequent practice works offline. For a single downloadable file, open `final-theory-offline-practice.html`; it contains every paper and optimized diagram without requiring a server. Internet access is only needed when opening an official-source link.
 
 ## Rebuild
 
@@ -25,7 +26,7 @@ Open `index.html` directly in a browser. No installation or internet connection 
 node generate-offline-practice.mjs
 ```
 
-The generator reads the captured paper data and local diagram files, then produces both `index.html` and `final-theory-offline-practice.html` as self-contained files.
+The generator reads the captured paper data and local diagrams, then produces the lightweight app shell, per-paper JSON files, manifest, service worker and self-contained offline backup. Optimized WebP assets are content-addressed in `optimized-assets/`.
 
 ## Sources and notice
 

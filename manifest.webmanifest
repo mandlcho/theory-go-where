@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "Theory Go Where",
+  "short_name": "Theory",
+  "description": "Offline Singapore Final Theory practice",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070a0d",
+  "theme_color": "#102d3c",
+  "icons": [
+    {
+      "src": "app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
