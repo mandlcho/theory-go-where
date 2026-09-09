@@ -342,6 +342,7 @@
     const questionSidebar = $("#questionSidebar"), paletteBackdrop = $("#paletteBackdrop"), paletteToggle = $("#paletteToggle");
     const state = { paper:null, index:0, order:[], answers:{}, flags:[], submitted:false, startedAt:null };
     const paperLoads = {};
+    let paperRequest = 0;
     let knowledgeLoad;
     let viewBeforeCheat="home";
 
@@ -352,8 +353,25 @@
       $("#themeColor").setAttribute("content",dark?"#070a0d":"#f3f5f7");
       if(persist) try{localStorage.setItem(THEME_KEY,dark?"dark":"light");}catch{}
     }
-    function readStore() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; } }
-    function writeStore(update) { const all=readStore(); all[String(state.paper)] = update || snapshot(); localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); }
+    function readRawStore() { try { const value=JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); return value && typeof value==="object" && !Array.isArray(value) ? value : {}; } catch { return {}; } }
+    function newAttempt(id,order=Object.keys(PAPER_META[String(id)].answerKey).map(Number)) { return {paper:Number(id),index:0,order:[...order],answers:{},flags:[],submitted:false,startedAt:Date.now()}; }
+    function readStore() {
+      const store={};
+      for(const [id,saved] of Object.entries(readRawStore())) {
+        // Never relabel a saved attempt as a different paper or inherit another attempt's fields.
+        if(!PAPER_META[id] || !saved || typeof saved!=="object" || Array.isArray(saved) || Number(saved.paper)!==Number(id))continue;
+        const clean=newAttempt(id), numbers=clean.order;
+        clean.answers=Object.fromEntries(Object.entries(saved.answers||{}).filter(([number,answer])=>numbers.includes(Number(number)) && Number.isInteger(answer) && answer>=0 && answer<=2));
+        if(Array.isArray(saved.order) && saved.order.length===numbers.length && new Set(saved.order).size===numbers.length && saved.order.every(number=>numbers.includes(number)))clean.order=[...saved.order];
+        clean.index=Number.isInteger(saved.index)?Math.max(0,Math.min(saved.index,numbers.length-1)):0;
+        clean.flags=Array.isArray(saved.flags)?saved.flags.filter(number=>numbers.includes(number)):[];
+        clean.submitted=saved.submitted===true;
+        clean.startedAt=Number.isFinite(saved.startedAt)?saved.startedAt:null;
+        store[id]=clean;
+      }
+      return store;
+    }
+    function writeStore() { if(!PAPER_META[String(state.paper)])return; const saved=snapshot(), all=readRawStore(); all[String(saved.paper)]=saved; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); }
     function snapshot() { return {paper:state.paper,index:state.index,order:state.order,answers:state.answers,flags:state.flags,submitted:state.submitted,startedAt:state.startedAt}; }
     async function loadPaper(id) {
       const key=String(id); if(PAPERS[key])return PAPERS[key];
@@ -395,9 +413,9 @@
     }
     function updateTabs(view) { const active=view==="cheat"?"cheats":view==="scores"||view==="result"?"scores":"papers"; [["#tabPapers","papers"],["#tabCheats","cheats"],["#tabScores","scores"]].forEach(([selector,name])=>{const button=$(selector),selected=name===active;button.classList.toggle("active",selected);if(selected)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");}); }
     function show(view) { if(view==="scores")renderScores(); homeView.hidden=view!=="home"; cheatView.hidden=view!=="cheat"; scoresView.hidden=view!=="scores"; examView.hidden=view!=="exam"; resultView.hidden=view!=="result"; document.body.dataset.view=view; $("#homeButton").hidden=view==="home"; $("#homeButton").textContent=view==="cheat"?"Back":"Papers"; $("#cheatButton").hidden=view==="cheat"; updateTabs(view); setPaletteOpen(false); window.scrollTo({top:0,behavior:"smooth"}); }
-    function goHome() { if(state.paper && !state.submitted) writeStore(); renderHome(); show("home"); }
+    function goHome() { paperRequest++; if(state.paper && !state.submitted) writeStore(); renderHome(); show("home"); }
     async function openCheat() { viewBeforeCheat=document.body.dataset.view||"home"; if(!await ensureKnowledge())return; renderKnowledge(); show("cheat"); }
-    function openScores() { if(state.paper&&!state.submitted)writeStore(); show("scores"); }
+    function openScores() { paperRequest++; if(state.paper&&!state.submitted)writeStore(); show("scores"); }
 
     function renderHome() {
       const store=readStore(); const readyIds=Object.keys(PAPER_META).sort((a,b)=>Number(a)-Number(b)); const ids=Array.from({length:10},(_,i)=>String(i+1));
@@ -407,7 +425,7 @@
         if(!PAPER_META[id]) return '<article class="paper-card placeholder"><span class="paper-no">Final Theory · Pending</span><h3>Paper '+id+'</h3><p class="paper-meta">Questions not captured yet</p><div class="paper-progress"><i style="width:0%"></i></div><p class="progress-label">Add this paper in a future session</p><div class="card-actions"><button class="btn" type="button" disabled>Not added yet</button></div></article>';
         const saved=store[id]||{}; const answered=Object.keys(saved.answers||{}).length; const score=saved.submitted ? scoreFor(id,saved.answers||{}) : null; const pct=Math.round(answered/50*100);
         const label=saved.submitted ? score+'/50 last score' : answered ? answered+'/50 answered' : 'Not started';
-        return '<article class="paper-card"><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3><p class="paper-meta">'+PAPER_META[id].count+' questions · '+PAPER_META[id].images+' diagrams</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><p class="progress-label">'+label+'</p><div class="card-actions"><button class="btn primary" data-start="'+id+'">'+(answered&&!saved.submitted?'Resume':'Start')+'</button><button class="btn" data-shuffle="'+id+'">Shuffle</button>'+(answered?'<button class="btn small danger" data-reset="'+id+'" title="Clear saved progress">Reset</button>':'')+'</div></article>';
+        return '<article class="paper-card"><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3><p class="paper-meta">'+PAPER_META[id].count+' questions · '+PAPER_META[id].images+' diagrams</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><p class="progress-label">'+label+'</p><div class="card-actions"><button class="btn primary" data-start="'+id+'">'+(answered&&!saved.submitted?'Resume':'Start')+'</button><button class="btn" data-shuffle="'+id+'">Shuffle</button>'+(answered||saved.submitted?'<button class="btn small danger" data-reset="'+id+'" title="Clear saved progress">Reset</button>':'')+'</div></article>';
       }).join("");
       document.querySelectorAll("[data-start]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.start,false)));
       document.querySelectorAll("[data-shuffle]").forEach(b=>b.addEventListener("click",()=>startPaper(b.dataset.shuffle,true)));
@@ -422,21 +440,21 @@
       $("#scoreSummary").innerHTML='<div class="score-stat"><strong>'+completed.length+'/'+ids.length+'</strong><span>Papers completed</span></div><div class="score-stat"><strong>'+(best===null?'—':best+'/50')+'</strong><span>Best latest score</span></div><div class="score-stat"><strong>'+totalAnswered+'</strong><span>Answers saved</span></div>';
       $("#scoreGrid").innerHTML=ids.map(id=>{
         const saved=store[id], answered=Object.keys(saved?.answers||{}).length;
-        if(!saved||!answered) return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status">Not started</span></div><p class="score-big">—</p><p class="score-detail">No saved attempt yet</p><div class="paper-progress"><i style="width:0%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Start paper</button></div></article>';
+        if(!saved||(!answered&&!saved.submitted)) return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status">Not started</span></div><p class="score-big">—</p><p class="score-detail">No saved attempt yet</p><div class="paper-progress"><i style="width:0%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Start paper</button></div></article>';
         if(saved.submitted){const score=scoreFor(id,saved.answers||{}),passed=score>=PASS_MARK;return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status '+(passed?'pass':'retry')+'">'+(passed?'Passed':'Keep practising')+'</span></div><p class="score-big">'+score+'/50</p><p class="score-detail">Latest saved attempt · '+(score*2)+'%</p><div class="paper-progress"><i style="width:'+(score*2)+'%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Review answers</button></div></article>';}
         const pct=Math.round(answered/50*100);return '<article class="score-card"><div class="score-card-head"><div><span class="paper-no">Final Theory</span><h3>Paper '+id+'</h3></div><span class="score-status">In progress</span></div><p class="score-big">'+answered+'/50</p><p class="score-detail">Questions answered</p><div class="paper-progress"><i style="width:'+pct+'%"></i></div><div class="card-actions"><button class="btn primary" type="button" data-score-paper="'+id+'">Resume paper</button></div></article>';
       }).join("");
       document.querySelectorAll("[data-score-paper]").forEach(button=>button.addEventListener("click",()=>openStoredPaper(button.dataset.scorePaper)));
     }
 
-    async function openStoredPaper(id) { if(!await ensurePaper(id))return; const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,{...saved,paper:Number(id)}); if(state.submitted)state.index=wrongIndexes()[0]??0; writeStore(); renderExam(); show("exam"); }
+    async function openStoredPaper(id) { const request=++paperRequest; if(!await ensurePaper(id) || request!==paperRequest)return; const saved=readStore()[id]; if(!saved)return startPaper(id,false); Object.assign(state,saved); if(state.submitted)state.index=wrongIndexes()[0]??0; writeStore(); renderExam(); show("exam"); }
 
-    function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; const all=readStore(); delete all[id]; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); renderHome(); }
+    function resetPaper(id) { if(!confirm("Clear saved progress for Paper "+id+"?")) return; paperRequest++; const all=readRawStore(); delete all[id]; localStorage.setItem(STORAGE_KEY,JSON.stringify(all)); if(String(state.paper)===String(id))Object.assign(state,{paper:null,index:0,order:[],answers:{},flags:[],submitted:false,startedAt:null}); renderHome(); }
     async function startPaper(id,randomize) {
-      if(!await ensurePaper(id))return;
-      state.paper=Number(id); const saved=readStore()[id]; const numbers=PAPERS[id].map(q=>q.number);
-      if(saved && !randomize && !saved.submitted) Object.assign(state,{...saved,paper:Number(id)});
-      else Object.assign(state,{paper:Number(id),index:0,order:randomize?shuffle(numbers):numbers,answers:{},flags:[],submitted:false,startedAt:Date.now()});
+      const request=++paperRequest;
+      if(!await ensurePaper(id) || request!==paperRequest)return;
+      const saved=readStore()[id]; const numbers=PAPERS[id].map(q=>q.number);
+      Object.assign(state,saved && !randomize && !saved.submitted ? saved : newAttempt(id,randomize?shuffle(numbers):numbers));
       writeStore(); renderExam(); show("exam");
     }
 
