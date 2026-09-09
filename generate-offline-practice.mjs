@@ -710,56 +710,25 @@ function buildHtml(papers, progressive = false) {
     function wrongIndexes() { return state.order.reduce((indexes,number,index)=>{const q=paperQuestions().find(item=>item.number===number);if(!q.options[Number(state.answers[number])]?.correct)indexes.push(index);return indexes;},[]); }
     function goToNextWrong() { const wrong=wrongIndexes(); if(!wrong.length)return; const next=wrong.find(index=>index>state.index)??wrong[0]; state.index=next; writeStore(); renderExam(); window.scrollTo({top:0,behavior:"smooth"}); }
 
-    function teachingPrinciple(q) {
-      const s=(q.question+" "+q.options.map(o=>o.text).join(" ")).toLowerCase();
-      if(/alcohol|drug|drows|tired|fatigue|sleep/.test(s)) return "alcohol, drugs and fatigue reduce judgement and reaction time before a driver may feel seriously impaired; the safe response is to avoid driving or stop and rest";
-      if(/stationary vehicle|parked vehicle|parked car|driver in it|move out suddenly/.test(s)) return "a stationary vehicle may pull out, open a door or hide another road user without much warning, so reduce speed and prepare to stop before passing it";
-      if(/changing gear.*look|when changing gear|look.*road ahead|attention.*road/.test(s)) return "your eyes should remain on the traffic scene while your hands operate familiar controls; looking down delays hazard detection even for a moment";
-      if(/blind spot|mirror|change lane|changing lane|move off|moving off|open.*door|signal/.test(s)) return "safe movement starts with mirrors, a signal and a direct blind-spot check; mirrors alone cannot show every cyclist, motorcycle or vehicle beside you";
-      if(/three.second|following distance|follow.*clos|vehicle in front|tailgat|safe gap|time gap/.test(s)) return "a time gap gives you room to perceive, react and brake, and unlike a fixed car-length estimate it grows naturally with speed";
-      if(/pedestrian|zebra|elderly|child|cyclist|bicycle|motorcycl/.test(s)) return "vulnerable road users have little physical protection and may move unexpectedly, so a driver should reduce speed, create space and be ready to stop";
-      if(/right.?most outer lane.*expressway/.test(s)) return "the wording means the outermost right lane: it is for overtaking and emergency vehicles, while normal traffic keeps left and slower vehicles use the leftmost lane";
-      if(/ambulance|emergency vehicle|siren|fire engine|police vehicle/.test(s)) return "emergency vehicles need a clear, predictable path; slow down, keep left and stop if necessary instead of racing them or making a sudden move";
-      if(/expressway|tunnel|road shoulder|missed.*exit|break.*down|puncture.*expressway/.test(s)) return "expressway traffic is fast and expects one-way, predictable movement; use the shoulder only for an emergency, never reverse for a missed exit, and continue to the next safe exit";
-      if(/bend|curve|centrifugal|corner/.test(s)) return "speed should be reduced before the bend, while the vehicle is straight; entering slowly preserves tyre grip and leaves steering capacity for the curve";
-      if(/brake|braking|skid|slippery|wet road|flood|tyre|tire|puncture|friction/.test(s)) return "traction is limited, especially on wet surfaces or damaged tyres; smooth steering and progressive braking preserve grip while harsh inputs can start a skid";
-      if(/engine brake|down.*slope|upward slope|downward slope|steep slope|gear|free.?wheel|clutch/.test(s)) return "the correct gear keeps the engine connected to the wheels, giving controlled engine braking and preventing the vehicle from gathering speed";
-      if(/traffic light|amber|green light|junction|intersection|roundabout|give way|stop line|crossing/.test(s)) return "a signal or priority rule does not remove the need to observe; approach at a controllable speed, obey the stop or give-way requirement and proceed only when the conflict area is clear";
-      if(/overtak|pass.*lorry|pass.*vehicle|large vehicle|lorry|bus|right.*lane|outer.*lane|keep left|lane discipline/.test(s)) return "safe overtaking depends on a clear view, enough space and a legal passing zone; staying back improves visibility and the right lane should not be used as a default cruising lane";
-      if(/revers|parking|park your car|parked vehicle|side road/.test(s)) return "reversing and parking create large blind areas and make the front of the car swing out, so move slowly, check all around and give way before committing";
-      if(/headlight|high beam|glare|night|dark|dim/.test(s)) return "night safety depends on seeing without dazzling others; dip high beams for oncoming traffic and use the left road edge as a guide if glare affects your vision";
-      if(/horn|sound.*horn/.test(s)) return "the horn is a warning device, not a way to claim priority; use it only to prevent danger and still slow down or give way as the situation requires";
-      if(/engine oil|over.?heat|radiator|maintenance|vehicle defect|shock absorber|windscreen wiper/.test(s)) return "vehicle defects reduce braking, steering or visibility; stop safely and correct the mechanical problem rather than continuing until control is lost";
-      if(/accident|collision|injur|fatal/.test(s)) return "after a collision, protect life and the scene first: stop, obtain help and avoid actions that create another hazard or interfere with an injury investigation";
-      if(/speed limit|stopping distance|speed of your vehicle|high speed/.test(s)) return "higher speed increases both reaction distance and braking distance, and it also raises the energy released in a collision";
-      if(/demerit|driving test|licen[cs]e|disqualif|suspend/.test(s)) return "this is an exact licensing or demerit-point rule, so the stated threshold in the answer key must be learned precisely rather than estimated";
-      if(/sign|road marking|white line|yellow line|bus lane|no entry|no parking|no stopping/.test(s)) return "traffic signs and road markings communicate mandatory priorities, prohibitions and hazards; following them makes every driver's movement predictable";
-      if(/seat|seatbelt|seat belt|shoe|pedal|steering|driving position|restraint/.test(s)) return "a stable seating position, suitable footwear and correctly adjusted controls let the driver steer and brake accurately without delay";
-      if(/rain|fog|weather|visibility|wind/.test(s)) return "poor weather reduces visibility and grip, so the driver needs lower speed, a larger safety margin and smoother control inputs";
-      if(/angry|calm|gesture|aggressive|inconvenience/.test(s)) return "calm, predictable driving prevents one mistake from escalating into road rage or a second unsafe manoeuvre";
-      return "the safest option is the one that improves observation, preserves vehicle control and creates time or space before the hazard develops";
-    }
-
-    function distractorContrast(choice,q) {
-      const s=choice.toLowerCase(), context=q.question.toLowerCase();
-      if(/right.?most outer lane.*expressway/.test(context)&&/maximum speed limit/.test(s)) return "Reaching the speed limit does not make the right lane a cruising lane; after overtaking, move back left when it is safe.";
-      if(/right.?most outer lane.*expressway/.test(context)&&/slow moving/.test(s)) return "Slow-moving vehicles should use the leftmost lane, not the rightmost overtaking lane.";
-      if(/speed up|drive faster|accelerat|quickly|same speed|maintain.*speed/.test(s)) return "That choice reduces reaction time and increases stopping distance or impact severity instead of creating a safety margin.";
-      if(/brake hard|hard.*brake|sudden|immediately.*stop|stop immediately|handbrake/.test(s)) return "That abrupt input can lock the wheels, start a skid or surprise following traffic when a controlled response is available.";
-      if(/sound.*horn|horn|flash.*headlight|wave/.test(s)) return "A warning or gesture does not give you right of way and does not remove the physical conflict, so it cannot replace slowing or giving way.";
-      if(/overtak|pass on|pass.*vehicle|pass.*lorry/.test(s)) return "That move enters the conflict area with less visibility and less escape space, which is exactly where another road user may appear.";
-      if(/mirror.*only|rear window.*only|look.*only|side mirror.*only/.test(s)) return "That check leaves a blind area unobserved; a direct look is needed before the vehicle changes position.";
-      if(/assum|as long as you think|expect.*wait|safe.*because/.test(s)) return "It relies on an assumption about another road user rather than confirming that the path is safe.";
-      if(/reverse|road shoulder/.test(s)) return "That is an unexpected—and on an expressway generally prohibited—movement that exposes you to fast approaching traffic.";
-      if(/neutral|free.?wheel|press.*clutch|clutch.*down/.test(s)) return "It disconnects engine braking and reduces control, allowing speed to build when you most need restraint.";
-      if(/high beam/.test(s)) return "It can dazzle the other driver and worsen the danger instead of improving everyone's view.";
-      if(/radiator.*cap|cap immediately|pour water/.test(s)) return "A hot cooling system can release scalding steam or be damaged by sudden cooling; allow it to cool before checking it.";
-      if(/keep close|drive closer|move close|follow close/.test(s)) return "It removes the space and view needed to react if the situation changes suddenly.";
-      if(/one car|two car|metre from/.test(s) && /gap|distance/.test((q.question+" "+q.options.map(o=>o.text).join(" ")).toLowerCase())) return "A fixed distance does not scale with speed, whereas a time gap preserves reaction time at different speeds.";
-      if(/right lane|outer lane|centre lane/.test(s)) return "That lane choice can obstruct traffic or place the vehicle in the overtaking path when there is no need to be there.";
-      if(/continue|carry on|do nothing|not change.*speed/.test(s)) return "Continuing unchanged leaves no extra time or space for the identified hazard to develop.";
-      return "That option does not follow the safe sequence for this situation and leaves the stated risk less controlled than the correct answer.";
-    }
+    // Reviewed explanations are tied to exact paper/question IDs, never guessed from keywords.
+    const REVIEWED_EXPLANATIONS = {
+      "4:24": {
+        reason:"The handbrake holds the car against rolling backwards while your left foot controls the clutch and your right foot moves to the accelerator. Release it when the clutch reaches its biting point and the engine can pull uphill.",
+        wrong:{A:"Both brakes can hold a stationary car, but keeping the foot brake pressed prevents your right foot from operating the accelerator for the hill start.",B:"The foot brake holds the car only while you press it. Moving that foot to the accelerator can let the car roll backwards; the handbrake holds it during that transition."}
+      },
+      "3:25": {
+        reason:"This asks which brake to RELEASE. The handbrake has been holding the car while you prepare the clutch and accelerator. Release it once the engine is ready to pull uphill without rolling back.",
+        wrong:{A:"At this stage the foot brake is already released so your right foot can work the accelerator. The handbrake is the remaining brake to release.",B:"Releasing only the foot brake leaves the handbrake holding the car, so it cannot move off normally."}
+      },
+      "1:24": {
+        reason:"Use the foot brake to bring the moving car to a controlled stop, then apply the handbrake to hold it on the slope.",
+        wrong:{A:"The handbrake is for holding the stopped car here. Apply the foot brake first to slow down and stop under control.",C:"The question asks for the sequence: stop with the foot brake, then secure the car with the handbrake. They are not applied together as the initial stopping action."}
+      },
+      "1:19": {
+        reason:"Outermost means the rightmost lane here. It is for overtaking and emergency vehicles. Normal traffic keeps left; slower vehicles use the leftmost lane.",
+        wrong:{B:"Driving at the speed limit does not make the rightmost lane a cruising lane. Move back left when safe after overtaking.",C:"Slow-moving vehicles use the leftmost lane. The outermost right lane is the overtaking lane."}
+      }
+    };
 
     function officialSource(q) {
       const s=(q.question+" "+q.options.map(o=>o.text).join(" ")).toLowerCase();
@@ -775,12 +744,22 @@ function buildHtml(papers, progressive = false) {
 
     function teachingFeedback(q,selected) {
       const correct=q.options.find(o=>o.correct); const chosen=selected===undefined?null:q.options[Number(selected)];
-      if(chosen?.correct) return '<aside class="teaching is-correct" role="status"><span class="teaching-label">Correct</span></aside>';
-      const opening=chosen?'<strong>'+chosen.label+' → '+correct.label+':</strong> ':'<strong>Unanswered → '+correct.label+':</strong> ';
-      const contrast=chosen?distractorContrast(chosen.text,q):"Review the correct option and connect it to the safety principle above.";
+      if(Number(q.paper)===4 && [14,15].includes(q.number)) {
+        const comparisons=q.number===15
+          ? {A:"12 points in 12 months is the repeat-suspension threshold for a driver with an existing suspension record. The question assumes no previous suspension.",C:"36 points in 36 months is not the first-suspension threshold. You become liable at 24 points within 24 months; you do not wait until 36."}
+          : {A:"12 points is below the first-suspension threshold. The 12-point rule applies within 12 months for a driver with an existing suspension record.",B:"16 points is below the 24-point first-suspension threshold; it does not trigger that suspension on points alone."};
+        const rule="For a non-probationary driver with no previous suspension, reaching 24 demerit points within 24 months makes the licence liable for its first suspension (rule through 31 December 2026).";
+        const comparison=chosen&&!chosen.correct?comparisons[chosen.label]:"The key distinction is the suspension record, not just having more than one year of driving experience.";
+        const details='<p>The question is incomplete: it does not say “no previous suspension”, which is the assumption behind the answer key.</p><p>From 1 January 2027, the first-suspension threshold changes to 18 points within 24 months. This captured paper uses the earlier rule.</p><a class="source-link" href="https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Driver-Improvement-Point-Systems" target="_blank" rel="noopener noreferrer">Traffic Police — current DIPS rules ↗</a><a class="source-link" href="https://www.police.gov.sg/Media-Hub/News/2026/07/20260731_tightening_of_the_driver_improvement_points" target="_blank" rel="noopener noreferrer">Traffic Police — changes from January 2027 ↗</a>';
+        return '<aside class="teaching'+(chosen?.correct?' is-correct':'')+'" role="status"><span class="teaching-label">'+(chosen?.correct?'Correct — why':chosen?'Wrong — why':'Unanswered — explanation')+'</span><p><strong>'+correct.label+' is correct for this paper.</strong> '+esc(rule)+'</p><p><strong>'+(chosen&&!chosen.correct?'Why '+chosen.label+' is wrong: ':'Remember: ')+'</strong>'+esc(comparison)+'</p><div class="feedback-extra">'+details+'</div><details class="feedback-mobile"><summary>Question assumption + rule change</summary>'+details+'</details></aside>';
+      }
+      const explanation=REVIEWED_EXPLANATIONS[String(q.paper)+":"+q.number];
+      if(chosen?.correct&&!explanation) return '<aside class="teaching is-correct" role="status"><span class="teaching-label">Correct</span></aside>';
       const source=officialSource(q);
-      const extra='<p>'+esc(contrast)+'</p><a class="source-link" href="'+source.url+'" target="_blank" rel="noopener noreferrer">Official source: '+esc(source.title)+' ↗</a>';
-      return '<aside class="teaching" role="status"><span class="teaching-label">Wrong — learn this one</span><p>'+opening+'Choose <strong>“'+esc(correct.text)+'”</strong> because '+teachingPrinciple(q)+'.</p><div class="feedback-extra">'+extra+'</div><details class="feedback-mobile"><summary>Compare your answer + source</summary>'+extra+'</details></aside>';
+      const sourceLink='<a class="source-link" href="'+source.url+'" target="_blank" rel="noopener noreferrer">Official source: '+esc(source.title)+' ↗</a>';
+      const reason=explanation?'<p>'+esc(explanation.reason)+'</p>':'<p>A reviewed explanation is not available for this question yet.</p>';
+      const contrast=chosen&&!chosen.correct&&explanation?'<p><strong>Why '+chosen.label+' is wrong:</strong> '+esc(explanation.wrong[chosen.label])+'</p>':'';
+      return '<aside class="teaching'+(chosen?.correct?' is-correct':'')+'" role="status"><span class="teaching-label">'+(chosen?.correct?'Correct — why':chosen?'Wrong — review':'Unanswered — review')+'</span><p><strong>'+correct.label+': '+esc(correct.text)+'</strong></p>'+reason+contrast+'<div class="feedback-extra">'+sourceLink+'</div><details class="feedback-mobile"><summary>Official source</summary>'+sourceLink+'</details></aside>';
     }
 
     function renderExam() {
