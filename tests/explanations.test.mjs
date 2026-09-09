@@ -25,6 +25,14 @@ test('hill-start feedback explains the brake transition and apply versus release
   assert.match(feedback(question(3,25),2),/RELEASE/);
   assert.match(feedback(question(1,24),0),/foot brake first/);
 });
+test('one-year answers distinguish revocation from new-driver probation',()=>{
+  assert.match(feedback(question(5,15),2),/revocation date/);
+  assert.match(feedback(question(5,15),2),/must pass them/);
+  assert.match(feedback(question(5,15),1),/Two years is longer/);
+  assert.match(feedback(question(6,16),2),/licence is issued/);
+  assert.match(feedback(question(6,16),2),/36 months/);
+  assert.match(feedback(question(6,16),0),/Correct — why/);
+});
 test('all choices render without fabricated keyword reasons or missing contrast text',()=>{
   for(let paper=1;paper<=10;paper++) {
     const questions=JSON.parse(readFileSync(new URL('../paper-data/paper-'+paper+'.json',import.meta.url),'utf8'));

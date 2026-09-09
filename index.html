@@ -492,6 +492,14 @@
 
     // Reviewed explanations are tied to exact paper/question IDs, never guessed from keywords.
     const REVIEWED_EXPLANATIONS = {
+      "5:15": {
+        reason:"Revocation cancels the licence; it does not automatically become valid again after a waiting period. Under the revocation rule tested here, you must wait one year from the revocation date before retaking the required theory and practical tests to obtain a new licence.",
+        wrong:{B:"Two years is longer than the one-year waiting period for retaking the tests under this rule. Waiting alone does not restore the licence.",C:"Three years is not the waiting period under this rule. You can retake the required tests after one year, but must pass them to obtain a new licence."}
+      },
+      "6:16": {
+        reason:"A newly qualified driver's probation lasts 12 months from the date the licence is issued. During that first year, the driver must display probation plates and is subject to the probationary-driver rules. This is a probation period, not the expiry date of the licence.",
+        wrong:{B:"Two years doubles the actual probation period. A new driver's probation lasts the first 12 months after licence issue.",C:"Three years would mean 36 months of probation. The required probation period is only 12 months from licence issue."}
+      },
       "4:24": {
         reason:"The handbrake holds the car against rolling backwards while your left foot controls the clutch and your right foot moves to the accelerator. Release it when the clutch reaches its biting point and the engine can pull uphill.",
         wrong:{A:"Both brakes can hold a stationary car, but keeping the foot brake pressed prevents your right foot from operating the accelerator for the hill start.",B:"The foot brake holds the car only while you press it. Moving that foot to the accelerator can let the car roll backwards; the handbrake holds it during that transition."}
@@ -511,8 +519,9 @@
     };
 
     function officialSource(q) {
+      if(Number(q.paper)===5&&q.number===15)return {title:"Traffic Police — Basic Theory handbook: licence revocation",url:"https://www.police.gov.sg/-/media/SPF/Advisories/TP/BT-ENG-2126.pdf"};
       const s=(q.question+" "+q.options.map(o=>o.text).join(" ")).toLowerCase();
-      if(/demerit|probationary|driving test|licen[cs]e|suspend|revok/.test(s)) return {title:"Traffic Police — Driver Improvement Point System",url:"https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Driver-Improvement-Point-Systems"};
+      if(/demerit|probation|driving test|licen[cs]e|suspend|revok/.test(s)) return {title:"Traffic Police — Driver Improvement Point System",url:"https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Driver-Improvement-Point-Systems"};
       if(/alcohol|drink.driv|blood alcohol|disqualif|traffic offence|penalt/.test(s)) return {title:"Traffic Police — Penalties for Traffic Offences",url:"https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Penalties-for-Traffic-Offences"};
       if(/expressway|tunnel|road shoulder|missed.*exit|break.*down.*expressway|puncture.*expressway/.test(s)) return {title:"LTA — Driving on Expressways and in Tunnels",url:"https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/road_safety_and_vehicle_rules/driving-in-expressway-and-tunnel.html"};
       if(/pedestrian|zebra|elderly|child|visually handicapped/.test(s)) return {title:"Traffic Police — Road Safety Tips for Pedestrians",url:"https://www.police.gov.sg/Knowledge-Hub/Traffic/Road-Safety-Tips/Road-Safety-Tips-for-Pedestrians"};
